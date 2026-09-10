@@ -1,443 +1,619 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>EJÉRCITO BMT</title>
-
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #050505;
-            color: #ffffff;
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-        }
-
-        /* =========================
-           BARRA SUPERIOR
-        ========================= */
-
-        header {
-            width: 100%;
-            background: #080808;
-            border-bottom: 1px solid #b8860b;
-            box-shadow: 0 0 18px rgba(218, 165, 32, 0.12);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            max-width: 1250px;
-            margin: auto;
-            padding: 18px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        .logo {
-            color: #d4af37;
-            font-family: "Press Start 2P", monospace;
-            font-size: 18px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.35);
-            white-space: nowrap;
-        }
-
-        nav {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-family: "Orbitron", sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: 0.25s;
-        }
-
-        nav a:hover {
-            color: #d4af37;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.45);
-        }
-
-        /* =========================
-           PORTADA
-        ========================= */
-
-        .hero {
-            min-height: 620px;
-            max-width: 1250px;
-            margin: auto;
-            padding: 100px 30px 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .small-title {
-            color: #d4af37;
-            font-family: "Orbitron", sans-serif;
-            font-size: 14px;
-            letter-spacing: 5px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            color: #f1d36b;
-            font-family: "Press Start 2P", monospace;
-            font-size: clamp(28px, 5vw, 58px);
-            line-height: 1.5;
-            text-shadow:
-                0 0 8px rgba(212, 175, 55, 0.4),
-                0 0 25px rgba(212, 175, 55, 0.12);
-            margin-bottom: 25px;
-        }
-
-        .hero h2 {
-            color: #ffffff;
-            font-family: "Orbitron", sans-serif;
-            font-size: clamp(18px, 3vw, 30px);
-            letter-spacing: 5px;
-            margin-bottom: 25px;
-        }
-
-        .hero p {
-            color: #bdbdbd;
-            font-size: 17px;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .gold-line {
-            width: 100px;
-            height: 2px;
-            background: #d4af37;
-            margin: 30px auto;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-        }
-
-        /* =========================
-           BOTONES
-        ========================= */
-
-        .buttons {
-            margin-top: 38px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 25px;
-            border: 1px solid #d4af37;
-            color: #d4af37;
-            background: #0b0b0b;
-            text-decoration: none;
-            font-family: "Orbitron", sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: 0.25s;
-        }
-
-        .button:hover {
-            background: #d4af37;
-            color: #050505;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
-        }
-
-        .button-primary {
-            background: #d4af37;
-            color: #050505;
-        }
-
-        .button-primary:hover {
-            background: #f1d36b;
-        }
-
-        /* =========================
-           SECCIONES
-        ========================= */
-
-        section {
-            max-width: 1150px;
-            margin: auto;
-            padding: 90px 30px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 55px;
-        }
-
-        .section-title h2 {
-            color: #d4af37;
-            font-family: "Press Start 2P", monospace;
-            font-size: clamp(20px, 3vw, 32px);
-            line-height: 1.6;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
-
-        .section-title p {
-            color: #8f8f8f;
-            margin-top: 18px;
-            font-size: 15px;
-        }
-
-        /* =========================
-           TARJETAS
-        ========================= */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: #0b0b0b;
-            border: 1px solid #242424;
-            border-top: 2px solid #9c7615;
-            padding: 30px;
-            transition: 0.25s;
-        }
-
-        .card:hover {
-            border-color: #d4af37;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .card h3 {
-            color: #e0bd4d;
-            font-family: "Orbitron", sans-serif;
-            font-size: 17px;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: #bdbdbd;
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        /* =========================
-           RANGOS
-        ========================= */
-
-        .rank-list {
-            border-top: 1px solid #282828;
-        }
-
-        .rank {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 24px 10px;
-            border-bottom: 1px solid #242424;
-        }
-
-        .rank-name {
-            color: #d4af37;
-            font-family: "Orbitron", sans-serif;
-            font-weight: 700;
-        }
-
-        .rank-info {
-            color: #aaa;
-            text-align: right;
-        }
-
-        /* =========================
-           DIVISOR
-        ========================= */
-
-        .divider {
-            max-width: 1100px;
-            height: 1px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                #8c6915,
-                transparent
-            );
-            margin: auto;
-        }
-
-        /* =========================
-           PIE
-        ========================= */
-
-        footer {
-            border-top: 1px solid #252525;
-            background: #070707;
-            text-align: center;
-            padding: 45px 25px;
-        }
-
-        footer .footer-title {
-            color: #d4af37;
-            font-family: "Press Start 2P", monospace;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
-        footer p {
-            color: #777;
-            font-size: 13px;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 900px) {
-            .navbar {
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            nav {
-                justify-content: center;
-                gap: 18px;
-            }
-
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .navbar {
-                padding: 18px 15px;
-            }
-
-            .logo {
-                font-size: 13px;
-            }
-
-            nav {
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 10px;
-            }
-
-            .hero {
-                padding: 80px 20px;
-                min-height: 550px;
-            }
-
-            .hero h1 {
-                font-size: 23px;
-            }
-
-            .hero h2 {
-                font-size: 16px;
-                letter-spacing: 2px;
-            }
-
-            .hero p {
-                font-size: 15px;
-            }
-
-            section {
-                padding: 65px 20px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .rank {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .rank-info {
-                text-align: left;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>EJÉRCITO BMT</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #050505;
+      color: #ffffff;
+    }
+
+    /* =========================
+       ENCABEZADO
+    ========================= */
+
+    header {
+      background: #070707;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+      border-bottom: 1px solid #a77d19;
+      box-shadow: 0 2px 20px rgba(212, 175, 55, 0.08);
+    }
+
+    header h1 {
+      font-family: "Press Start 2P", monospace;
+      color: #d4af37;
+      font-size: 22px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+
+    header p {
+      font-family: "Orbitron", sans-serif;
+      color: #c7c7c7;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       NAVEGACIÓN
+    ========================= */
+
+    nav {
+      background: #0b0b0b;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 14px 15px;
+      border-bottom: 1px solid #242424;
+    }
+
+    nav a {
+      color: #eeeeee;
+      text-decoration: none;
+      padding: 10px 14px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+      border-color: #8c6915;
+      background: #111111;
+    }
+
+    /* =========================
+       PORTADA
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 90px 20px;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(212, 175, 55, 0.07),
+          transparent 55%
+        ),
+        #050505;
+      border-bottom: 1px solid #222222;
+    }
+
+    .hero h2 {
+      font-family: "Press Start 2P", monospace;
+      color: #f0cf63;
+      font-size: clamp(22px, 4vw, 38px);
+      line-height: 1.7;
+      margin-bottom: 22px;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.8;
+      color: #bdbdbd;
+      font-size: 16px;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 30px;
+      background: #d4af37;
+      color: #050505;
+      text-decoration: none;
+      padding: 14px 25px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border: 1px solid #f0cf63;
+      transition: 0.25s;
+    }
+
+    .boton:hover {
+      background: #f0cf63;
+      box-shadow: 0 0 22px rgba(212, 175, 55, 0.3);
+    }
+
+    /* =========================
+       SECCIONES
+    ========================= */
+
+    .seccion {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 75px 20px 0;
+    }
+
+    .seccion h2 {
+      text-align: center;
+      margin-bottom: 35px;
+      color: #d4af37;
+      font-family: "Press Start 2P", monospace;
+      font-size: clamp(18px, 3vw, 27px);
+      line-height: 1.7;
+      text-shadow: 0 0 9px rgba(212, 175, 55, 0.2);
+    }
+
+    .seccion h2::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 2px;
+      background: #b88a1b;
+      margin: 18px auto 0;
+    }
+
+    /* =========================
+       TARJETAS
+    ========================= */
+
+    .tarjetas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .tarjeta {
+      background: #0b0b0b;
+      padding: 25px;
+      border: 1px solid #292929;
+      border-top: 2px solid #a77d19;
+      text-align: center;
+      transition: 0.25s;
+    }
+
+    .tarjeta:hover {
+      border-color: #d4af37;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .tarjeta h3 {
+      margin-bottom: 12px;
+      color: #e1bf50;
+      font-family: "Orbitron", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .tarjeta p {
+      color: #a9a9a9;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* =========================
+       DISCORD
+    ========================= */
+
+    .discord {
+      background:
+        linear-gradient(
+          135deg,
+          #0b0b0b,
+          #111111
+        );
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      margin-top: 75px;
+      border-top: 1px solid #a77d19;
+      border-bottom: 1px solid #a77d19;
+    }
+
+    .discord h2 {
+      color: #d4af37;
+      font-family: "Press Start 2P", monospace;
+      font-size: clamp(18px, 3vw, 26px);
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .discord p {
+      color: #bdbdbd;
+      line-height: 1.6;
+    }
+
+    .discord a {
+      display: inline-block;
+      margin-top: 22px;
+      background: #d4af37;
+      color: #050505;
+      text-decoration: none;
+      padding: 13px 24px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid #f0cf63;
+      transition: 0.25s;
+    }
+
+    .discord a:hover {
+      background: #f0cf63;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    /* =========================
+       PIE DE PÁGINA
+    ========================= */
+
+    footer {
+      background: #050505;
+      color: #777777;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 13px;
+      border-top: 1px solid #222222;
+    }
+
+    footer strong {
+      color: #d4af37;
+      font-family: "Orbitron", sans-serif;
+    }
+
+    /* =========================
+       PC / LAPTOP
+    ========================= */
+
+    @media (min-width: 1000px) {
+
+      header {
+        padding: 32px 20px;
+      }
+
+      header h1 {
+        font-size: 26px;
+      }
+
+      .hero {
+        padding: 120px 30px;
+      }
+
+      .seccion {
+        padding-top: 90px;
+      }
+    }
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 15px;
+      }
+
+      header p {
+        font-size: 11px;
+      }
+
+      nav {
+        gap: 4px;
+      }
+
+      nav a {
+        font-size: 9px;
+        padding: 8px 9px;
+      }
+
+      .hero {
+        padding: 70px 20px;
+      }
+
+      .hero h2 {
+        font-size: 18px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .seccion {
+        padding-top: 60px;
+      }
+
+      .tarjetas {
+        grid-template-columns: 1fr;
+      }
+
+      .discord {
+        margin-top: 60px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN -->
+  <!-- =========================
+       ENCABEZADO
+  ========================= -->
 
-    <header>
-        <div class="navbar">
+  <header>
 
-            <div class="logo">BMT</div>
+    <h1>✦ EJÉRCITO BMT ✦</h1>
 
-            <nav>
-                <a href="#inicio">INICIO</a>
-                <a href="#rangos">RANGOS</a>
-                <a href="#departamentos">DEPARTAMENTOS</a>
-                <a href="#reglamento">REGLAMENTO</a>
-                <a href="#pagos">PAGOS</a>
-            </nav>
+    <p>
+      Plataforma oficial del Ejército BMT
+    </p>
 
-        </div>
-    </header>
+  </header>
 
 
-    <!-- INICIO -->
+  <!-- =========================
+       NAVEGACIÓN
+  ========================= -->
 
-    <main id="inicio">
+  <nav>
 
-        <div class="hero">
+    <a href="index.html">Inicio</a>
+    <a href="#">Rangos</a>
+    <a href="#">Departamentos</a>
+    <a href="#">Reglamento</a>
+    <a href="#">Pagos</a>
+    <a href="#">Donaciones</a>
+    <a href="#">Flood</a>
+    <a href="#">Guías</a>
+    <a href="#">Discord</a>
+    <a href="#">Iniciar sesión</a>
 
-            <div class="hero-content">
+  </nav>
 
-                <div class="small-title">
-                    EJÉRCITO BMT
-                </div>
 
-                <h1>BMT</h1>
+  <!-- =========================
+       INICIO
+  ========================= -->
 
-                <h2>EJÉRCITO BMT</h2>
+  <section class="hero">
 
-                <div class="gold-line"></div>
+    <h2>
+      Bienvenido a EJÉRCITO BMT
+    </h2>
 
-                <p>
-                    Bienvenido a la plataforma oficial del Ejército BMT.
-                    Aquí podrás consultar información sobre rangos,
-                    departamentos, regl
+    <p>
+      Plataforma oficial para los miembros del Ejército BMT.
+      Aquí podrás consultar información, rangos, departamentos,
+      reglamentos, pagos, guías y mucho más.
+    </p>
+
+    <a class="boton" href="#">
+      Iniciar sesión
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       JERARQUÍA
+  ========================= -->
+
+  <section class="seccion">
+
+    <h2>🏛️ Jerarquía de BMT</h2>
+
+    <div class="tarjetas">
+
+      <div class="tarjeta">
+
+        <h3>Estado Mayor</h3>
+
+        <p>
+          Aquí aparecerán los integrantes correspondientes
+          al Estado Mayor de BMT.
+        </p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Oficiales</h3>
+
+        <p>
+          Aquí aparecerán los oficiales correspondientes
+          a la jerarquía de BMT.
+        </p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Suboficiales</h3>
+
+        <p>
+          Aquí aparecerán los integrantes correspondientes
+          a los suboficiales.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DEPARTAMENTOS
+  ========================= -->
+
+  <section class="seccion">
+
+    <h2>🏢 Departamentos</h2>
+
+    <div class="tarjetas">
+
+      <div class="tarjeta">
+
+        <h3>Recursos Humanos</h3>
+
+        <p>Líder: Próximamente</p>
+        <p>Co-líder: Próximamente</p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Ataque</h3>
+
+        <p>Líder: Próximamente</p>
+        <p>Co-líder: Próximamente</p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Marchas</h3>
+
+        <p>Líder: Próximamente</p>
+        <p>Co-líder: Próximamente</p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Juego</h3>
+
+        <p>Líder: Próximamente</p>
+        <p>Co-líder: Próximamente</p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Capacitación</h3>
+
+        <p>Líder: Próximamente</p>
+        <p>Co-líder: Próximamente</p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>Marketing</h3>
+
+        <p>
+          Departamento próximamente disponible.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       TOP DONADORES
+  ========================= -->
+
+  <section class="seccion">
+
+    <h2>🏆 Top Donadores</h2>
+
+    <div class="tarjetas">
+
+      <div class="tarjeta">
+
+        <h3>🥇 Próximamente</h3>
+
+        <p>
+          El ranking de donaciones aparecerá aquí.
+        </p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>🥈 Próximamente</h3>
+
+        <p>
+          El ranking de donaciones aparecerá aquí.
+        </p>
+
+      </div>
+
+
+      <div class="tarjeta">
+
+        <h3>🥉 Próximamente</h3>
+
+        <p>
+          El ranking de donaciones aparecerá aquí.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DISCORD
+  ========================= -->
+
+  <section class="discord">
+
+    <h2>💬 Discord oficial</h2>
+
+    <p>
+      Únete al servidor oficial de Discord de EJÉRCITO BMT.
+    </p>
+
+    <a href="#">
+      Entrar a Discord
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       PIE
+  ========================= -->
+
+  <footer>
+
+    © <strong>EJÉRCITO BMT</strong> — Todos los derechos reservados.
+
+  </footer>
+
+</body>
+</html>
