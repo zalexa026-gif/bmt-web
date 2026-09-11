@@ -3,1991 +3,1605 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EJÉRCITO BMT — Batallón Táctico Militar</title>
+<title>EJÉRCITO BMT</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
-
 :root{
-  --bg:#050505;
-  --surface:#0d0d0d;
-  --surface2:#151515;
-  --text:#fff;
-  --muted:#aaa;
-  --gold:#f0c94a;
-  --border:rgba(240,201,74,.4);
-  --danger:#d9534f;
-  --success:#58c77a;
+--bg:#070707;
+--surface:#101010;
+--surface2:#171717;
+--text:#fff;
+--muted:#aaa;
+--gold:#c99a55;
+--border:rgba(201,154,85,.45);
+--danger:#c94c4c;
+--success:#4caf72;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
+font-family:Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
 }
 
-h1,h2,h3,
-.menu-title,
-.category-title,
-.modal-title,
-.section-title{
-  font-family:"Silkscreen","Trebuchet MS",Arial,sans-serif;
+button,input,select{
+font:inherit;
 }
 
-button,
-a{
-  font-family:inherit;
+button{
+cursor:pointer;
 }
-
-/* =========================
-   MENÚ
-========================= */
-
-.menu-btn{
-  position:fixed;
-  top:16px;
-  left:16px;
-  z-index:1100;
-  width:48px;
-  height:48px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#090909;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:5px;
-  cursor:pointer;
-}
-
-.menu-btn span{
-  width:22px;
-  height:2px;
-  background:var(--gold);
-  border-radius:2px;
-}
-
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  background:rgba(0,0,0,.72);
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-}
-
-.side-menu{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:1050;
-  width:min(360px,88vw);
-  height:100vh;
-  overflow:auto;
-  background:#080808;
-  border-right:1px solid var(--border);
-  transform:translateX(-105%);
-  transition:.25s;
-  padding:82px 18px 28px;
-}
-
-body.open .side-menu{
-  transform:translateX(0);
-}
-
-body.open .overlay{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.login-box{
-  border:1px solid var(--gold);
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:22px;
-  background:#0e0e0e;
-}
-
-.login-box h2{
-  color:var(--gold);
-  font-size:17px;
-  margin-bottom:9px;
-}
-
-.login-box p{
-  color:#aaa;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-.menu-link{
-  display:block;
-  width:100%;
-  text-align:left;
-  color:#fff;
-  background:transparent;
-  border:1px solid #292929;
-  padding:12px 13px;
-  border-radius:9px;
-  margin-bottom:8px;
-  font-size:14px;
-  text-decoration:none;
-  cursor:pointer;
-}
-
-.menu-link:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-}
-
-.menu-category{
-  margin-top:14px;
-}
-
-.category-btn{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  color:var(--gold);
-  background:#101010;
-  border:1px solid #292929;
-  padding:14px;
-  border-radius:9px;
-  cursor:pointer;
-  font-family:"Silkscreen",Arial,sans-serif;
-  font-size:12px;
-  text-align:left;
-}
-
-.category-btn .arrow{
-  transition:.2s;
-}
-
-.category-btn.active .arrow{
-  transform:rotate(90deg);
-}
-
-.submenu{
-  display:none;
-  padding:8px 0 2px 10px;
-}
-
-.submenu.open{
-  display:block;
-}
-
-.submenu button{
-  margin-bottom:7px;
-}
-
-/* =========================
-   PORTADA
-========================= */
 
 header{
-  padding:78px 20px 25px;
-  text-align:center;
-  border-bottom:1px solid var(--border);
+padding:28px 20px;
+text-align:center;
+border-bottom:1px solid var(--border);
 }
 
 header h1{
-  color:var(--gold);
-  font-size:clamp(20px,5vw,30px);
-  letter-spacing:1px;
+color:var(--gold);
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-size:30px;
+letter-spacing:1px;
 }
 
 header p{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:9px;
+color:var(--muted);
+font-size:14px;
+margin-top:7px;
+}
+
+.menu-btn{
+position:fixed;
+top:16px;
+left:16px;
+z-index:1100;
+width:48px;
+height:48px;
+border:1px solid var(--border);
+border-radius:10px;
+background:#090909;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:5px;
+}
+
+.menu-btn span{
+width:22px;
+height:2px;
+background:var(--gold);
+border-radius:2px;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+z-index:1000;
+background:rgba(0,0,0,.72);
+opacity:0;
+pointer-events:none;
+transition:.2s;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+left:0;
+z-index:1050;
+width:min(370px,90vw);
+height:100vh;
+overflow:auto;
+background:#080808;
+border-right:1px solid var(--border);
+transform:translateX(-105%);
+transition:.25s;
+padding:82px 18px 28px;
+}
+
+body.open .side-menu{
+transform:translateX(0);
+}
+
+body.open .overlay{
+opacity:1;
+pointer-events:auto;
+}
+
+.login-box{
+border:1px solid var(--gold);
+border-radius:12px;
+padding:18px;
+margin-bottom:22px;
+background:#0e0e0e;
+}
+
+.login-box h2{
+color:var(--gold);
+font-size:19px;
+margin-bottom:8px;
+}
+
+.login-box p{
+color:#aaa;
+font-size:13px;
+line-height:1.5;
+margin-bottom:14px;
+}
+
+.menu-section{
+margin-top:18px;
+}
+
+.menu-section h3{
+color:var(--gold);
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:1px;
+margin:0 0 9px 3px;
+}
+
+.menu-link{
+display:block;
+width:100%;
+text-align:left;
+color:#fff;
+background:transparent;
+border:1px solid #292929;
+padding:12px 13px;
+border-radius:9px;
+margin-bottom:8px;
+font-size:14px;
+text-decoration:none;
+}
+
+.menu-link:hover{
+border-color:var(--gold);
+color:var(--gold);
 }
 
 .hero{
-  text-align:center;
-  padding:65px 20px 55px;
+text-align:center;
+padding:68px 20px 55px;
 }
 
 .hero h2{
-  color:var(--gold);
-  font-size:clamp(20px,5vw,32px);
-  margin-bottom:18px;
-  line-height:1.5;
+font-size:clamp(28px,5vw,42px);
+color:var(--gold);
+font-family:"Trebuchet MS",Arial,sans-serif;
+margin-bottom:15px;
 }
 
 .hero p{
-  max-width:700px;
-  margin:auto;
-  line-height:1.8;
-  color:var(--muted);
+max-width:700px;
+margin:auto;
+line-height:1.7;
+color:var(--muted);
 }
 
 .button{
-  display:inline-block;
-  margin-top:25px;
-  background:var(--gold);
-  color:#050505;
-  text-decoration:none;
-  padding:13px 23px;
-  border-radius:8px;
-  font-weight:bold;
-  border:1px solid var(--gold);
-  cursor:pointer;
+display:inline-block;
+margin-top:24px;
+background:var(--gold);
+color:#050505;
+text-decoration:none;
+padding:13px 23px;
+border-radius:8px;
+font-weight:bold;
+border:1px solid var(--gold);
 }
 
-/* =========================
-   SECCIONES
-========================= */
-
 .seccion{
-  max-width:1100px;
-  margin:42px auto;
-  padding:0 20px;
+max-width:1100px;
+margin:42px auto;
+padding:0 20px;
 }
 
 .seccion>h2{
-  text-align:center;
-  color:var(--gold);
-  margin-bottom:24px;
-  font-size:20px;
+text-align:center;
+margin-bottom:24px;
+font-size:25px;
+color:var(--gold);
 }
 
 .tarjetas{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;
 }
 
 .tarjeta{
-  background:var(--surface);
-  padding:22px;
-  border:1px solid #292929;
-  border-radius:12px;
-  text-align:center;
+background:var(--surface);
+padding:22px;
+border:1px solid #292929;
+border-radius:12px;
+text-align:center;
 }
 
 .tarjeta h3{
-  margin-bottom:10px;
-  color:var(--gold);
-  font-size:15px;
+margin-bottom:10px;
+color:var(--gold);
 }
 
 .tarjeta p{
-  color:var(--muted);
-  line-height:1.5;
-  font-size:14px;
+color:var(--muted);
+line-height:1.5;
+font-size:14px;
 }
 
 .discord{
-  background:var(--surface);
-  text-align:center;
-  padding:40px 20px;
-  margin-top:35px;
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
+background:var(--surface);
+text-align:center;
+padding:40px 20px;
+margin-top:35px;
+border-top:1px solid var(--border);
+border-bottom:1px solid var(--border);
 }
 
 .discord h2{
-  color:var(--gold);
-  font-size:19px;
+color:var(--gold);
 }
 
 .discord p{
-  color:var(--muted);
-  margin-top:10px;
+color:var(--muted);
+margin-top:8px;
 }
 
 .discord a{
-  display:inline-block;
-  margin-top:18px;
-  background:var(--gold);
-  color:#050505;
-  text-decoration:none;
-  padding:12px 22px;
-  border-radius:7px;
-  font-weight:bold;
+display:inline-block;
+margin-top:18px;
+background:var(--gold);
+color:#050505;
+text-decoration:none;
+padding:12px 22px;
+border-radius:7px;
+font-weight:bold;
 }
 
 .horario-intro{
-  text-align:center;
-  color:var(--muted);
-  max-width:700px;
-  margin:-8px auto 22px;
-  line-height:1.6;
-  font-size:14px;
+text-align:center;
+color:var(--muted);
+max-width:700px;
+margin:-8px auto 22px;
+line-height:1.6;
+font-size:14px;
 }
 
 .horario{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+gap:12px;
 }
 
 .pais{
-  background:var(--surface);
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
+background:var(--surface);
+border:1px solid #292929;
+border-radius:11px;
+padding:16px;
+display:flex;
+align-items:center;
+gap:12px;
 }
 
 .flag{
-  font-size:27px;
+font-size:27px;
 }
 
 .pais strong{
-  display:block;
-  margin-bottom:4px;
+display:block;
+margin-bottom:4px;
 }
 
 .hora{
-  color:var(--gold);
-  font-weight:bold;
-  font-size:17px;
+color:var(--gold);
+font-weight:bold;
+font-size:17px;
 }
 
 .nota{
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:14px;
+text-align:center;
+color:var(--muted);
+font-size:12px;
+margin-top:14px;
 }
 
-.small-pay{
-  text-align:center;
-  color:#888;
-  font-size:12px;
-  margin:45px 20px 15px;
+.modal{
+position:fixed;
+inset:0;
+z-index:3000;
+background:rgba(0,0,0,.78);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
 }
 
-footer{
-  background:#030303;
-  color:#777;
-  text-align:center;
-  padding:22px;
-  font-size:12px;
-  margin-top:30px;
+.modal.active{
+display:flex;
 }
 
-/* =========================
-   PANTALLAS INTERNAS
-========================= */
-
-.page{
-  display:none;
-  max-width:950px;
-  margin:0 auto;
-  padding:55px 20px;
+.modal-box{
+width:min(500px,100%);
+max-height:90vh;
+overflow:auto;
+background:#101010;
+border:1px solid var(--border);
+border-radius:15px;
+padding:25px;
+position:relative;
 }
 
-.page.active{
-  display:block;
+.modal-box h2{
+color:var(--gold);
+margin-bottom:18px;
 }
 
-.page h2{
-  color:var(--gold);
-  text-align:center;
-  font-size:21px;
-  margin-bottom:28px;
+.close{
+position:absolute;
+right:15px;
+top:12px;
+background:none;
+border:none;
+color:#aaa;
+font-size:25px;
 }
 
-.panel{
-  background:var(--surface);
-  border:1px solid #292929;
-  border-radius:12px;
-  padding:22px;
-  margin-bottom:18px;
+.form-group{
+margin-bottom:14px;
 }
 
-.panel h3{
-  color:var(--gold);
-  font-size:15px;
-  margin-bottom:13px;
+.form-group label{
+display:block;
+font-size:13px;
+color:#ccc;
+margin-bottom:6px;
 }
 
-.panel p{
-  color:var(--muted);
-  line-height:1.6;
-  font-size:14px;
+.form-group input,
+.form-group select{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #333;
+background:#080808;
+color:white;
+outline:none;
 }
 
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:12px;
-}
-
-.info{
-  background:#101010;
-  border:1px solid #292929;
-  border-radius:9px;
-  padding:15px;
-}
-
-.info span{
-  display:block;
-  color:#888;
-  font-size:12px;
-  margin-bottom:6px;
-}
-
-.info strong{
-  color:#fff;
-}
-
-/* =========================
-   LOGIN / REGISTRO
-========================= */
-
-.form{
-  max-width:500px;
-  margin:auto;
-}
-
-.field{
-  margin-bottom:15px;
-}
-
-.field label{
-  display:block;
-  color:#bbb;
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  background:#080808;
-  border:1px solid #333;
-  color:#fff;
-  padding:13px;
-  border-radius:8px;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:var(--gold);
+.form-group input:focus,
+.form-group select:focus{
+border-color:var(--gold);
 }
 
 .form-button{
-  width:100%;
-  background:var(--gold);
-  border:0;
-  color:#050505;
-  padding:13px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
+width:100%;
+padding:12px;
+border:0;
+border-radius:8px;
+background:var(--gold);
+color:#050505;
+font-weight:bold;
+margin-top:8px;
 }
 
-.form-links{
-  text-align:center;
-  margin-top:16px;
+.secondary-button{
+width:100%;
+padding:11px;
+border:1px solid #333;
+border-radius:8px;
+background:transparent;
+color:white;
+margin-top:9px;
 }
 
-.form-links button{
-  background:none;
-  border:0;
-  color:var(--gold);
-  cursor:pointer;
-  margin:5px;
+.info-box{
+background:#171717;
+border:1px solid #292929;
+border-radius:10px;
+padding:15px;
+margin-top:15px;
+line-height:1.6;
+color:#ccc;
 }
 
-.status{
-  padding:13px;
-  border-radius:8px;
-  margin-bottom:16px;
-  font-size:13px;
-  line-height:1.5;
+.success{
+color:var(--success);
 }
 
-.status.pending{
-  background:rgba(240,201,74,.08);
-  border:1px solid rgba(240,201,74,.3);
-  color:#e9d98b;
+.danger{
+color:var(--danger);
 }
 
-.status.success{
-  background:rgba(88,199,122,.08);
-  border:1px solid rgba(88,199,122,.3);
-  color:#8ee0a4;
+footer{
+background:#030303;
+color:#aaa;
+text-align:center;
+padding:22px;
+font-size:13px;
+margin-top:40px;
 }
-
-.status.danger{
-  background:rgba(217,83,79,.08);
-  border:1px solid rgba(217,83,79,.3);
-  color:#ee9794;
-}
-
-/* =========================
-   PROGRESO
-========================= */
-
-.progress{
-  height:12px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.progress div{
-  height:100%;
-  width:0%;
-  background:var(--gold);
-}
-
-/* =========================
-   ACCESO ADMINISTRATIVO
-========================= */
-
-.admin-only{
-  display:none;
-}
-
-.admin-card{
-  border:1px solid rgba(240,201,74,.5);
-  background:#101010;
-  border-radius:11px;
-  padding:18px;
-  margin-bottom:12px;
-}
-
-.admin-card strong{
-  color:var(--gold);
-}
-
-.permission{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:5px;
-  font-size:11px;
-  margin-top:8px;
-  background:#1b1b1b;
-  color:#bbb;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:600px){
+header{
+padding-top:78px;
+}
 
-  .tarjetas{
-    grid-template-columns:1fr;
-  }
+.hero{
+padding-top:45px;
+}
 
-  .hero{
-    padding-top:45px;
-  }
-
-  .hero h2{
-    line-height:1.7;
-  }
+.tarjetas{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     BOTÓN MENÚ
-========================= -->
-
 <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
-  <span></span>
-  <span></span>
-  <span></span>
+<span></span>
+<span></span>
+<span></span>
 </button>
 
 <div class="overlay" id="overlay"></div>
 
-<!-- =========================
-     MENÚ LATERAL
-========================= -->
-
 <aside class="side-menu">
 
-  <div class="login-box">
-    <h2>🔐 Iniciar sesión</h2>
+<div class="login-box">
+<h2>🔐 Cuenta BMT</h2>
+<p>
+Inicia sesión o regístrate para acceder a tu perfil y a las funciones privadas del portal de EJÉRCITO BMT.
+</p>
 
-    <p>
-      Accede a tu cuenta para consultar las funciones privadas
-      del portal de EJÉRCITO BMT.
-    </p>
+<a class="menu-link" href="#" onclick="openLogin();return false">
+➜ Iniciar sesión
+</a>
 
-    <button class="menu-link" onclick="showPage('login')">
-      ➜ Iniciar sesión
-    </button>
-  </div>
+<a class="menu-link" href="#" onclick="openRegister();return false">
+➜ Regístrate
+</a>
+</div>
 
-  <!-- MI CUENTA -->
+<div class="menu-section">
+<h3>👤 Mi cuenta</h3>
 
-  <div class="menu-category">
+<button class="menu-link" onclick="openProfile()">
+👤 Perfil
+</button>
 
-    <button class="category-btn" onclick="toggleCategory(this)">
-      <span>👤 Mi cuenta</span>
-      <span class="arrow">›</span>
-    </button>
+<button class="menu-link" onclick="openStatus()">
+💭 Estado
+</button>
 
-    <div class="submenu">
+<button class="menu-link" onclick="openBirthday()">
+🎂 Cumpleaños / Calendario
+</button>
 
-      <button class="menu-link" onclick="showPage('perfil')">
-        👤 Perfil
-      </button>
+<button class="menu-link" onclick="openSettings()">
+⚙️ Configuración
+</button>
 
-      <button class="menu-link" onclick="showPage('estado')">
-        💭 Estado
-      </button>
+<button class="menu-link" onclick="openSecurity()">
+🔒 Seguridad
+</button>
+</div>
 
-      <button class="menu-link" onclick="showPage('cumpleanos')">
-        🎂 Cumpleaños / Calendario
-      </button>
+<div class="menu-section">
+<h3>💼 Trabajo</h3>
 
-      <button class="menu-link" onclick="showPage('configuracion')">
-        ⚙️ Configuración
-      </button>
+<button class="menu-link" onclick="openPromotion()">
+Ascenso
+</button>
 
-      <button class="menu-link" onclick="showPage('seguridad')">
-        🔒 Seguridad
-      </button>
+<button class="menu-link" onclick="openTraining()">
+Entrenamiento
+</button>
 
-    </div>
-  </div>
+<button class="menu-link" onclick="openDepartments()">
+Departamentos
+</button>
+</div>
 
-  <!-- TRABAJO -->
+<div class="menu-section">
+<h3>ℹ️ Información</h3>
 
-  <div class="menu-category">
+<button class="menu-link" onclick="openRanks()">
+Rangos
+</button>
 
-    <button class="category-btn" onclick="toggleCategory(this)">
-      <span>💼 Trabajo</span>
-      <span class="arrow">›</span>
-    </button>
+<button class="menu-link" onclick="openRankCalculator()">
+Calcular rangos
+</button>
 
-    <div class="submenu">
+<button class="menu-link" onclick="openPayments()">
+Pagos
+</button>
 
-      <button class="menu-link" onclick="showPage('ascenso')">
-        📈 Ascenso
-      </button>
+<button class="menu-link" onclick="openActives()">
+Activos
+</button>
 
-      <button class="menu-link" onclick="showPage('entrenamiento')">
-        🎓 Entrenamiento
-      </button>
+<button class="menu-link" onclick="openPaySchedule()">
+Horario de paga
+</button>
 
-      <button class="menu-link" onclick="showPage('departamentos')">
-        🏢 Departamentos
-      </button>
-
-    </div>
-  </div>
-
-  <!-- INFORMACIÓN -->
-
-  <div class="menu-category">
-
-    <button class="category-btn" onclick="toggleCategory(this)">
-      <span>ℹ️ Información</span>
-      <span class="arrow">›</span>
-    </button>
-
-    <div class="submenu">
-
-      <button class="menu-link" onclick="showPage('rangos')">
-        🎖️ Rangos
-      </button>
-
-      <button class="menu-link" onclick="showPage('calcular')">
-        🧮 Calcular rangos
-      </button>
-
-      <button class="menu-link" onclick="showPage('pagos')">
-        💰 Pagos
-      </button>
-
-      <button class="menu-link" onclick="showPage('activos')">
-        🟢 Activos
-      </button>
-
-      <button class="menu-link" onclick="showPage('horario')">
-        🕐 Horario de paga
-      </button>
-
-    </div>
-  </div>
-
-  <!-- ACCESO ADMINISTRATIVO
-       Se mostrará posteriormente según rango real -->
-
-  <div class="menu-category admin-only" id="accessMenu">
-
-    <button class="category-btn" onclick="toggleCategory(this)">
-      <span>🔐 Acceso</span>
-      <span class="arrow">›</span>
-    </button>
-
-    <div class="submenu">
-
-      <button class="menu-link" onclick="showPage('acceso')">
-        👥 Solicitudes
-      </button>
-
-      <button class="menu-link" onclick="showPage('permisos')">
-        🛡️ Permisos
-      </button>
-
-    </div>
-  </div>
+<button class="menu-link" onclick="openLegislation()">
+📜 Legislación
+</button>
+</div>
 
 </aside>
 
-
-<!-- =========================
-     ENCABEZADO
-========================= -->
-
-<header id="siteHeader">
-  <h1>🎖️ EJÉRCITO BMT</h1>
-  <p>Batallón Táctico Militar</p>
+<header>
+<h1>⚔️ EJÉRCITO BMT</h1>
+<p>Plataforma oficial del Ejército BMT</p>
 </header>
 
-
-<!-- =========================
-     PORTADA
-========================= -->
-
-<main id="home">
+<main>
 
 <section class="hero">
+<h2>Bienvenido a EJÉRCITO BMT</h2>
 
-  <h2>Bienvenido a EJÉRCITO BMT</h2>
+<p>
+Plataforma oficial para los miembros del Ejército BMT.
+Aquí podrás consultar información, rangos, departamentos,
+reglamentos, pagos, guías y mucho más.
+</p>
 
-  <p>
-    Plataforma oficial del Batallón Táctico Militar 🎖️.
-    Aquí podrás consultar información del ejército,
-    rangos, actividades, pagos, entrenamientos y
-    diferentes funciones destinadas a nuestros miembros.
-  </p>
-
-  <button class="button" onclick="showPage('login')">
-    🔐 Iniciar sesión
-  </button>
-
+<a class="button" href="#" onclick="openLogin();return false">
+Iniciar sesión
+</a>
 </section>
-
 
 <section class="discord">
-
-  <h2>💬 Discord oficial</h2>
-
-  <p>
-    Únete al servidor oficial de Discord de EJÉRCITO BMT.
-  </p>
-
-  <a href="#" onclick="return false">
-    Entrar a Discord
-  </a>
-
+<h2>💬 Discord oficial</h2>
+<p>Únete al servidor oficial de Discord de EJÉRCITO BMT.</p>
+<a href="#" onclick="return false">Entrar a Discord</a>
 </section>
-
 
 <section class="seccion">
+<h2>🏛️ Jerarquía de BMT</h2>
 
-  <h2>🏛️ Jerarquía de BMT</h2>
+<div class="tarjetas">
 
-  <div class="tarjetas">
-
-    <div class="tarjeta">
-      <h3>Líderes</h3>
-      <p>
-        Información correspondiente a los líderes
-        del Batallón Táctico Militar.
-      </p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Estado Mayor</h3>
-      <p>
-        Información correspondiente al Estado Mayor
-        de BMT.
-      </p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Presidencia</h3>
-      <p>
-        Información correspondiente a la Presidencia
-        de BMT.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="seccion">
-
-  <h2>🏆 Top Donadores</h2>
-
-  <div class="tarjetas">
-
-    <div class="tarjeta">
-      <h3>🥇 Próximamente</h3>
-      <p>
-        El ranking de donaciones aparecerá aquí.
-      </p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>🥈 Próximamente</h3>
-      <p>
-        El ranking de donaciones aparecerá aquí.
-      </p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>🥉 Próximamente</h3>
-      <p>
-        El ranking de donaciones aparecerá aquí.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- HORARIO PEQUEÑO DE PORTADA -->
-
-<div class="small-pay">
-  💰 Paga todos los sábados · 7:00 PM, hora de España ·
-  <a href="#" onclick="showPage('horario');return false" style="color:var(--gold);">
-    Ver horario
-  </a>
+<div class="tarjeta">
+<h3>Líderes</h3>
+<p>Aquí aparecerán los integrantes correspondientes a los Líderes de BMT.</p>
 </div>
+
+<div class="tarjeta">
+<h3>Estado Mayor</h3>
+<p>Aquí aparecerán los integrantes correspondientes al Estado Mayor de BMT.</p>
+</div>
+
+<div class="tarjeta">
+<h3>Presidencia</h3>
+<p>Aquí aparecerán los integrantes correspondientes a la Presidencia de BMT.</p>
+</div>
+
+</div>
+</section>
+
+<section class="seccion">
+<h2>🏢 Departamentos</h2>
+
+<div class="tarjetas">
+
+<div class="tarjeta">
+<h3>Recursos Humanos</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Ataque</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Marchas</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Juego</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Capacitación</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Marketing</h3>
+<p>Departamento próximamente disponible.</p>
+</div>
+
+</div>
+</section><section class="seccion">
+<h2>🏆 Top Donadores</h2>
+
+<div class="tarjetas">
+
+<div class="tarjeta">
+<h3>🥇 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+<div class="tarjeta">
+<h3>🥈 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+<div class="tarjeta">
+<h3>🥉 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+</div>
+</section>
+
+<section class="seccion">
+<h2>💰 Horario de paga</h2>
+
+<p class="horario-intro">
+La paga se realiza cada sábado a las <strong>7:00 PM, hora de España</strong>.
+Las horas de los demás países se calculan automáticamente.
+</p>
+
+<div class="horario">
+
+<div class="pais">
+<span class="flag">🇪🇸</span>
+<div>
+<strong>España</strong>
+<span class="hora" data-zone="Europe/Madrid">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇻🇪</span>
+<div>
+<strong>Venezuela</strong>
+<span class="hora" data-zone="America/Caracas">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇩🇴</span>
+<div>
+<strong>Rep. Dominicana</strong>
+<span class="hora" data-zone="America/Santo_Domingo">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇨🇴</span>
+<div>
+<strong>Colombia</strong>
+<span class="hora" data-zone="America/Bogota">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇨🇱</span>
+<div>
+<strong>Chile</strong>
+<span class="hora" data-zone="America/Santiago">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇲🇽</span>
+<div>
+<strong>México</strong>
+<span class="hora" data-zone="America/Mexico_City">Calculando...</span>
+</div>
+</div>
+
+</div>
+
+<p class="nota" id="proximaPaga">
+Calculando próxima paga...
+</p>
+</section>
 
 </main>
 
-
-<!-- =========================
-     PÁGINA LOGIN
-========================= -->
-
-<section class="page" id="page-login">
-
-  <h2>🔐 Iniciar sesión</h2>
-
-  <div class="panel form">
-
-    <div id="loginMessage"></div>
-
-    <div class="field">
-      <label>Nombre de usuario</label>
-      <input id="loginUser" type="text" placeholder="Tu usuario">
-    </div>
-
-    <div class="field">
-      <label>Contraseña</label>
-      <input id="loginPass" type="password" placeholder="Tu contraseña">
-    </div>
-
-    <button class="form-button" onclick="loginUser()">
-      Iniciar sesión
-    </button>
-
-    <div class="form-links">
-
-      <button onclick="showPage('forgot')">
-        ¿Olvidaste tu contraseña?
-      </button>
-
-      <br>
-
-      <button onclick="showPage('registro')">
-        ¿No tienes una cuenta? Regístrate
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     REGISTRO
-========================= -->
-
-<section class="page" id="page-registro">
-
-  <h2>📝 Crear cuenta</h2>
-
-  <div class="panel form">
-
-    <div class="status pending">
-      Las cuentas nuevas deberán ser revisadas y aceptadas
-      antes de poder acceder a las funciones privadas
-      correspondientes.
-    </div>
-
-    <div class="field">
-      <label>Nombre de usuario</label>
-      <input id="registerUser" type="text" placeholder="Crea tu usuario">
-    </div>
-
-    <div class="field">
-      <label>Nombre de Habbo</label>
-      <input id="registerHabbo" type="text" placeholder="Tu nombre de Habbo">
-    </div>
-
-    <div class="field">
-      <label>Correo electrónico</label>
-      <input id="registerEmail" type="email" placeholder="Tu correo">
-    </div>
-
-    <div class="field">
-      <label>Contraseña</label>
-      <input id="registerPass" type="password" placeholder="Crea una contraseña">
-    </div>
-
-    <button class="form-button" onclick="registerUser()">
-      Crear cuenta
-    </button>
-
-    <div class="form-links">
-      <button onclick="showPage('login')">
-        Ya tengo una cuenta
-      </button>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     RECUPERAR CONTRASEÑA
-========================= -->
-
-<section class="page" id="page-forgot">
-
-  <h2>🔑 Recuperar contraseña</h2>
-
-  <div class="panel form">
-
-    <p style="margin-bottom:18px;color:var(--muted);">
-      Introduce el correo asociado a tu cuenta.
-      El sistema de recuperación se conectará posteriormente
-      al servidor real.
-    </p>
-
-    <div class="field">
-      <label>Correo electrónico</label>
-      <input type="email" placeholder="Tu correo">
-    </div>
-
-    <button class="form-button" onclick="alert('La recuperación real se conectará posteriormente.')">
-      Solicitar recuperación
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PERFIL
-========================= -->
-
-<section class="page" id="page-perfil">
-
-  <h2>👤 Mi perfil</h2>
-
-  <div class="panel">
-
-    <div class="info-grid">
-
-      <div class="info">
-        <span>Usuario</span>
-        <strong id="profileUser">—</strong>
-      </div>
-
-      <div class="info">
-        <span>Nombre de Habbo</span>
-        <strong id="profileHabbo">—</strong>
-      </div>
-
-      <div class="info">
-        <span>Rango</span>
-        <strong id="profileRank">Alistado</strong>
-      </div>
-
-      <div class="info">
-        <span>Misión</span>
-        <strong id="profileMission">Alistado [BMT]</strong>
-      </div>
-
-      <div class="info">
-        <span>Estado</span>
-        <strong id="profileStatus">Pendiente</strong>
-      </div>
-
-      <div class="info">
-        <span>Departamento</span>
-        <strong>Sin departamento</strong>
-      </div>
-
-      <div class="info">
-        <span>Fecha de ingreso</span>
-        <strong>—</strong>
-      </div>
-
-      <div class="info">
-        <span>Próxima paga</span>
-        <strong>Sábado</strong>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="panel">
-
-    <h3>📈 Progreso</h3>
-
-    <p>
-      Progreso hacia el siguiente requisito:
-    </p>
-
-    <div class="progress">
-      <div style="width:0%"></div>
-    </div>
-
-    <p style="margin-top:8px;">
-      0 / 8
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ESTADO
-========================= -->
-
-<section class="page" id="page-estado">
-
-  <h2>💭 Mi estado</h2>
-
-  <div class="panel">
-
-    <h3>Estado actual</h3>
-
-    <p>
-      Tu estado dentro de BMT aparecerá aquí.
-    </p>
-
-    <div class="status pending" style="margin-top:15px;">
-      ⏳ Cuenta pendiente de aprobación.
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     CUMPLEAÑOS
-========================= -->
-
-<section class="page" id="page-cumpleanos">
-
-  <h2>🎂 Cumpleaños / Calendario</h2>
-
-  <div class="panel">
-
-    <h3>🎂 Mi cumpleaños</h3>
-
-    <p>
-      Esta sección permitirá registrar el día y mes
-      de cumpleaños y posteriormente mostrar el
-      calendario correspondiente.
-    </p>
-
-  </div>
-
-  <div class="panel">
-
-    <h3>📅 Calendario BMT</h3>
-
-    <p>
-      Próximamente se mostrarán cumpleaños,
-      actividades, pagos y eventos importantes.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     CONFIGURACIÓN
-========================= -->
-
-<section class="page" id="page-configuracion">
-
-  <h2>⚙️ Configuración</h2>
-
-  <div class="panel">
-
-    <h3>Cuenta</h3>
-
-    <p>
-      Las opciones de configuración de la cuenta
-      se conectarán al sistema de usuarios.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SEGURIDAD
-========================= -->
-
-<section class="page" id="page-seguridad">
-
-  <h2>🔒 Seguridad</h2>
-
-  <div class="panel">
-
-    <h3>Protección de cuenta</h3>
-
-    <p>
-      Aquí se mostrarán las herramientas de seguridad
-      de la cuenta.
-    </p>
-
-    <br>
-
-    <p>
-      El sistema podrá detectar señales como sesiones
-      o IPs coincidentes para que la administración
-      pueda revisarlas.
-    </p>
-
-    <div class="status pending" style="margin-top:15px;">
-      La verificación real de IP se realizará desde el
-      servidor y nunca deberá utilizarse como bloqueo
-      automático.
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ASCENSO
-========================= -->
-
-<section class="page" id="page-ascenso">
-
-  <h2>📈 Ascenso</h2>
-
-  <div class="panel">
-
-    <h3>Tu próximo ascenso</h3>
-
-    <p>
-      Aquí aparecerán automáticamente los requisitos
-      correspondientes a tu rango actual.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ENTRENAMIENTO
-========================= -->
-
-<section class="page" id="page-entrenamiento">
-
-  <h2>🎓 Entrenamiento</h2>
-
-  <div class="panel">
-
-    <h3>Capacitaciones</h3>
-
-    <p>
-      Las guías y capacitaciones correspondientes
-      al rango del miembro aparecerán aquí.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     DEPARTAMENTOS
-========================= -->
-
-<section class="page" id="page-departamentos">
-
-  <h2>🏢 Departamentos</h2>
-
-  <div class="tarjetas">
-
-    <div class="tarjeta">
-      <h3>Recursos Humanos</h3>
-      <p>Líder: Próximamente</p>
-      <p>Co-líder: Próximamente</p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Ataque</h3>
-      <p>Líder: Próximamente</p>
-      <p>Co-líder: Próximamente</p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Marchas</h3>
-      <p>Líder: Próximamente</p>
-      <p>Co-líder: Próximamente</p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Juego</h3>
-      <p>Líder: Próximamente</p>
-      <p>Co-líder: Próximamente</p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Capacitación</h3>
-      <p>Líder: Próximamente</p>
-      <p>Co-líder: Próximamente</p>
-    </div>
-
-    <div class="tarjeta">
-      <h3>Marketing</h3>
-      <p>Próximamente disponible.</p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     RANGOS
-========================= -->
-
-<section class="page" id="page-rangos">
-
-  <h2>🎖️ Rangos</h2>
-
-  <div class="panel">
-
-    <h3>Jerarquía BMT</h3>
-
-    <p>
-      Aquí se mostrará la información completa
-      de los rangos, misiones y requisitos.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     CALCULAR RANGOS
-========================= -->
-
-<section class="page" id="page-calcular">
-
-  <h2>🧮 Calcular rangos</h2>
-
-  <div class="panel">
-
-    <h3>Calculadora de ascenso</h3>
-
-    <p>
-      Esta herramienta calculará el progreso del miembro
-      según las reglas oficiales de BMT.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PAGOS
-========================= -->
-
-<section class="page" id="page-pagos">
-
-  <h2>💰 Pagos</h2>
-
-  <div class="panel">
-
-    <h3>Información de pagos</h3>
-
-    <div class="info-grid">
-
-      <div class="info">
-        <span>Próxima paga</span>
-        <strong>Sábado</strong>
-      </div>
-
-      <div class="info">
-        <span>Hora</span>
-        <strong>7:00 PM España</strong>
-      </div>
-
-      <div class="info">
-        <span>Última paga</span>
-        <strong>—</strong>
-      </div>
-
-      <div class="info">
-        <span>Estado</span>
-        <strong>—</strong>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ACTIVOS
-========================= -->
-
-<section class="page" id="page-activos">
-
-  <h2>🟢 Activos</h2>
-
-  <div class="panel">
-
-    <h3>Miembros activos</h3>
-
-    <p>
-      Esta sección mostrará posteriormente los miembros
-      activos de BMT según los permisos correspondientes.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     HORARIO
-========================= -->
-
-<section class="page" id="page-horario">
-
-  <h2>🕐 Horario de paga</h2>
-
-  <p class="horario-intro">
-    La paga se realiza cada sábado a las
-    <strong>7:00 PM, hora de España</strong>.
-  </p>
-
-  <div class="horario">
-
-    <div class="pais">
-      <span class="flag">🇪🇸</span>
-      <div>
-        <strong>España</strong>
-        <span class="hora" data-zone="Europe/Madrid">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-    <div class="pais">
-      <span class="flag">🇻🇪</span>
-      <div>
-        <strong>Venezuela</strong>
-        <span class="hora" data-zone="America/Caracas">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-    <div class="pais">
-      <span class="flag">🇩🇴</span>
-      <div>
-        <strong>Rep. Dominicana</strong>
-        <span class="hora" data-zone="America/Santo_Domingo">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-    <div class="pais">
-      <span class="flag">🇨🇴</span>
-      <div>
-        <strong>Colombia</strong>
-        <span class="hora" data-zone="America/Bogota">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-    <div class="pais">
-      <span class="flag">🇨🇱</span>
-      <div>
-        <strong>Chile</strong>
-        <span class="hora" data-zone="America/Santiago">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-    <div class="pais">
-      <span class="flag">🇲🇽</span>
-      <div>
-        <strong>México</strong>
-        <span class="hora" data-zone="America/Mexico_City">
-          Calculando...
-        </span>
-      </div>
-    </div>
-
-  </div>
-
-  <p class="nota" id="proximaPaga">
-    Calculando próxima paga...
-  </p>
-
-</section>
-
-
-<!-- =========================
-     ACCESO ADMINISTRATIVO
-========================= -->
-
-<section class="page" id="page-acceso">
-
-  <h2>🔐 Acceso administrativo</h2>
-
-  <div class="status pending">
-    Esta sección estará disponible únicamente para
-    rangos autorizados.
-  </div>
-
-  <div class="admin-card">
-    <strong>👥 Solicitudes de registro</strong>
-
-    <p style="margin-top:9px;">
-      Aquí aparecerán las cuentas nuevas pendientes
-      de aprobación.
-    </p>
-
-    <span class="permission">
-      Oficiales · Oficiales Superiores · Generales ·
-      Presidencia · Estado Mayor · Líderes
-    </span>
-  </div>
-
-  <div class="admin-card">
-    <strong>🔎 Revisiones de seguridad</strong>
-
-    <p style="margin-top:9px;">
-      Aquí podrán aparecer cuentas que compartan
-      determinadas señales de seguridad con otras
-      cuentas para su revisión administrativa.
-    </p>
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PERMISOS
-========================= -->
-
-<section class="page" id="page-permisos">
-
-  <h2>🛡️ Permisos</h2>
-
-  <div class="panel">
-
-    <h3>Niveles de acceso</h3>
-
-    <p>
-      Los permisos serán determinados por el rango
-      real almacenado en la base de datos.
-    </p>
-
-    <br>
-
-    <p>
-      No será posible que un usuario cambie su propio
-      rango desde la página para obtener permisos.
-    </p>
-
-  </div>
-
-</section>
-
-
 <footer>
-  © EJÉRCITO BMT — Batallón Táctico Militar 🎖️
+© EJÉRCITO BMT — Todos los derechos reservados.
 </footer>
 
+<!-- LOGIN -->
+
+<div class="modal" id="loginModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🔐 Iniciar sesión</h2>
+
+<div class="form-group">
+<label>Correo electrónico o usuario</label>
+<input id="loginUser" type="text" placeholder="Escribe tu usuario o correo">
+</div>
+
+<div class="form-group">
+<label>Contraseña</label>
+<input id="loginPassword" type="password" placeholder="Escribe tu contraseña">
+</div>
+
+<button class="form-button" onclick="doLogin()">
+Iniciar sesión
+</button>
+
+<button class="secondary-button" onclick="openRegister()">
+Regístrate
+</button>
+
+<button class="secondary-button" onclick="forgotPassword()">
+¿Olvidaste tu contraseña?
+</button>
+
+</div>
+</div>
+
+<!-- REGISTRO -->
+
+<div class="modal" id="registerModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>📝 Crear cuenta BMT</h2>
+
+<div class="form-group">
+<label>Nombre de Habbo</label>
+<input id="registerHabbo" type="text" placeholder="Tu nombre de Habbo">
+</div>
+
+<div class="form-group">
+<label>Nombre de usuario</label>
+<input id="registerUser" type="text" placeholder="Nombre para tu cuenta">
+</div>
+
+<div class="form-group">
+<label>Correo electrónico</label>
+<input id="registerEmail" type="email" placeholder="Tu correo">
+</div>
+
+<div class="form-group">
+<label>Contraseña</label>
+<input id="registerPassword" type="password" placeholder="Crea una contraseña">
+</div>
+
+<div class="form-group">
+<label>Fecha de cumpleaños</label>
+<input id="registerBirthday" type="date">
+</div>
+
+<div class="info-box">
+<strong>Rango inicial:</strong> Alistado
+<br>
+<strong>Misión inicial:</strong> Alistado [BMT]
+</div>
+
+<button class="form-button" onclick="registerUser()">
+Crear cuenta
+</button>
+
+</div>
+</div>
+
+<!-- PERFIL -->
+
+<div class="modal" id="profileModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>👤 Mi perfil</h2>
+
+<div class="info-box">
+<strong>Nombre:</strong> <span id="profileName">Sin iniciar sesión</span>
+<br>
+<strong>Habbo:</strong> <span id="profileHabbo">Sin registrar</span>
+<br>
+<strong>Rango:</strong> <span id="profileRank">Alistado</span>
+<br>
+<strong>Misión:</strong> <span id="profileMission">Alistado [BMT]</span>
+<br>
+<strong>Tiempo de servicio:</strong> <span id="profileTime">0 h 0 min</span>
+</div>
+
+</div>
+</div>
+
+<!-- ESTADO -->
+
+<div class="modal" id="statusModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>💭 Estado</h2>
+
+<div class="form-group">
+<label>Tu estado actual</label>
+<select id="statusSelect">
+<option>En servicio</option>
+<option>Activo</option>
+<option>Ausente</option>
+<option>En capacitación</option>
+<option>Fuera de servicio</option>
+</select>
+</div>
+
+<button class="form-button" onclick="saveStatus()">
+Guardar estado
+</button>
+
+<div class="info-box" id="statusResult">
+Estado actual: Activo
+</div>
+
+</div>
+</div>
+
+<!-- CUMPLEAÑOS -->
+
+<div class="modal" id="birthdayModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🎂 Cumpleaños / Calendario</h2>
+
+<div class="form-group">
+<label>Día</label>
+<select id="birthdayDay"></select>
+</div>
+
+<div class="form-group">
+<label>Mes</label>
+<select id="birthdayMonth">
+<option value="1">Enero</option>
+<option value="2">Febrero</option>
+<option value="3">Marzo</option>
+<option value="4">Abril</option>
+<option value="5">Mayo</option>
+<option value="6">Junio</option>
+<option value="7">Julio</option>
+<option value="8">Agosto</option>
+<option value="9">Septiembre</option>
+<option value="10">Octubre</option>
+<option value="11">Noviembre</option>
+<option value="12">Diciembre</option>
+</select>
+</div>
+
+<button class="form-button" onclick="saveBirthday()">
+Guardar cumpleaños
+</button>
+
+<div class="info-box" id="birthdayResult">
+No has registrado tu cumpleaños.
+</div>
+
+</div>
+</div>
+
+<!-- RANGOS -->
+
+<div class="modal" id="ranksModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🎖️ Rangos BMT</h2>
+
+<div class="info-box">
+<strong>Alistado</strong><br>
+Ingreso inicial al Ejército BMT.
+</div>
+
+<div class="info-box">
+<strong>Recluta</strong><br>
+Tras cumplir el requisito de servicio establecido por BMT.
+<br>
+Misión inicial: Grumete 0/8.
+</div>
+
+<div class="info-box">
+<strong>Especialistas</strong><br>
+Personal especializado que cumple funciones determinadas dentro de BMT.
+</div>
+
+<div class="info-box">
+<strong>Sub-oficiales</strong><br>
+Supervisan al personal de rangos inferiores y apoyan el funcionamiento de la base.
+</div>
+
+<div class="info-box">
+<strong>Oficiales</strong><br>
+Rango superior encargado de funciones de mando y supervisión.
+</div>
+
+<div class="info-box">
+<strong>Estado Mayor</strong><br>
+Máxima estructura de dirección y organización de BMT.
+</div>
+
+</div>
+</div>
+
+<!-- CALCULADOR DE RANGO -->
+
+<div class="modal" id="calculatorModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🧮 Calcular rango</h2>
+
+<div class="form-group">
+<label>Horas de servicio</label>
+<input id="calcHours" type="number" min="0" step="0.1" placeholder="Ejemplo: 1.5">
+</div>
+
+<div class="form-group">
+<label>Dígitos de misión obtenidos</label>
+<input id="calcDigits" type="number" min="0" step="1" placeholder="Ejemplo: 0">
+</div>
+
+<button class="form-button" onclick="calculateRank()">
+Calcular
+</button>
+
+<div class="info-box" id="rankResult">
+Introduce tus datos para calcular el rango.
+</div>
+
+</div>
+</div>
+
+<!-- LEGISLACIÓN -->
+
+<div class="modal" id="legislationModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>📜 Legislación BMT</h2>
+
+<div class="info-box">
+<strong>Faltas leves</strong><br><br>
+• Incumplimientos menores de las normas.<br>
+• Conductas que afecten ligeramente al servicio.<br>
+• No seguir correctamente una indicación cuando corresponda.
+</div>
+
+<div class="info-box">
+<strong>Faltas medias</strong><br><br>
+• Reincidencia en faltas leves.<br>
+• Falta de respeto durante el servicio.<br>
+• Incumplimientos que afecten el funcionamiento de la base.
+</div>
+
+<div class="info-box">
+<strong>Faltas graves</strong><br><br>
+• Bailar dentro de las instalaciones de BMT.<br>
+• Comentarios irrespetuosos.<br>
+• Uso indebido de efectos dentro de las instalaciones.<br>
+• Acoso u hostigamiento.<br>
+• Conductas que perjudiquen gravemente al Ejército BMT.
+</div>
+
+</div>
+  </div><!-- CONFIGURACIÓN -->
+
+<div class="modal" id="settingsModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>⚙️ Configuración</h2>
+
+<div class="form-group">
+<label>Tema</label>
+<select id="themeSelect" onchange="changeTheme()">
+<option value="oscuro">Oscuro</option>
+<option value="claro">Claro</option>
+</select>
+</div>
+
+<div class="info-box">
+Las configuraciones de la cuenta se ampliarán en próximas versiones.
+</div>
+
+</div>
+</div>
+
+<!-- SEGURIDAD -->
+
+<div class="modal" id="securityModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🔒 Seguridad</h2>
+
+<div class="info-box">
+Protege tu cuenta BMT y no compartas tu contraseña con otras personas.
+</div>
+
+<button class="secondary-button" onclick="forgotPassword()">
+Cambiar / recuperar contraseña
+</button>
+
+</div>
+</div>
+
+<!-- ASCENSO -->
+
+<div class="modal" id="promotionModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>⬆️ Ascenso</h2>
+
+<div class="info-box">
+Aquí se mostrará el progreso necesario para tu próximo ascenso.
+</div>
+
+<div class="info-box">
+<strong>Rango actual:</strong> Alistado
+<br>
+<strong>Próximo rango:</strong> Recluta
+<br>
+<strong>Requisito:</strong> 1 hora y 30 minutos de servicio.
+</div>
+
+</div>
+</div>
+
+<!-- ENTRENAMIENTO -->
+
+<div class="modal" id="trainingModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>📚 Entrenamiento</h2>
+
+<div class="info-box">
+Aquí se mostrarán las capacitaciones correspondientes a tu rango.
+</div>
+
+<div class="info-box">
+<strong>Alistado</strong><br>
+Capacitación inicial del Ejército BMT.
+</div>
+
+</div>
+</div>
+
+<!-- DEPARTAMENTOS -->
+
+<div class="modal" id="departmentsModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🏢 Departamentos</h2>
+
+<div class="info-box">
+<strong>Recursos Humanos</strong><br>
+Gestión y organización del personal.
+</div>
+
+<div class="info-box">
+<strong>Ataque</strong><br>
+Funciones relacionadas con defensa y seguridad.
+</div>
+
+<div class="info-box">
+<strong>Marchas</strong><br>
+Organización de actividades y formaciones.
+</div>
+
+<div class="info-box">
+<strong>Juego</strong><br>
+Actividades y dinámicas internas.
+</div>
+
+<div class="info-box">
+<strong>Capacitación</strong><br>
+Formación y preparación del personal.
+</div>
+
+<div class="info-box">
+<strong>Marketing</strong><br>
+Promoción y presentación de BMT.
+</div>
+
+</div>
+</div>
+
+<!-- PAGOS -->
+
+<div class="modal" id="paymentsModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>💰 Pagos</h2>
+
+<div class="info-box">
+<strong>Alistado:</strong> 7c por la primera hora y media de servicio.
+</div>
+
+<div class="info-box">
+Los pagos y registros de actividad serán ampliados cuando conectemos la cuenta con el sistema real de BMT.
+</div>
+
+</div>
+</div>
+
+<!-- ACTIVOS -->
+
+<div class="modal" id="activesModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🟢 Activos</h2>
+
+<div class="info-box">
+Aquí aparecerán los miembros activos del Ejército BMT.
+</div>
+
+</div>
+</div>
+
+<!-- HORARIO -->
+
+<div class="modal" id="payScheduleModal">
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>🕖 Horario de paga</h2>
+
+<div class="info-box">
+La paga se realiza cada sábado a las <strong>7:00 PM, hora de España</strong>.
+</div>
+
+<div class="info-box">
+Las horas correspondientes a otros países se calculan automáticamente.
+</div>
+
+</div>
+</div>
 
 <script>
 
-/* ==================================================
-   MENÚ
-================================================== */
+const body=document.body;
+const btn=document.getElementById("menuBtn");
+const overlay=document.getElementById("overlay");
 
-const body = document.body;
-const menuBtn = document.getElementById("menuBtn");
-const overlay = document.getElementById("overlay");
-
-menuBtn.onclick = () => {
-  body.classList.toggle("open");
+btn.onclick=()=>{
+body.classList.toggle("open");
 };
 
-overlay.onclick = () => {
-  body.classList.remove("open");
+overlay.onclick=()=>{
+body.classList.remove("open");
 };
 
-
-/* ==================================================
-   CATEGORÍAS DEL MENÚ
-================================================== */
-
-function toggleCategory(button){
-
-  const submenu = button.nextElementSibling;
-
-  button.classList.toggle("active");
-  submenu.classList.toggle("open");
-
+function closeModals(){
+document.querySelectorAll(".modal").forEach(modal=>{
+modal.classList.remove("active");
+});
 }
 
-
-/* ==================================================
-   CAMBIAR ENTRE PORTADA Y PÁGINAS
-================================================== */
-
-function showPage(page){
-
-  body.classList.remove("open");
-
-  document.getElementById("home").style.display = "none";
-  document.getElementById("siteHeader").style.display = "none";
-
-  document.querySelectorAll(".page").forEach(section => {
-    section.classList.remove("active");
-  });
-
-  const selected = document.getElementById("page-" + page);
-
-  if(selected){
-    selected.classList.add("active");
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-  updateProfile();
+function openModal(id){
+closeModals();
+document.getElementById(id).classList.add("active");
+body.classList.remove("open");
 }
 
+function openLogin(){
+openModal("loginModal");
+}
 
-/* ==================================================
-   REGISTRO DEMOSTRATIVO
-   -----------------------------------------------
-   Esto será reemplazado posteriormente por backend.
-================================================== */
+function openRegister(){
+openModal("registerModal");
+}
+
+function openProfile(){
+openModal("profileModal");
+}
+
+function openStatus(){
+openModal("statusModal");
+}
+
+function openBirthday(){
+fillBirthdayDays();
+openModal("birthdayModal");
+}
+
+function openSettings(){
+openModal("settingsModal");
+}
+
+function openSecurity(){
+openModal("securityModal");
+}
+
+function openPromotion(){
+openModal("promotionModal");
+}
+
+function openTraining(){
+openModal("trainingModal");
+}
+
+function openDepartments(){
+openModal("departmentsModal");
+}
+
+function openRanks(){
+openModal("ranksModal");
+}
+
+function openRankCalculator(){
+openModal("calculatorModal");
+}
+
+function openPayments(){
+openModal("paymentsModal");
+}
+
+function openActives(){
+openModal("activesModal");
+}
+
+function openPaySchedule(){
+openModal("payScheduleModal");
+}
+
+function openLegislation(){
+openModal("legislationModal");
+}
+
+function doLogin(){
+
+const user=document.getElementById("loginUser").value.trim();
+
+if(!user){
+alert("Escribe tu usuario o correo.");
+return;
+}
+
+localStorage.setItem("bmt-user",user);
+
+document.getElementById("profileName").textContent=user;
+
+alert("Inicio de sesión preparado. La conexión real con la base de datos se realizará en la siguiente fase.");
+
+closeModals();
+
+}
 
 function registerUser(){
 
-  const username = document.getElementById("registerUser").value.trim();
-  const habbo = document.getElementById("registerHabbo").value.trim();
-  const email = document.getElementById("registerEmail").value.trim();
-  const password = document.getElementById("registerPass").value;
+const habbo=document.getElementById("registerHabbo").value.trim();
+const user=document.getElementById("registerUser").value.trim();
+const email=document.getElementById("registerEmail").value.trim();
+const password=document.getElementById("registerPassword").value;
+const birthday=document.getElementById("registerBirthday").value;
 
-  if(!username || !habbo || !email || !password){
-
-    alert("Completa todos los campos.");
-    return;
-  }
-
-  const account = {
-
-    username:username,
-    habbo:habbo,
-    email:email,
-
-    /* Nunca se debe guardar una contraseña real
-       directamente en localStorage.
-       Esto es solamente una maqueta visual. */
-
-    status:"pending",
-
-    rank:"Alistado",
-
-    mission:"Alistado [BMT]",
-
-    department:"Sin departamento",
-
-    createdAt:new Date().toISOString()
-
-  };
-
-  localStorage.setItem(
-    "bmt-demo-account",
-    JSON.stringify(account)
-  );
-
-  alert(
-    "Cuenta registrada correctamente.\n\n" +
-    "Estado: Pendiente de aprobación."
-  );
-
-  showPage("login");
+if(!habbo||!user||!email||!password||!birthday){
+alert("Completa todos los campos.");
+return;
 }
 
+const account={
+habbo:habbo,
+user:user,
+email:email,
+birthday:birthday,
+rank:"Alistado",
+mission:"Alistado [BMT]",
+hours:0,
+digits:0,
+status:"Activo"
+};
 
-/* ==================================================
-   LOGIN DEMOSTRATIVO
-================================================== */
+localStorage.setItem("bmt-account",JSON.stringify(account));
+localStorage.setItem("bmt-user",user);
 
-function loginUser(){
+document.getElementById("profileName").textContent=user;
+document.getElementById("profileHabbo").textContent=habbo;
+document.getElementById("profileRank").textContent="Alistado";
+document.getElementById("profileMission").textContent="Alistado [BMT]";
 
-  const username =
-    document.getElementById("loginUser").value.trim();
+alert("Cuenta creada correctamente como Alistado.");
 
-  const account =
-    JSON.parse(localStorage.getItem("bmt-demo-account"));
-
-  const message =
-    document.getElementById("loginMessage");
-
-  if(!account){
-
-    message.innerHTML = `
-      <div class="status danger">
-        No existe una cuenta registrada en esta demostración.
-      </div>
-    `;
-
-    return;
-  }
-
-  if(username !== account.username){
-
-    message.innerHTML = `
-      <div class="status danger">
-        El usuario no coincide con la cuenta registrada.
-      </div>
-    `;
-
-    return;
-  }
-
-  if(account.status === "pending"){
-
-    message.innerHTML = `
-      <div class="status pending">
-        ⏳ Tu cuenta está registrada, pero todavía
-        necesita ser aceptada por un administrador.
-        <br><br>
-        Mientras esté pendiente, no tendrás acceso
-        al contenido privado correspondiente.
-      </div>
-    `;
-
-    return;
-  }
-
-  message.innerHTML = `
-    <div class="status success">
-      ✅ Inicio de sesión realizado.
-    </div>
-  `;
-
-  updateProfile();
-  showPage("perfil");
-}
-
-
-/* ==================================================
-   PERFIL
-================================================== */
-
-function updateProfile(){
-
-  const account =
-    JSON.parse(localStorage.getItem("bmt-demo-account"));
-
-  if(!account) return;
-
-  const user =
-    document.getElementById("profileUser");
-
-  const habbo =
-    document.getElementById("profileHabbo");
-
-  const rank =
-    document.getElementById("profileRank");
-
-  const mission =
-    document.getElementById("profileMission");
-
-  const status =
-    document.getElementById("profileStatus");
-
-  if(user) user.textContent = account.username;
-
-  if(habbo) habbo.textContent = account.habbo;
-
-  if(rank) rank.textContent = account.rank;
-
-  if(mission) mission.textContent = account.mission;
-
-  if(status){
-
-    status.textContent =
-      account.status === "pending"
-      ? "Pendiente"
-      : "Aceptada";
-
-  }
+closeModals();
 
 }
 
+function saveStatus(){
 
-/* ==================================================
-   PERMISOS DE ADMINISTRACIÓN
-   -----------------------------------------------
-   IMPORTANTE:
-   En la versión real el rango vendrá del servidor.
-   Nunca se confiará en un valor manipulado por el
-   navegador.
-================================================== */
+const status=document.getElementById("statusSelect").value;
 
-const privilegedRanks = [
+document.getElementById("statusResult").innerHTML=
+"Estado actual: <strong>"+status+"</strong>";
 
-  "Oficial",
-  "Oficial Superior",
-  "General",
-  "Presidencia",
-  "Estado Mayor",
-  "Líder"
+const account=getAccount();
 
+if(account){
+account.status=status;
+saveAccount(account);
+}
+
+}
+
+function fillBirthdayDays(){
+
+const select=document.getElementById("birthdayDay");
+
+if(select.options.length>0)return;
+
+for(let i=1;i<=31;i++){
+
+const option=document.createElement("option");
+
+option.value=i;
+option.textContent=i;
+
+select.appendChild(option);
+
+}
+
+}
+
+function saveBirthday(){
+
+const day=document.getElementById("birthdayDay").value;
+const month=document.getElementById("birthdayMonth").value;
+
+const names=[
+"",
+"Enero",
+"Febrero",
+"Marzo",
+"Abril",
+"Mayo",
+"Junio",
+"Julio",
+"Agosto",
+"Septiembre",
+"Octubre",
+"Noviembre",
+"Diciembre"
 ];
 
-function checkAdministrativeAccess(){
+const text=day+" de "+names[Number(month)];
 
-  /*
-    DEMOSTRACIÓN:
+document.getElementById("birthdayResult").innerHTML=
+"🎂 Cumpleaños guardado: <strong>"+text+"</strong>";
 
-    El sistema real tendrá que obtener el rango
-    desde la base de datos después de autenticar
-    al usuario.
+const account=getAccount();
 
-    Por seguridad NO permitimos que el registro
-    normal elija su propio rango.
-  */
-
-  const currentRank =
-    localStorage.getItem("bmt-demo-admin-rank");
-
-  if(privilegedRanks.includes(currentRank)){
-
-    document
-      .getElementById("accessMenu")
-      .style.display = "block";
-
-  }
+if(account){
+account.birthday=day+"/"+month;
+saveAccount(account);
+}
 
 }
 
-checkAdministrativeAccess();
+function calculateRank(){
 
+const hours=Number(document.getElementById("calcHours").value)||0;
+const digits=Number(document.getElementById("calcDigits").value)||0;
 
-/* ==================================================
-   HORARIO DE PAGA
-================================================== */
+let rank="Alistado";
+let mission="Alistado [BMT]";
+let explanation="Rango inicial.";
+
+if(hours>=1.5){
+
+rank="Recluta";
+mission="Grumete "+Math.min(digits,8)+"/8";
+
+explanation=
+"Has alcanzado el requisito inicial de 1 hora y 30 minutos para pasar a Recluta.";
+
+}
+
+document.getElementById("rankResult").innerHTML=
+"<strong>Rango calculado:</strong> "+rank+
+"<br><strong>Misión:</strong> "+mission+
+"<br><br>"+explanation;
+
+}
+
+function getAccount(){
+
+const data=localStorage.getItem("bmt-account");
+
+if(!data)return null;
+
+try{
+return JSON.parse(data);
+}catch(e){
+return null;
+}
+
+}
+
+function saveAccount(account){
+
+localStorage.setItem("bmt-account",JSON.stringify(account));
+
+}
+
+function forgotPassword(){
+
+alert("La recuperación de contraseña se conectará cuando instalemos el sistema de cuentas real.");
+
+}
+
+function changeTheme(){
+
+const theme=document.getElementById("themeSelect").value;
+
+if(theme==="claro"){
+body.style.background="#e8d8bc";
+body.style.color="#111";
+}else{
+body.style.background="";
+body.style.color="";
+}
+
+localStorage.setItem("bmt-tema",theme);
+
+}
 
 function nextSaturday(){
 
-  const now = new Date();
-  const d = new Date(now);
+const now=new Date();
+const d=new Date(now);
 
-  let days =
-    (6 - now.getDay() + 7) % 7;
+let days=(6-now.getDay()+7)%7;
 
-  if(days === 0){
+if(days===0){
 
-    const madridHour =
-      Number(
-        new Intl.DateTimeFormat(
-          "en-US",
-          {
-            timeZone:"Europe/Madrid",
-            hour:"numeric",
-            hour12:false
-          }
-        ).format(now)
-      );
+const madridHour=Number(
+new Intl.DateTimeFormat(
+"en-US",
+{
+timeZone:"Europe/Madrid",
+hour:"numeric",
+hour12:false
+}
+).format(now)
+);
 
-    if(madridHour >= 19){
-      days = 7;
-    }
+if(madridHour>=19)days=7;
 
-  }
-
-  d.setDate(d.getDate() + days);
-
-  return d;
 }
 
+d.setDate(d.getDate()+days);
+
+return d;
+
+}
 
 function madridInstant(date){
 
-  let u =
-    new Date(
-      Date.UTC(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        19
-      )
-    );
+let u=new Date(
+Date.UTC(
+date.getFullYear(),
+date.getMonth(),
+date.getDate(),
+19
+)
+);
 
-  for(let i=0;i<3;i++){
+for(let i=0;i<3;i++){
 
-    const parts =
-      new Intl.DateTimeFormat(
-        "en-US",
-        {
-          timeZone:"Europe/Madrid",
-          timeZoneName:"longOffset"
-        }
-      ).formatToParts(u);
+const parts=
+new Intl.DateTimeFormat(
+"en-US",
+{
+timeZone:"Europe/Madrid",
+timeZoneName:"longOffset"
+}
+).formatToParts(u);
 
-    const z =
-      parts.find(
-        x => x.type === "timeZoneName"
-      )?.value || "GMT";
+const z=
+parts.find(x=>x.type==="timeZoneName")?.value||"GMT";
 
-    const m =
-      z.match(
-        /GMT([+-])(\d{2}):(\d{2})/
-      );
+const m=z.match(/GMT([+-])(\d{2}):(\d{2})/);
 
-    const off =
-      m
-      ? (
-          (m[1] === "+" ? 1 : -1) *
-          (
-            Number(m[2]) * 60 +
-            Number(m[3])
-          )
-        )
-      : 0;
+const off=m?
+(
+(m[1]==="+"?1:-1)*
+(
+Number(m[2])*60+
+Number(m[3])
+)
+):0;
 
-    u =
-      new Date(
-        Date.UTC(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate(),
-          19
-        ) -
-        off * 60000
-      );
+u=new Date(
+Date.UTC(
+date.getFullYear(),
+date.getMonth(),
+date.getDate(),
+19
+)-off*60000
+);
 
-  }
-
-  return u;
 }
 
-
-const d = nextSaturday();
-const pay = madridInstant(d);
-
-document
-  .querySelectorAll("[data-zone]")
-  .forEach(element => {
-
-    element.textContent =
-      new Intl.DateTimeFormat(
-        "es-ES",
-        {
-          timeZone:element.dataset.zone,
-          hour:"numeric",
-          minute:"2-digit",
-          hour12:true
-        }
-      ).format(pay);
-
-  });
-
-
-const formatted =
-  new Intl.DateTimeFormat(
-    "es-ES",
-    {
-      timeZone:"Europe/Madrid",
-      weekday:"long",
-      day:"numeric",
-      month:"long"
-    }
-  ).format(pay);
-
-
-const nextPay =
-  document.getElementById("proximaPaga");
-
-if(nextPay){
-
-  nextPay.textContent =
-    "Próxima paga: " +
-    formatted.charAt(0).toUpperCase() +
-    formatted.slice(1) +
-    ".";
+return u;
 
 }
+
+const d=nextSaturday();
+const pay=madridInstant(d);
+
+document.querySelectorAll("[data-zone]").forEach(e=>{
+
+e.textContent=
+new Intl.DateTimeFormat(
+"es-ES",
+{
+timeZone:e.dataset.zone,
+hour:"numeric",
+minute:"2-digit",
+hour12:true
+}
+).format(pay);
+
+});
+
+const f=
+new Intl.DateTimeFormat(
+"es-ES",
+{
+timeZone:"Europe/Madrid",
+weekday:"long",
+day:"numeric",
+month:"long"
+}
+).format(pay);
+
+document.getElementById("proximaPaga").textContent=
+"Próxima paga: "+
+f.charAt(0).toUpperCase()+
+f.slice(1)+
+".";
 
 </script>
 
 </body>
-  </html>
+</html>
