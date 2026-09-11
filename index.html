@@ -4,994 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EJÉRCITO BMT</title>
-
 <style>
-:root{
---bg:#050505;
---surface:#10120b;
---surface2:#171a0e;
---text:#fff;
---muted:#c8c8c8;
---gold:#d6a72c;
---gold2:#f0c94a;
---border:rgba(214,167,44,.45);
-}
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-font-family:Arial,sans-serif;
-background:#050505;
-color:var(--text);
-min-height:100vh;
-overflow-x:hidden;
-}
-
-body:before{
-content:"";
-position:fixed;
-inset:0;
-z-index:-2;
-background:
-linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.82)),
-url("BMT-fondo.jpg") center/cover fixed;
-opacity:.8;
-}
-
-body:after{
-content:"";
-position:fixed;
-inset:0;
-z-index:-1;
-background:rgba(0,0,0,.18);
-pointer-events:none;
-}
-
-body.light{
---bg:#eee2b8;
---surface:#171717;
---surface2:#222;
---text:#111;
---muted:#333;
---gold:#111;
---gold2:#111;
---border:rgba(0,0,0,.35);
-}
-
-button,
-input,
-select,
-textarea{
-font:inherit;
-}
-
-button{
-cursor:pointer;
-}
-
-.menu-btn{
-position:fixed;
-top:16px;
-left:16px;
-z-index:1100;
-width:48px;
-height:48px;
-border:1px solid var(--border);
-border-radius:10px;
-background:#080808;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:5px;
-}
-
-.menu-btn span{
-width:22px;
-height:2px;
-background:var(--gold2);
-border-radius:2px;
-}
-
-.overlay{
-position:fixed;
-inset:0;
-z-index:1000;
-background:rgba(0,0,0,.72);
-opacity:0;
-pointer-events:none;
-transition:.25s;
-}
-
-.side-menu{
-position:fixed;
-top:0;
-left:0;
-z-index:1050;
-width:min(370px,90vw);
-height:100vh;
-overflow:auto;
-background:rgba(7,8,5,.97);
-border-right:1px solid var(--border);
-transform:translateX(-105%);
-transition:.25s;
-padding:82px 18px 30px;
-}
-
-body.open .side-menu{
-transform:translateX(0);
-}
-
-body.open .overlay{
-opacity:1;
-pointer-events:auto;
-}
-
-.login-box{
-border:1px solid var(--gold);
-border-radius:12px;
-padding:18px;
-margin-bottom:24px;
-background:rgba(20,21,13,.9);
-}
-
-.login-box h2{
-color:var(--gold2);
-font-size:19px;
-margin-bottom:8px;
-}
-
-.login-box p{
-color:#aaa;
-font-size:13px;
-line-height:1.5;
-margin-bottom:14px;
-}
-
-.menu-section{
-margin-top:20px;
-}
-
-.menu-section h3{
-color:var(--gold2);
-font-size:13px;
-text-transform:uppercase;
-letter-spacing:1px;
-margin:0 0 10px 3px;
-}
-
-.menu-link{
-display:block;
-width:100%;
-text-align:left;
-color:#fff;
-background:transparent;
-border:1px solid #303329;
-padding:12px 13px;
-border-radius:9px;
-margin-bottom:8px;
-font-size:14px;
-text-decoration:none;
-transition:.2s;
-}
-
-.menu-link:hover{
-border-color:var(--gold2);
-color:var(--gold2);
-background:rgba(214,167,44,.06);
-}
-
-header{
-padding:30px 20px 24px;
-text-align:center;
-border-bottom:1px solid var(--border);
-background:rgba(0,0,0,.42);
-}
-
-header h1{
-color:var(--gold2);
-font-family:"Trebuchet MS",Arial,sans-serif;
-font-size:32px;
-letter-spacing:2px;
-}
-
-header p{
-color:var(--muted);
-font-size:14px;
-margin-top:7px;
-}
-
-main{
-max-width:1200px;
-margin:auto;
-}
-
-.hero{
-text-align:center;
-padding:85px 20px 65px;
-}
-
-.hero h2{
-font-family:"Trebuchet MS",Arial,sans-serif;
-font-size:clamp(28px,5vw,44px);
-color:var(--gold2);
-margin-bottom:15px;
-}
-
-.hero p{
-max-width:700px;
-margin:auto;
-line-height:1.7;
-color:var(--muted);
-}
-
-.button{
-display:inline-block;
-margin-top:24px;
-background:var(--gold2);
-color:#050505;
-text-decoration:none;
-padding:13px 23px;
-border-radius:8px;
-font-weight:bold;
-border:1px solid var(--gold2);
-}
-
-.seccion{
-max-width:1100px;
-margin:42px auto;
-padding:0 20px;
-}
-
-.seccion>h2{
-text-align:center;
-margin-bottom:24px;
-font-size:25px;
-color:var(--gold2);
-}
-
-.tarjetas{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:18px;
-}
-
-.tarjeta{
-background:rgba(13,15,9,.88);
-padding:22px;
-border:1px solid #34362b;
-border-radius:12px;
-text-align:center;
-}
-
-.tarjeta h3{
-margin-bottom:10px;
-color:var(--gold2);
-}
-
-.tarjeta p{
-color:var(--muted);
-line-height:1.5;
-font-size:14px;
-}
-
-.discord{
-background:rgba(13,15,9,.88);
-text-align:center;
-padding:40px 20px;
-margin-top:35px;
-border-top:1px solid var(--border);
-border-bottom:1px solid var(--border);
-}
-
-.discord h2{
-color:var(--gold2);
-}
-
-.discord p{
-color:var(--muted);
-margin-top:8px;
-}
-
-.discord a{
-display:inline-block;
-margin-top:18px;
-background:var(--gold2);
-color:#050505;
-text-decoration:none;
-padding:12px 22px;
-border-radius:7px;
-font-weight:bold;
-}
-
-.pagina-interna{
-padding:45px 20px 70px;
-max-width:1100px;
-margin:auto;
-}
-
-.pagina-interna h2{
-color:var(--gold2);
-margin-bottom:22px;
-}
-
-.panel{
-background:rgba(12,14,8,.91);
-border:1px solid var(--border);
-border-radius:15px;
-padding:25px;
-box-shadow:0 10px 35px rgba(0,0,0,.35);
-}
-
-.texto-vacio{
-color:var(--muted);
-text-align:center;
-padding:25px;
-}
-
-.perfil-portada{
-min-height:310px;
-border-radius:18px;
-overflow:hidden;
-position:relative;
-display:flex;
-align-items:flex-end;
-background:
-linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.08)),
-url("BMT-fondo.jpg") center/cover;
-border:1px solid var(--border);
-}
-
-.perfil-personaje{
-padding:30px;
-width:100%;
-}
-
-.avatar-placeholder{
-width:75px;
-height:75px;
-border-radius:12px;
-border:2px solid var(--gold2);
-background:rgba(0,0,0,.75);
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-color:var(--gold2);
-margin-bottom:15px;
-}
-
-.perfil-personaje h2{
-font-size:30px;
-margin-bottom:7px;
-color:#fff;
-}
-
-.perfil-personaje p{
-color:var(--gold2);
-font-weight:bold;
-}
-
-.perfil-datos{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-margin-top:18px;
-}
-
-.dato-box{
-background:rgba(14,15,10,.92);
-border:1px solid #34362b;
-border-radius:12px;
-padding:20px;
-}
-
-.dato-box strong{
-display:block;
-color:var(--gold2);
-margin-bottom:8px;
-}
-
-.dato-box span{
-color:var(--muted);
-}
-
-.firma-box{
-display:none;
-}
-
-.firma-box.visible{
-display:block;
-}
-
-.membresias{
-margin-top:25px;
-}
-
-.membresias h2{
-margin-bottom:15px;
-}
-
-.membresia-item{
-background:rgba(18,20,12,.95);
-border:1px solid #44462f;
-border-radius:12px;
-padding:18px;
-margin-bottom:12px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-}
-
-.membresia-item strong{
-color:var(--gold2);
-}
-
-.membresia-tiempo{
-color:#fff;
-font-weight:bold;
-}
-
-.membresia-form{
-margin-top:20px;
-display:grid;
-grid-template-columns:1fr 180px auto;
-gap:10px;
-}
-
-input,
-select,
-textarea{
-width:100%;
-padding:12px 13px;
-border-radius:8px;
-border:1px solid #44462f;
-background:#090a07;
-color:#fff;
-outline:none;
-}
-
-textarea{
-min-height:120px;
-resize:vertical;
-}
-
-label{
-display:block;
-color:var(--gold2);
-font-weight:bold;
-margin:14px 0 7px;
-}
-
-.small-button{
-padding:11px 16px;
-border-radius:8px;
-border:1px solid var(--gold2);
-background:var(--gold2);
-color:#050505;
-font-weight:bold;
-}
-
-.estado-marquesina{
-overflow:hidden;
-border:1px solid var(--border);
-border-radius:12px;
-background:rgba(0,0,0,.5);
-padding:20px;
-margin-bottom:20px;
-}
-
-.estado-movimiento{
-white-space:nowrap;
-display:inline-block;
-animation:moverEstado 13s linear infinite;
-color:#fff;
-font-size:18px;
-}
-
-@keyframes moverEstado{
-from{transform:translateX(100%)}
-to{transform:translateX(-100%)}
-}
-
-.estado-editar{
-display:grid;
-grid-template-columns:1fr auto;
-gap:10px;
-}
-
-.cumple-card{
-position:relative;
-overflow:hidden;
-text-align:center;
-padding:55px 25px;
-border-radius:18px;
-border:1px solid var(--border);
-background:
-linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.7)),
-url("BMT-fondo.jpg") center/cover;
-}
-
-.cumple-card .cumple-logo{
-width:75px;
-height:75px;
-border-radius:50%;
-margin:0 auto 20px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(0,0,0,.78);
-border:2px solid var(--gold2);
-color:var(--gold2);
-font-weight:bold;
-font-size:22px;
-}
-
-.cumple-card h2{
-color:#fff;
-max-width:700px;
-margin:auto;
-}
-
-.cumple-card p{
-color:#ddd;
-margin-top:12px;
-}
-
-.calendario-btn{
-display:block;
-margin:25px auto;
-}
-
-.calendario-panel{
-background:rgba(13,15,9,.94);
-border:1px solid var(--border);
-border-radius:15px;
-padding:22px;
-margin-bottom:25px;
-}
-
-.meses{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-}
-
-.meses button{
-padding:13px 8px;
-border:1px solid #44462f;
-background:#0b0c08;
-color:#fff;
-border-radius:8px;
-}
-
-.meses button:hover{
-border-color:var(--gold2);
-color:var(--gold2);
-}
-
-.cumpleaneros{
-margin-top:25px;
-}
-
-.cumple-persona{
-position:relative;
-min-height:230px;
-border-radius:15px;
-overflow:hidden;
-border:1px solid #44462f;
-background:#050505;
-display:flex;
-align-items:flex-end;
-margin-bottom:15px;
-}
-
-.cumple-persona .cake{
-position:absolute;
-right:25px;
-bottom:15px;
-font-size:60px;
-filter:grayscale(1);
-}
-
-.cumple-persona .cumple-info{
-position:relative;
-z-index:2;
-padding:22px;
-}
-
-.cumple-persona .cumple-nombre{
-display:none;
-color:#fff;
-font-size:24px;
-font-weight:bold;
-}
-
-.cumple-persona.activo{
-background:
-linear-gradient(to top,rgba(0,0,0,.8),rgba(0,0,0,.1)),
-url("BMT-fondo.jpg") center/cover;
-}
-
-.cumple-persona.activo .cumple-nombre{
-display:block;
-}
-
-.felicitar-btn{
-margin-top:14px;
-padding:10px 16px;
-border-radius:8px;
-border:1px solid var(--gold2);
-background:var(--gold2);
-color:#050505;
-font-weight:bold;
-}
-
-.modal{
-position:fixed;
-inset:0;
-z-index:3000;
-background:rgba(0,0,0,.8);
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-}
-
-.modal.visible{
-display:flex;
-}
-
-.modal-box{
-width:min(520px,100%);
-background:#10120b;
-border:1px solid var(--gold2);
-border-radius:15px;
-padding:25px;
-}
-
-.modal-box h2{
-color:var(--gold2);
-margin-bottom:15px;
-}
-
-.modal-buttons{
-display:flex;
-justify-content:flex-end;
-gap:10px;
-margin-top:15px;
-}
-
-.modal-close{
-background:transparent;
-color:#fff;
-border:1px solid #44462f;
-padding:10px 16px;
-border-radius:8px;
-}
-
-.config-opcion{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-padding:20px 0;
-border-bottom:1px solid #303329;
-}
-
-.config-opcion:last-child{
-border-bottom:0;
-}
-
-.config-opcion strong{
-color:var(--gold2);
-}
-
-.config-opcion p{
-color:var(--muted);
-font-size:14px;
-margin-top:6px;
-}
-
-.switch{
-position:relative;
-width:55px;
-height:29px;
-margin:0;
-flex-shrink:0;
-}
-
-.switch input{
-display:none;
-}
-
-.slider{
-position:absolute;
-inset:0;
-background:#444;
-border-radius:30px;
-transition:.2s;
-cursor:pointer;
-}
-
-.slider:before{
-content:"";
-position:absolute;
-width:21px;
-height:21px;
-left:4px;
-top:4px;
-background:#fff;
-border-radius:50%;
-transition:.2s;
-}
-
-.switch input:checked+.slider{
-background:var(--gold2);
-}
-
-.switch input:checked+.slider:before{
-transform:translateX(26px);
-}
-
-.tema-botones{
-display:flex;
-gap:8px;
-}
-
-.tema-botones button{
-padding:9px 13px;
-border-radius:8px;
-border:1px solid #44462f;
-background:#090a07;
-color:#fff;
-}
-
-.rangos-lista{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-}
-
-.rangos-lista button{
-min-height:62px;
-background:rgba(16,18,11,.94);
-color:#fff;
-border:1px solid #44462f;
-border-radius:10px;
-font-weight:bold;
-}
-
-.rangos-lista button:hover,
-.rangos-lista button.activo{
-border-color:var(--gold2);
-color:var(--gold2);
-background:rgba(214,167,44,.08);
-}
-
-.detalle-rango{
-margin-top:20px;
-}
-
-.rango-detalle{
-background:rgba(10,11,7,.96);
-border:1px solid var(--border);
-border-radius:14px;
-padding:23px;
-}
-
-.rango-detalle h3{
-color:var(--gold2);
-font-size:23px;
-margin-bottom:20px;
-}
-
-.rango-categorias{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.rango-categoria{
-border:1px solid #393b2e;
-border-radius:11px;
-padding:18px;
-background:#11130c;
-}
-
-.rango-categoria h4{
-color:var(--gold2);
-margin-bottom:12px;
-}
-
-.rango-categoria p{
-color:#ddd;
-line-height:1.6;
-font-size:14px;
-margin-bottom:7px;
-}
-
-.registro-item{
-background:#11130c;
-border:1px solid #393b2e;
-border-radius:10px;
-padding:16px;
-margin-bottom:10px;
-}
-
-.registro-item strong{
-color:var(--gold2);
-}
-
-footer{
-background:#030303;
-color:#aaa;
-text-align:center;
-padding:22px;
-font-size:13px;
-margin-top:40px;
-}
-
-@media(max-width:800px){
-.rangos-lista{
-grid-template-columns:repeat(2,1fr);
-}
-.rango-categorias{
-grid-template-columns:1fr;
-}
-.meses{
-grid-template-columns:repeat(3,1fr);
-}
-.membresia-form{
-grid-template-columns:1fr;
-}
-}
-
+:root{--bg:#050505;--surface:#0d0d0d;--surface2:#151515;--text:#fff;--muted:#aaa;--gold:#f0c94a;--border:rgba(240,201,74,.4)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.25s}
+body.light{--bg:#f0c94a;--surface:#050505;--surface2:#101010;--text:#fff;--muted:#ddd;--gold:#050505;--border:rgba(0,0,0,.45)}
+header{padding:24px 20px;text-align:center;border-bottom:1px solid var(--border)}
+header h1,.hero h2,.seccion>h2,.discord h2{color:var(--gold);font-family:"Trebuchet MS",Arial,sans-serif}
+header h1{font-size:30px;letter-spacing:1px}
+header p{color:var(--muted);font-size:14px;margin-top:7px}
+.menu-btn{position:fixed;top:16px;left:16px;z-index:1100;width:48px;height:48px;border:1px solid var(--border);border-radius:10px;background:#090909;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
+.menu-btn span{width:22px;height:2px;background:var(--gold);border-radius:2px}
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:.2s}
+.side-menu{position:fixed;top:0;left:0;z-index:1050;width:min(360px,88vw);height:100vh;overflow:auto;background:#080808;border-right:1px solid var(--border);transform:translateX(-105%);transition:.25s;padding:82px 18px 28px}
+body.open .side-menu{transform:translateX(0)}
+body.open .overlay{opacity:1;pointer-events:auto}
+.login-box{border:1px solid var(--gold);border-radius:12px;padding:18px;margin-bottom:22px;background:#0e0e0e}
+.login-box h2{color:var(--gold);font-size:19px;margin-bottom:8px}
+.login-box p{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:14px}
+.menu-section{margin-top:18px}
+.menu-section h3{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:0 0 9px 3px}
+.menu-link{display:block;width:100%;text-align:left;color:#fff;background:transparent;border:1px solid #292929;padding:12px 13px;border-radius:9px;margin-bottom:8px;font-size:14px;text-decoration:none;cursor:pointer}
+.menu-link:hover{border-color:var(--gold);color:var(--gold)}
+.locked{opacity:.4;cursor:not-allowed}
+.hero{text-align:center;padding:68px 20px 55px}
+.hero h2{font-size:clamp(28px,5vw,42px);margin-bottom:15px}
+.hero p{max-width:680px;margin:auto;line-height:1.7;color:var(--muted)}
+.button{display:inline-block;margin-top:24px;background:var(--gold);color:#050505;text-decoration:none;padding:13px 23px;border-radius:8px;font-weight:bold;border:1px solid var(--gold)}
+.seccion{max-width:1100px;margin:42px auto;padding:0 20px}
+.seccion>h2{text-align:center;margin-bottom:24px;font-size:25px}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.tarjeta{background:var(--surface);padding:22px;border:1px solid #292929;border-radius:12px;text-align:center}
+.tarjeta h3{margin-bottom:10px;color:var(--gold)}
+.tarjeta p{color:var(--muted);line-height:1.5;font-size:14px}
+.discord{background:var(--surface);text-align:center;padding:40px 20px;margin-top:35px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.discord p{color:var(--muted);margin-top:8px}
+.discord a{display:inline-block;margin-top:18px;background:var(--gold);color:#050505;text-decoration:none;padding:12px 22px;border-radius:7px;font-weight:bold}
+.horario-intro{text-align:center;color:var(--muted);max-width:700px;margin:-8px auto 22px;line-height:1.6;font-size:14px}
+.horario{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pais{background:var(--surface);border:1px solid #292929;border-radius:11px;padding:16px;display:flex;align-items:center;gap:12px}
+.flag{font-size:27px}
+.pais strong{display:block;margin-bottom:4px}
+.hora{color:var(--gold);font-weight:bold;font-size:17px}
+.nota{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
+footer{background:#030303;color:#aaa;text-align:center;padding:22px;font-size:13px;margin-top:40px}
+@media(max-width:600px){header{padding-top:78px}.hero{padding-top:45px}.tarjetas{grid-template-columns:1fr}}
+.screen{display:none;min-height:70vh;padding:35px 20px;max-width:1100px;margin:auto}
+.screen.active{display:block}
+.screen h2{text-align:center;color:var(--gold);margin-bottom:25px}
+.form-box{max-width:500px;margin:25px auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.form-box label{display:block;color:var(--gold);font-size:14px;margin:14px 0 7px}
+.form-box input,.form-box select,.form-box textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#050505;color:#fff}
+.form-box button{margin-top:18px;padding:12px 18px;border-radius:8px;border:1px solid var(--gold);background:var(--gold);color:#050505;font-weight:bold;cursor:pointer}
+.back{display:inline-block;background:transparent;color:var(--gold);border:1px solid var(--border);padding:9px 14px;border-radius:8px;cursor:pointer;margin-bottom:20px}
+.menu-section .submenu{display:none}
+.menu-section.expanded .submenu{display:block}
+.menu-section>h3{cursor:pointer}
+.profile-cover{position:relative;max-width:900px;height:280px;margin:0 auto 25px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background-size:cover;background-position:center}
+.profile-cover::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
+.profile-info{position:relative;z-index:2;height:100%;display:flex;align-items:flex-end;padding:25px;gap:18px}
+.profile-logo{width:90px;height:90px;border-radius:50%;border:2px solid var(--gold);background-size:cover;background-position:center;flex-shrink:0}
+.profile-name{font-size:26px;font-weight:bold;color:#fff}
+.profile-mission{color:var(--gold);margin-top:5px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.info-card{background:var(--surface);border:1px solid #292929;border-radius:12px;padding:20px}
+.info-card h3{color:var(--gold);margin-bottom:10px}
+.info-card p{color:var(--muted);line-height:1.6}
+.rank-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:25px}
+.rank-btn{padding:15px;background:var(--surface);border:1px solid #333;border-radius:10px;color:#fff;cursor:pointer}
+.rank-btn:hover,.rank-btn.active{border-color:var(--gold);color:var(--gold)}
+.rank-cats{display:none;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.rank-cats.active{display:grid}
+.rank-cat{padding:14px;background:var(--surface2);border:1px solid #333;border-radius:9px;color:#fff;cursor:pointer;text-align:center}
+.rank-cat:hover,.rank-cat.active{border-color:var(--gold);color:var(--gold)}
+.rank-info{display:none;background:var(--surface);border:1px solid #292929;border-radius:12px;padding:22px}
+.rank-info.active{display:block}.profile-mobile{display:none}
 @media(max-width:600px){
-header{
-padding-top:78px;
+.profile-cover{height:180px}
+.rank-cats{grid-template-columns:1fr}
+.profile-name{font-size:21px}
+.profile-info{padding:15px}
+.profile-logo{width:65px;height:65px}
 }
-.hero{
-padding-top:45px;
-}
-.perfil-datos{
-grid-template-columns:1fr;
-}
-.meses{
-grid-template-columns:repeat(2,1fr);
-}
-.estado-editar{
-grid-template-columns:1fr;
-}
-.tema-botones{
-flex-direction:column;
-}
-}
+.calendar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.month{padding:18px;background:var(--surface);border:1px solid #292929;border-radius:10px;text-align:center;color:#fff;cursor:pointer}
+.month:hover{border-color:var(--gold);color:var(--gold)}
+.birthday-list{margin-top:20px}
+.birthday-person{display:flex;align-items:center;gap:12px;background:var(--surface);padding:12px;border:1px solid #292929;border-radius:10px;margin-bottom:8px}
+.api-head{width:48px;height:48px;border-radius:50%;background:#222;object-fit:cover}
+.birthday-card{max-width:500px;margin:25px auto;background:var(--surface);border:1px solid var(--gold);border-radius:15px;padding:25px;text-align:center;cursor:pointer}
+.birthday-card img{max-width:100%;border-radius:10px;filter:grayscale(1);transition:.5s}
+.birthday-card.open img{filter:none}
+.birthday-card .birthday-name{display:none;color:var(--gold);font-size:25px;font-weight:bold;margin-top:15px}
+.birthday-card.open .birthday-name{display:block}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-box{width:min(500px,100%);background:#0d0d0d;border:1px solid var(--gold);border-radius:12px;padding:25px}
+.modal-box h3{color:var(--gold);margin-bottom:15px}
+.modal-box textarea{width:100%;height:120px;background:#050505;color:#fff;border:1px solid #333;border-radius:8px;padding:12px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:15px}
+.modal-actions button{padding:10px 15px;border-radius:8px;border:1px solid var(--gold);cursor:pointer}
+.send{background:var(--gold);color:#050505}
+.close{background:transparent;color:#fff}
+.status-top{max-width:1000px;margin:0 auto 25px;overflow:hidden;border:1px solid var(--border);border-radius:9px;background:var(--surface);padding:12px}
+.status-scroll{white-space:nowrap;animation:statusMove 12s linear infinite}
+@keyframes statusMove{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.memberships{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.membership{background:var(--surface);border:1px solid #292929;border-radius:12px;padding:20px}
+.membership h3{color:var(--gold);margin-bottom:8px}
+.membership .days{font-size:25px;color:#fff;font-weight:bold}
+.approval{max-width:600px;margin:25px auto;background:var(--surface);padding:25px;border:1px solid var(--border);border-radius:12px}
+.result{margin-top:15px;padding:12px;border-radius:8px;background:#111;border:1px solid #333}
+.admin-only{display:none}
+.logged-in .private-only{display:block}
+.logged-in .admin-only{display:block}
+.hidden{display:none!important}
 </style>
 </head>
-
 <body>
 
 <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
-<span></span>
-<span></span>
-<span></span>
+<span></span><span></span><span></span>
 </button>
-
 <div class="overlay" id="overlay"></div>
 
 <aside class="side-menu">
 
-<div class="login-box">
+<div class="login-box" id="loginBox">
 <h2>🔐 Iniciar sesión</h2>
-<p>Inicia sesión para acceder a tu cuenta y a las funciones privadas de EJÉRCITO BMT.</p>
-<a class="menu-link" href="#" onclick="login();return false">➜ Iniciar sesión</a>
+<p>Accede a tu cuenta de EJÉRCITO BMT.</p>
+<a class="menu-link" href="#" onclick="showScreen('login');return false">➜ Iniciar sesión</a>
+</div>
+
+<div class="private-only hidden" id="privateMenu">
+
+<div class="menu-section">
+<h3 onclick="toggleSection(this)">👤 Mi cuenta</h3>
+<div class="submenu">
+<button class="menu-link" onclick="showScreen('perfil')">👤 Perfil</button>
+<button class="menu-link" onclick="showScreen('estado')">💭 Estado</button>
+<button class="menu-link" onclick="showScreen('cumpleanos')">🎂 Cumpleaños / Calendario</button>
+<button class="menu-link" onclick="showScreen('configuracion')">⚙️ Configuración</button>
+<button class="menu-link" onclick="showScreen('seguridad')">🔒 Seguridad</button>
+</div>
 </div>
 
 <div class="menu-section">
-<h3>👤 Mi cuenta</h3>
-
-<button class="menu-link" onclick="mostrarPagina('perfil')">
-👤 Perfil
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('estado')">
-💭 Estado
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('cumpleanos')">
-🎂 Cumpleaños
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('configuracion')">
-⚙️ Configuración
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('seguridad')">
-🔒 Seguridad
-</button>
+<h3 onclick="toggleSection(this)">💼 Trabajo</h3>
+<div class="submenu">
+<button class="menu-link" onclick="showScreen('ascenso')">Ascenso</button>
+<button class="menu-link" onclick="showScreen('entrenamiento')">Entrenamiento</button>
+</div>
 </div>
 
 <div class="menu-section">
-<h3>💼 Trabajo</h3>
-
-<button class="menu-link" onclick="mostrarPagina('ascensos')">
-📈 Ascensos
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('registro-digitos')">
-📋 Registro de dígitos
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('entrenamiento')">
-🎓 Entrenamiento
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('departamentos')">
-🏢 Departamentos
-</button>
+<h3 onclick="toggleSection(this)">ℹ️ Información</h3>
+<div class="submenu">
+<button class="menu-link" onclick="showScreen('rangos')">Rangos</button>
+<button class="menu-link" onclick="showScreen('calcular')">Calcular rango</button>
+<button class="menu-link" onclick="showScreen('pagos')">Pagos</button>
+<button class="menu-link" onclick="showScreen('activos')">Activos</button>
+<button class="menu-link" onclick="showScreen('horario')">Horario de paga</button>
+</div>
 </div>
 
+<div class="admin-only">
 <div class="menu-section">
-<h3>ℹ️ Información</h3>
-
-<button class="menu-link" onclick="mostrarPagina('rangos')">
-🎖️ Rangos
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('calcular-rango')">
-🧮 Calcular rango
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('pagos')">
-💰 Pagos
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('activos')">
-👥 Activos
-</button>
-
-<button class="menu-link" onclick="mostrarPagina('horario')">
-🕖 Horario de paga
-</button>
+<h3 onclick="toggleSection(this)">⚙️ Administración</h3>
+<div class="submenu">
+<button class="menu-link" onclick="showScreen('preregistro')">Pre-registro</button>
+</div>
+</div>
 </div>
 
+<button class="menu-link" onclick="logout()">Cerrar sesión</button>
+
+</div>
 </aside>
 
-<header>
+<header id="siteHeader">
 <h1>⚔️ EJÉRCITO BMT</h1>
-<p>Plataforma oficial del Ejército BMT</p>
+<p>Batallón Militar Táctico</p>
 </header>
 
-<main>
+<main id="home">
 
 <section class="hero">
-<h2>Bienvenido a EJÉRCITO BMT</h2>
-<p>
-Plataforma oficial para los miembros del Ejército BMT.
-</p>
+<h2>Bienvenido EJÉRCITO BMT</h2>
+</section>
 
-<a class="button" href="#" onclick="login();return false">
-Iniciar sesión
-</a>
-</section><section class="discord">
-<h2>💬 Discord oficial</h2>
+<section class="discord">
+<h2>💬 Discord</h2>
 <p>Únete al servidor oficial de Discord de EJÉRCITO BMT.</p>
-<a href="#">Entrar a Discord</a>
+<a href="#" target="_blank">Entrar a Discord</a>
 </section>
 
 <section class="seccion">
 <h2>🏛️ Jerarquía de BMT</h2>
-
 <div class="tarjetas">
 
 <div class="tarjeta">
@@ -1012,1832 +222,849 @@ Iniciar sesión
 </div>
 </section>
 
-
-<!-- PERFIL -->
-
-<section id="pagina-perfil" class="pagina-interna" style="display:none">
-
-<div class="panel">
-
-<div class="perfil-portada">
-
-<div class="perfil-personaje">
-
-<div class="avatar-placeholder" id="perfilAvatar">
-API
+<section class="seccion">
+<h2>💰 Horario de paga</h2>
+<p class="horario-intro">La paga se realiza cada sábado a las <strong>7:00 PM, hora de España</strong>.</p>
+<div class="horario">
+<div class="pais"><span class="flag">🇪🇸</span><div><strong>España</strong><span class="hora" data-zone="Europe/Madrid">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇻🇪</span><div><strong>Venezuela</strong><span class="hora" data-zone="America/Caracas">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇩🇴</span><div><strong>Rep. Dominicana</strong><span class="hora" data-zone="America/Santo_Domingo">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇨🇴</span><div><strong>Colombia</strong><span class="hora" data-zone="America/Bogota">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇨🇱</span><div><strong>Chile</strong><span class="hora" data-zone="America/Santiago">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇲🇽</span><div><strong>México</strong><span class="hora" data-zone="America/Mexico_City">Calculando...</span></div></div>
 </div>
-
-<h2 id="perfilNombre">
-Nombre del miembro
-</h2>
-
-<p id="perfilMision">
-Misión BMT
-</p>
-
-</div>
-
-</div>
-
-<div class="perfil-datos">
-
-<div class="dato-box">
-<strong>Registrado</strong>
-<span id="fechaRegistro">Pendiente</span>
-</div>
-
-<div class="dato-box firma-box" id="firmaBox">
-<strong>Firma</strong>
-<span id="firmaUsuario">—</span>
-</div>
-
-</div>
-
-<div class="membresias">
-
-<h2>Membresías</h2>
-
-<div id="listaMembresias">
-<p class="texto-vacio">
-No tienes membresías activas.
-</p>
-</div>
-
-<div class="membresia-form">
-
-<input
-id="nombreMembresia"
-type="text"
-placeholder="Nombre de la membresía">
-
-<input
-id="diasMembresia"
-type="number"
-min="1"
-placeholder="Días">
-
-<button
-class="small-button"
-onclick="agregarMembresia()">
-Agregar
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+<p class="nota" id="proximaPaga">Calculando próxima paga...</p>
 </section>
 
+</main>
 
-<!-- ESTADO -->
+<footer>Diseñada y creada por Alexa026</footer>
 
-<section id="pagina-estado" class="pagina-interna" style="display:none">
+<section class="screen" id="login">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🔐 Iniciar sesión</h2>
+<div class="form-box">
+<label>Nombre de Habbo</label>
+<input id="loginHabbo" type="text" autocomplete="username">
+<label>Contraseña</label>
+<input id="loginPassword" type="password" autocomplete="current-password">
+<button onclick="doLogin()">Iniciar sesión</button>
+<p style="margin-top:15px;text-align:center">
+<a href="#" onclick="forgotPassword();return false" style="color:var(--gold)">¿Olvidaste tu contraseña?</a>
+</p>
+<p style="margin-top:12px;text-align:center">
+<a href="#" onclick="showScreen('registro');return false" style="color:var(--gold)">Regístrate aquí y ahora</a>
+</p>
+</div>
+</section><section class="screen" id="registro">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>📝 Registro</h2>
+<div class="form-box">
+<label>Nombre de Habbo</label>
+<input id="regHabbo" type="text">
+<label>Contraseña</label>
+<input id="regPassword" type="password">
+<label>Confirmar contraseña</label>
+<input id="regPassword2" type="password">
+<button onclick="registerUser()">Registrarme</button>
+<div id="regMessage" class="result"></div>
+</div>
+</section>
 
-<div class="panel">
+<section class="screen" id="perfil">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>👤 Perfil</h2>
 
+<div class="profile-cover" id="profileCover">
+<div class="profile-info">
+<div class="profile-logo" id="profileLogo"></div>
+<div>
+<div class="profile-name" id="profileName">Nombre de Habbo</div>
+<div class="profile-mission" id="profileMission">Alistado [BMT]</div>
+</div>
+</div>
+</div>
+
+<div class="card-grid">
+<div class="info-card">
+<h3>Estado</h3>
+<p id="profileStatus">Registrado</p>
+</div>
+<div class="info-card">
+<h3>Registrado</h3>
+<p id="profileDate">Fecha de registro</p>
+</div>
+</div>
+</section>
+
+<section class="screen" id="estado">
+<button class="back" onclick="showHome()">← Volver</button>
 <h2>💭 Estado</h2>
-
-<div class="estado-marquesina">
-<div id="estadoTexto" class="estado-movimiento">
-Este es tu estado de BMT.
+<div class="status-top">
+<div class="status-scroll" id="statusScroll">Estado actual de BMT</div>
 </div>
+<div class="form-box">
+<label>Nuevo estado</label>
+<input id="newStatus" type="text">
+<button onclick="saveStatus()">Guardar estado</button>
 </div>
+</section>
 
-<div class="estado-editar">
+<section class="screen" id="cumpleanos">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🎂 Cumpleaños de todos los integrantes de BMT</h2>
 
-<input
-id="nuevoEstado"
-type="text"
-maxlength="120"
-placeholder="Escribe tu estado">
-
-<button
-class="small-button"
-onclick="guardarEstado()">
-Guardar estado
-</button>
-
+<div class="birthday-card" id="todayBirthday" onclick="openBirthday()">
+<div style="font-size:55px">🎂</div>
+<div style="font-size:45px">🎈</div>
+<div class="birthday-name" id="todayBirthdayName"></div>
 </div>
 
+<div style="text-align:center;margin:20px 0">
+<button class="button" onclick="showCalendar()">Calendario</button>
 </div>
+
+<div id="calendarArea" class="hidden">
+<div class="calendar">
+<div class="month" onclick="showMonth('Enero')">Enero</div>
+<div class="month" onclick="showMonth('Febrero')">Febrero</div>
+<div class="month" onclick="showMonth('Marzo')">Marzo</div>
+<div class="month" onclick="showMonth('Abril')">Abril</div>
+<div class="month" onclick="showMonth('Mayo')">Mayo</div>
+<div class="month" onclick="showMonth('Junio')">Junio</div>
+<div class="month" onclick="showMonth('Julio')">Julio</div>
+<div class="month" onclick="showMonth('Agosto')">Agosto</div>
+<div class="month" onclick="showMonth('Septiembre')">Septiembre</div>
+<div class="month" onclick="showMonth('Octubre')">Octubre</div>
+<div class="month" onclick="showMonth('Noviembre')">Noviembre</div>
+<div class="month" onclick="showMonth('Diciembre')">Diciembre</div>
+</div>
+<div id="monthResults" class="birthday-list"></div>
+</div>
+
+<h2 style="margin-top:40px">Cumpleañeros</h2>
+<div id="birthdayList" class="card-grid"></div>
 
 </section>
 
-
-<!-- CUMPLEAÑOS -->
-
-<section id="pagina-cumpleanos" class="pagina-interna" style="display:none">
-
-<div class="cumple-card">
-
-<div class="cumple-logo">
-BMT
-</div>
-
-<h2>
-Cumpleaños de todos los integrantes de BMT
-</h2>
-
-<p>
-Celebremos juntos los cumpleaños de nuestros integrantes.
-</p>
-
-</div>
-
-<button
-class="button calendario-btn"
-onclick="abrirCalendario()">
-📅 Calendario
-</button>
-
-<div
-id="calendario"
-class="calendario-panel"
-style="display:none">
-
-<h2>Calendario</h2>
-
-<div id="listaMeses" class="meses"></div>
-
-</div>
-
-<div class="cumpleaneros">
-
-<h2>🎂 Cumpleañeros</h2>
-
-<div id="cumpleanerosLista">
-
-<div class="cumple-persona">
-
-<div class="cumple-info">
-
-<p>
-Aquí aparecerán los integrantes que hayan seleccionado su fecha de cumpleaños.
-</p>
-
-</div>
-
-<div class="cake">
-🎂🎈
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CONFIGURACIÓN -->
-
-<section
-id="pagina-configuracion"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
+<section class="screen" id="configuracion">
+<button class="back" onclick="showHome()">← Volver</button>
 <h2>⚙️ Configuración</h2>
-
-<div class="config-opcion">
-
-<div>
-<strong>Ver estados</strong>
-<p>
-Permitir visualizar los estados publicados por otros integrantes.
-</p>
-</div>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="verEstados"
-checked
-onchange="cambiarVerEstados()">
-
-<span class="slider"></span>
-
-</label>
-
-</div>
-
-<div class="config-opcion">
-
-<div>
-<strong>Tema</strong>
-<p>
-Selecciona el tema que deseas utilizar.
-</p>
-</div>
-
-<div class="tema-botones">
-
-<button onclick="cambiarTema('claro')">
-☀️ Claro
-</button>
-
-<button onclick="cambiarTema('oscuro')">
-🌙 Oscuro
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SEGURIDAD -->
-
-<section
-id="pagina-seguridad"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🔒 Seguridad</h2>
-
-<p style="color:var(--muted)">
-Cambia la contraseña de tu cuenta.
-</p>
-
-<label for="claveAnterior">
-Contraseña anterior
-</label>
-
-<input
-id="claveAnterior"
-type="password"
-placeholder="Contraseña anterior">
-
-<label for="claveNueva">
-Nueva contraseña
-</label>
-
-<input
-id="claveNueva"
-type="password"
-placeholder="Nueva contraseña">
-
-<button
-class="small-button"
-style="margin-top:18px"
-onclick="cambiarContrasena()">
-Cambiar contraseña
-</button>
-
-</div>
-
-</section>
-
-
-<!-- ASCENSOS -->
-
-<section
-id="pagina-ascensos"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>📈 Ascensos</h2>
-
-<div class="registro-item">
-
-<strong>Rango actual</strong>
-<p>Se mostrará el rango actual del integrante.</p>
-
-</div>
-
-<div class="registro-item">
-
-<strong>Calcular ascenso</strong>
-<p>
-Utiliza esta sección para consultar el rango que corresponde según los dígitos.
-</p>
-
-<button
-class="small-button"
-onclick="mostrarPagina('calcular-rango')">
-Calcular rango
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- REGISTRO DE DÍGITOS -->
-
-<section
-id="pagina-registro-digitos"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>📋 Registro de dígitos</h2>
-
-<div id="registroDigitos">
-
-<div class="registro-item">
-
-<strong>Sin registros todavía.</strong>
-
-<p style="color:var(--muted);margin-top:7px">
-Aquí aparecerá quién otorgó el dígito, el motivo y la fecha.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ENTRENAMIENTO -->
-
-<section
-id="pagina-entrenamiento"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🎓 Entrenamiento</h2>
-
-<p style="color:var(--muted);line-height:1.7">
-Área destinada a los entrenamientos y capacitaciones del Ejército BMT.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- DEPARTAMENTOS -->
-
-<section
-id="pagina-departamentos"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🏢 Departamentos</h2>
-
-<div class="tarjetas">
-
-<div class="tarjeta">
-<h3>Recursos Humanos</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Ataque</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Marchas</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Juego</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Capacitación</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Marketing</h3>
-<p>Departamento próximamente disponible.</p>
-</div>
-
-</div>
-
-</div>
-
-  </section><!-- RANGOS -->
-
-<section
-id="pagina-rangos"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🎖️ Rangos</h2>
-
-<div class="rangos-lista">
-
-<button onclick="abrirRango('alistado',this)">
-Alistado
-</button>
-
-<button onclick="abrirRango('recluta',this)">
-Recluta
-</button>
-
-<button onclick="abrirRango('especialista',this)">
-Especialista
-</button>
-
-<button onclick="abrirRango('suboficial',this)">
-Suboficial
-</button>
-
-<button onclick="abrirRango('oficial',this)">
-Oficial
-</button>
-
-<button onclick="abrirRango('oficial-superior',this)">
-Oficial Superior
-</button>
-
-<button onclick="abrirRango('general',this)">
-General
-</button>
-
-<button onclick="abrirRango('presidencia',this)">
-Presidencia
-</button>
-
-<button onclick="abrirRango('estado-mayor',this)">
-Estado Mayor
-</button>
-
-<button onclick="abrirRango('lideres',this)">
-Líderes
-</button>
-
-</div>
-
-<div
-id="detalleRango"
-class="detalle-rango">
-
-<p class="texto-vacio">
-Selecciona un rango.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CALCULAR RANGO -->
-
-<section
-id="pagina-calcular-rango"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🧮 Calcular rango</h2>
-
-<label for="rangoActual">
-Rango actual
-</label>
-
-<select id="rangoActual">
-
-<option>Alistado</option>
-<option>Recluta</option>
-<option>Especialista</option>
-<option>Suboficial</option>
-<option>Oficial</option>
-<option>Oficial Superior</option>
-<option>General</option>
-
+<div class="form-box">
+<label>Ver estados</label>
+<select id="showStates" onchange="saveSettings()">
+<option value="on">Activado</option>
+<option value="off">Desactivado</option>
 </select>
 
-<label for="digitosActuales">
-Dígitos actuales
-</label>
-
-<input
-id="digitosActuales"
-type="number"
-min="0"
-value="0">
-
-<button
-class="small-button"
-style="margin-top:18px"
-onclick="calcularRango()">
-Calcular rango
-</button>
-
-<div
-id="resultadoRango"
-class="registro-item"
-style="margin-top:20px">
+<label>Tema</label>
+<select id="themeSelect" onchange="changeTheme()">
+<option value="oscuro">Tema oscuro</option>
+<option value="claro">Tema claro</option>
+</select>
 </div>
-
-</div>
-
 </section>
 
+<section class="screen" id="seguridad">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🔒 Seguridad</h2>
+<div class="form-box">
+<label>Contraseña actual</label>
+<input id="oldPassword" type="password">
+<label>Nueva contraseña</label>
+<input id="newPassword" type="password">
+<button onclick="changePassword()">Cambiar contraseña</button>
+<div id="securityMessage" class="result"></div>
+</div>
+</section>
 
-<!-- PAGOS -->
+<section class="screen" id="ascenso">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>⬆️ Ascenso</h2>
+<div class="form-box">
+<label>Persona que recibe el dígito</label>
+<input id="ascRecipient">
+<label>Quién otorgó el dígito</label>
+<input id="ascAwarder">
+<label>Motivo</label>
+<textarea id="ascReason"></textarea>
+<label>Fecha</label>
+<input id="ascDate" type="date">
+<button onclick="saveAscenso()">Registrar ascenso</button>
+<div id="ascResult" class="result"></div>
+</div>
+</section>
 
-<section
-id="pagina-pagos"
-class="pagina-interna"
-style="display:none">
+<section class="screen" id="entrenamiento">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>📚 Entrenamiento</h2>
+<div class="card-grid">
+<div class="info-card">
+<h3>Capacitación</h3>
+<p>Área destinada a la información y entrenamiento de los integrantes de EJÉRCITO BMT.</p>
+</div>
+<div class="info-card">
+<h3>Guías</h3>
+<p>Consulta las guías correspondientes al rango y función que desempeñas.</p>
+</div>
+</div>
+</section>
 
-<div class="panel">
+<section class="screen" id="rangos">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🏅 Rangos</h2>
 
+<div class="rank-list">
+<button class="rank-btn" onclick="selectRank('alistado',this)">Alistado</button>
+<button class="rank-btn" onclick="selectRank('recluta',this)">Recluta</button>
+<button class="rank-btn" onclick="selectRank('especialista',this)">Especialista</button>
+<button class="rank-btn" onclick="selectRank('suboficial',this)">Suboficial</button>
+<button class="rank-btn" onclick="selectRank('oficial',this)">Oficial</button>
+<button class="rank-btn" onclick="selectRank('superior',this)">Oficial Superior</button>
+<button class="rank-btn" onclick="selectRank('general',this)">General</button>
+<button class="rank-btn" onclick="selectRank('presidencia',this)">Presidencia</button>
+<button class="rank-btn" onclick="selectRank('estadoMayor',this)">Estado Mayor</button>
+<button class="rank-btn" onclick="selectRank('lideres',this)">Líderes</button>
+</div>
+
+<div id="rankCategories" class="rank-cats">
+<button class="rank-cat" onclick="showRankInfo('misiones')">Misiones</button>
+<button class="rank-cat" onclick="showRankInfo('requisitos')">Requisitos</button>
+<button class="rank-cat" onclick="showRankInfo('paga')">Paga</button>
+</div>
+
+<div id="rankInfo" class="rank-info">
+<h3 id="rankInfoTitle" style="color:var(--gold);margin-bottom:12px"></h3>
+<div id="rankInfoContent"></div>
+</div>
+</section>
+
+<section class="screen" id="calcular">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🧮 Calcular rango</h2>
+<div class="form-box">
+<label>Tiempo de servicio</label>
+<input id="calcTime" type="number" min="0" placeholder="Minutos">
+<label>Dígitos obtenidos</label>
+<input id="calcDigits" type="number" min="0">
+<button onclick="calculateRank()">Calcular rango</button>
+<div id="calcResult" class="result"></div>
+</div>
+</section>
+
+<section class="screen" id="pagos">
+<button class="back" onclick="showHome()">← Volver</button>
 <h2>💰 Pagos</h2>
-
-<div class="tarjetas">
-
-<div class="tarjeta">
+<div class="card-grid">
+<div class="info-card">
 <h3>Alistado</h3>
 <p>7 créditos</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>Recluta</h3>
 <p>25 créditos + 1 dígito</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>Especialista</h3>
 <p>35 créditos + 1 dígito</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>Suboficial</h3>
 <p>50 créditos + 1 dígito</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>Oficial</h3>
 <p>65 créditos + 1 dígito</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>Oficial Superior</h3>
 <p>85 créditos + 1 dígito</p>
 </div>
-
-<div class="tarjeta">
+<div class="info-card">
 <h3>General</h3>
 <p>95 créditos + 1 dígito</p>
 </div>
-
 </div>
-
+</section><section class="screen" id="activos">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🟢 Activos</h2>
+<div class="card-grid" id="activeMembers">
+<div class="info-card">
+<h3>Integrantes activos</h3>
+<p>La información de los integrantes activos aparecerá aquí.</p>
 </div>
-
+</div>
 </section>
 
-
-<!-- ACTIVOS -->
-
-<section
-id="pagina-activos"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>👥 Activos</h2>
-
-<div id="listaActivos">
-
-<div class="registro-item">
-
-<strong>Próximamente</strong>
-
-<p style="color:var(--muted);margin-top:7px">
-Aquí aparecerán los integrantes activos de BMT.
-</p>
-
+<section class="screen" id="horario">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>💰 Horario de paga</h2>
+<p class="horario-intro">La paga se realiza cada sábado a las <strong>7:00 PM, hora de España</strong>.</p>
+<div class="horario">
+<div class="pais"><span class="flag">🇪🇸</span><div><strong>España</strong><span class="hora" data-zone="Europe/Madrid">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇻🇪</span><div><strong>Venezuela</strong><span class="hora" data-zone="America/Caracas">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇩🇴</span><div><strong>Rep. Dominicana</strong><span class="hora" data-zone="America/Santo_Domingo">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇨🇴</span><div><strong>Colombia</strong><span class="hora" data-zone="America/Bogota">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇨🇱</span><div><strong>Chile</strong><span class="hora" data-zone="America/Santiago">Calculando...</span></div></div>
+<div class="pais"><span class="flag">🇲🇽</span><div><strong>México</strong><span class="hora" data-zone="America/Mexico_City">Calculando...</span></div></div>
 </div>
-
-</div>
-
-</div>
-
+<p class="nota" id="proximaPaga2">Calculando próxima paga...</p>
 </section>
 
-
-<!-- HORARIO -->
-
-<section
-id="pagina-horario"
-class="pagina-interna"
-style="display:none">
-
-<div class="panel">
-
-<h2>🕖 Horario de paga</h2>
-
-<p style="color:var(--muted);line-height:1.7;margin-bottom:20px">
-La paga se realiza cada sábado a las 7:00 PM, hora de España.
-</p>
-
-<div class="tarjetas">
-
-<div class="tarjeta">
-<h3>🇪🇸 España</h3>
-<span class="hora" data-zone="Europe/Madrid">
-Calculando...
-</span>
+<section class="screen" id="preregistro">
+<button class="back" onclick="showHome()">← Volver</button>
+<h2>🛡️ Pre-registro</h2>
+<div class="approval">
+<p style="color:var(--muted);line-height:1.6">Busca manualmente el nombre exacto de Habbo registrado. Si aparece, podrás aprobar su registro.</p>
+<label style="display:block;color:var(--gold);margin:15px 0 7px">Nombre de Habbo</label>
+<input id="searchPre" type="text" style="width:100%;padding:12px;background:#050505;border:1px solid #333;color:#fff;border-radius:8px">
+<button class="button" onclick="searchPreRegistration()">Buscar</button>
+<div id="preResult" class="result"></div>
 </div>
-
-<div class="tarjeta">
-<h3>🇩🇴 República Dominicana</h3>
-<span class="hora" data-zone="America/Santo_Domingo">
-Calculando...
-</span>
-</div>
-
-<div class="tarjeta">
-<h3>🇻🇪 Venezuela</h3>
-<span class="hora" data-zone="America/Caracas">
-Calculando...
-</span>
-</div>
-
-<div class="tarjeta">
-<h3>🇨🇴 Colombia</h3>
-<span class="hora" data-zone="America/Bogota">
-Calculando...
-</span>
-</div>
-
-<div class="tarjeta">
-<h3>🇨🇱 Chile</h3>
-<span class="hora" data-zone="America/Santiago">
-Calculando...
-</span>
-</div>
-
-<div class="tarjeta">
-<h3>🇲🇽 México</h3>
-<span class="hora" data-zone="America/Mexico_City">
-Calculando...
-</span>
-</div>
-
-</div>
-
-<p
-id="proximaPaga"
-style="text-align:center;color:var(--muted);margin-top:20px">
-Calculando próxima paga...
-</p>
-
-</div>
-
 </section>
 
-
-<section class="seccion">
-
-<h2>🏢 Departamentos</h2>
-
-<div class="tarjetas">
-
-<div class="tarjeta">
-<h3>Recursos Humanos</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Ataque</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Marchas</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Juego</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Capacitación</h3>
-<p>Líder: Próximamente</p>
-<p>Co-líder: Próximamente</p>
-</div>
-
-<div class="tarjeta">
-<h3>Marketing</h3>
-<p>Departamento próximamente disponible.</p>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- MODAL FELICITACIÓN -->
-
-<div
-id="modalFelicitacion"
-class="modal">
-
+<div class="modal" id="birthdayModal">
 <div class="modal-box">
-
-<h2>🎉 Felicitar</h2>
-
-<p style="color:#ccc">
-Escribe tu felicitación para este integrante.
-</p>
-
-<textarea
-id="mensajeFelicitacion"
-placeholder="Escribe tu felicitación..."></textarea>
-
-<div class="modal-buttons">
-
-<button
-class="modal-close"
-onclick="cerrarFelicitacion()">
-Cerrar
-</button>
-
-<button
-class="small-button"
-onclick="enviarFelicitacion()">
-✉️ Enviar
-</button>
-
+<h3>🎉 Felicitar</h3>
+<textarea id="birthdayMessage" placeholder="Escribe tu felicitación..."></textarea>
+<div class="modal-actions">
+<button class="close" onclick="closeBirthdayModal()">Cerrar</button>
+<button class="send" onclick="sendBirthdayMessage()">Enviar</button>
 </div>
-
 </div>
-
-  </div></main>
-
-<footer>
-© EJÉRCITO BMT — Todos los derechos reservados.
-</footer>
-
+</div>
 
 <script>
-
-/* MENÚ */
-
 const body=document.body;
-const btn=document.getElementById("menuBtn");
-const overlay=document.getElementById("overlay");
+const btn=document.getElementById('menuBtn');
+const overlay=document.getElementById('overlay');
 
-btn.onclick=()=>{
-body.classList.toggle("open");
+btn.onclick=()=>body.classList.toggle('open');
+overlay.onclick=()=>body.classList.remove('open');
+
+const wideImage='wide_cinematic_dark_ui_dashboard_website_interfa.png';
+const smallImage='image-gen-1(1).png';
+
+const screens=document.querySelectorAll('.screen');
+
+function showScreen(id){
+body.classList.remove('open');
+document.getElementById('home').style.display='none';
+document.getElementById('siteHeader').style.display='none';
+document.querySelector('footer').style.display='none';
+screens.forEach(s=>s.classList.remove('active'));
+const target=document.getElementById(id);
+if(target)target.classList.add('active');
+window.scrollTo(0,0);
+}
+
+function showHome(){
+screens.forEach(s=>s.classList.remove('active'));
+document.getElementById('home').style.display='block';
+document.getElementById('siteHeader').style.display='block';
+document.querySelector('footer').style.display='block';
+body.classList.remove('open');
+window.scrollTo(0,0);
+}
+
+function toggleSection(el){
+el.parentElement.classList.toggle('expanded');
+}
+
+function registerUser(){
+const habbo=document.getElementById('regHabbo').value.trim();
+const pass=document.getElementById('regPassword').value;
+const pass2=document.getElementById('regPassword2').value;
+const msg=document.getElementById('regMessage');
+
+if(!habbo||!pass||!pass2){
+msg.textContent='Completa todos los campos.';
+return;
+}
+
+if(pass!==pass2){
+msg.textContent='Las contraseñas no coinciden.';
+return;
+}
+
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
+
+if(users[habbo]){
+msg.textContent='Ese nombre ya está registrado.';
+return;
+}
+
+users[habbo]={
+password:pass,
+mission:'Alistado [BMT]',
+role:'pending',
+registered:new Date().toISOString(),
+status:'Pendiente de aprobación'
 };
 
-overlay.onclick=()=>{
-body.classList.remove("open");
-};
-
-
-/* NAVEGACIÓN */
-
-function cerrarMenu(){
-body.classList.remove("open");
+localStorage.setItem('bmt-users',JSON.stringify(users));
+msg.textContent='Registro realizado. Tu cuenta queda pendiente de aprobación por la administración.';
+document.getElementById('regHabbo').value='';
+document.getElementById('regPassword').value='';
+document.getElementById('regPassword2').value='';
 }
 
-function mostrarPagina(nombre){
+function doLogin(){
+const habbo=document.getElementById('loginHabbo').value.trim();
+const pass=document.getElementById('loginPassword').value;
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
 
-document.querySelectorAll(".pagina-interna").forEach(
-seccion=>{
-seccion.style.display="none";
-}
-);
-
-const pagina=document.getElementById(
-"pagina-"+nombre
-);
-
-if(pagina){
-pagina.style.display="block";
-pagina.scrollIntoView({
-behavior:"smooth"
-});
-}
-
-cerrarMenu();
-
-}
-
-
-/* LOGIN */
-
-function login(){
-
-alert(
-"La pantalla de inicio de sesión se conectará al sistema de cuentas de BMT."
-);
-
-}
-
-
-/* PERFIL */
-
-const fechaGuardada=
-localStorage.getItem("bmt-registro");
-
-if(!fechaGuardada){
-
-localStorage.setItem(
-"bmt-registro",
-new Date().toLocaleDateString("es-DO")
-);
-
-}
-
-document.getElementById(
-"fechaRegistro"
-).textContent=
-localStorage.getItem("bmt-registro");
-
-
-/* MEMBRESÍAS */
-
-let membresias=
-JSON.parse(
-localStorage.getItem("bmt-membresias")||"[]"
-);
-
-
-function guardarMembresias(){
-
-localStorage.setItem(
-"bmt-membresias",
-JSON.stringify(membresias)
-);
-
-}
-
-
-function mostrarMembresias(){
-
-const lista=
-document.getElementById("listaMembresias");
-
-if(!membresias.length){
-
-lista.innerHTML=
-'<p class="texto-vacio">No tienes membresías activas.</p>';
-
+if(!users[habbo]){
+alert('No se encontró una cuenta con ese nombre.');
 return;
-
 }
 
-lista.innerHTML="";
-
-membresias.forEach(
-(m,index)=>{
-
-const item=
-document.createElement("div");
-
-item.className="membresia-item";
-
-item.innerHTML=`
-
-<div>
-<strong>${m.nombre}</strong>
-</div>
-
-<div class="membresia-tiempo">
-${m.dias} días
-</div>
-
-<button
-class="modal-close"
-onclick="eliminarMembresia(${index})">
-Eliminar
-</button>
-
-`;
-
-lista.appendChild(item);
-
-}
-);
-
-}
-
-
-function agregarMembresia(){
-
-const nombre=
-document.getElementById(
-"nombreMembresia"
-).value.trim();
-
-const dias=
-Number(
-document.getElementById(
-"diasMembresia"
-).value
-);
-
-if(!nombre||dias<1){
-
-alert(
-"Escribe el nombre de la membresía y la cantidad de días."
-);
-
+if(users[habbo].password!==pass){
+alert('Contraseña incorrecta.');
 return;
-
 }
 
-membresias.push({
-nombre:nombre,
-dias:dias
-});
-
-guardarMembresias();
-mostrarMembresias();
-
-document.getElementById(
-"nombreMembresia"
-).value="";
-
-document.getElementById(
-"diasMembresia"
-).value="";
-
-}
-
-
-function eliminarMembresia(index){
-
-membresias.splice(index,1);
-
-guardarMembresias();
-mostrarMembresias();
-
-}
-
-
-function reducirMembresias(){
-
-membresias=
-membresias.map(
-m=>{
-
-if(m.dias>0){
-
-m.dias--;
-
-}
-
-return m;
-
-}).filter(
-m=>m.dias>0
-);
-
-guardarMembresias();
-mostrarMembresias();
-
-}
-
-
-/*
-El contador reduce un día automáticamente
-cada 24 horas.
-*/
-
-const ultimaReduccion=
-Number(
-localStorage.getItem(
-"bmt-ultima-reduccion"
-)||0
-);
-
-const ahora=Date.now();
-
-if(
-ahora-ultimaReduccion>=86400000
-){
-
-reducirMembresias();
-
-localStorage.setItem(
-"bmt-ultima-reduccion",
-ahora
-);
-
-}
-
-mostrarMembresias();
-
-
-/* ESTADO */
-
-const estadoGuardado=
-localStorage.getItem("bmt-estado");
-
-if(estadoGuardado){
-
-document.getElementById(
-"estadoTexto"
-).textContent=estadoGuardado;
-
-}
-
-
-function guardarEstado(){
-
-const texto=
-document.getElementById(
-"nuevoEstado"
-).value.trim();
-
-if(!texto){
-
-alert("Escribe un estado.");
-
+if(users[habbo].role==='pending'){
+alert('Tu registro todavía está pendiente de aprobación.');
 return;
-
 }
 
-localStorage.setItem(
-"bmt-estado",
-texto
-);
-
-document.getElementById(
-"estadoTexto"
-).textContent=texto;
-
+localStorage.setItem('bmt-current',habbo);
+setLoggedState();
+showScreen('perfil');
 }
 
+function setLoggedState(){
+const habbo=localStorage.getItem('bmt-current');
+if(!habbo)return;
 
-/* CONFIGURACIÓN */
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
+const user=users[habbo];
 
-function cambiarVerEstados(){
+if(!user)return;
 
-const activo=
-document.getElementById(
-"verEstados"
-).checked;
+body.classList.add('logged-in');
+document.getElementById('privateMenu').classList.remove('hidden');
+document.getElementById('loginBox').style.display='none';
 
-localStorage.setItem(
-"bmt-ver-estados",
-activo
-);
+document.getElementById('profileName').textContent=habbo;
+document.getElementById('profileMission').textContent=user.mission||'Alistado [BMT]';
+document.getElementById('profileDate').textContent=new Date(user.registered).toLocaleDateString('es-ES');
+document.getElementById('profileCover').style.backgroundImage=`url("${wideImage}")`;
+document.getElementById('profileLogo').style.backgroundImage=`url("${smallImage}")`;
 
-}
-
-
-const verEstados=
-localStorage.getItem(
-"bmt-ver-estados"
-);
-
-if(verEstados!==null){
-
-document.getElementById(
-"verEstados"
-).checked=
-verEstados==="true";
-
-}
-
-
-function cambiarTema(tema){
-
-if(tema==="claro"){
-
-document.body.classList.add("light");
-
-localStorage.setItem(
-"bmt-tema",
-"claro"
-);
-
+if(user.role==='admin'){
+document.querySelectorAll('.admin-only').forEach(e=>e.style.display='block');
 }else{
-
-document.body.classList.remove("light");
-
-localStorage.setItem(
-"bmt-tema",
-"oscuro"
-);
-
+document.querySelectorAll('.admin-only').forEach(e=>e.style.display='none');
+}
 }
 
+function logout(){
+localStorage.removeItem('bmt-current');
+body.classList.remove('logged-in');
+document.getElementById('privateMenu').classList.add('hidden');
+document.getElementById('loginBox').style.display='block';
+showHome();
 }
 
-
-if(
-localStorage.getItem("bmt-tema")==="claro"
-){
-
-document.body.classList.add("light");
-
+function forgotPassword(){
+alert('Si olvidaste tu contraseña, solicita asistencia a la administración de BMT.');
 }
 
+if(localStorage.getItem('bmt-tema')==='claro'){
+body.classList.add('light');
+}
 
-/* SEGURIDAD */
+function changeTheme(){
+const value=document.getElementById('themeSelect').value;
+if(value==='claro'){
+body.classList.add('light');
+localStorage.setItem('bmt-tema','claro');
+}else{
+body.classList.remove('light');
+localStorage.setItem('bmt-tema','oscuro');
+}
+}
 
-function cambiarContrasena(){
+function saveSettings(){
+localStorage.setItem('bmt-show-states',document.getElementById('showStates').value);
+}
 
-const anterior=
-document.getElementById(
-"claveAnterior"
-).value;
+function saveStatus(){
+const value=document.getElementById('newStatus').value.trim();
+if(!value)return;
+localStorage.setItem('bmt-status',value);
+document.getElementById('statusScroll').textContent=value;
+}
 
-const nueva=
-document.getElementById(
-"claveNueva"
-).value;
+function changePassword(){
+const habbo=localStorage.getItem('bmt-current');
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
+const user=users[habbo];
 
-if(!anterior||!nueva){
+if(!user)return;
 
-alert(
-"Debes completar la contraseña anterior y la nueva contraseña."
-);
+const oldPass=document.getElementById('oldPassword').value;
+const newPass=document.getElementById('newPassword').value;
+const msg=document.getElementById('securityMessage');
 
+if(user.password!==oldPass){
+msg.textContent='La contraseña actual no es correcta.';
 return;
-
 }
 
-if(nueva.length<6){
-
-alert(
-"La nueva contraseña debe tener al menos 6 caracteres."
-);
-
+if(!newPass){
+msg.textContent='Escribe una nueva contraseña.';
 return;
-
 }
 
-alert(
-"La contraseña se actualizará cuando la cuenta esté conectada al sistema."
-);
+user.password=newPass;
+users[habbo]=user;
+localStorage.setItem('bmt-users',JSON.stringify(users));
+msg.textContent='Contraseña cambiada correctamente.';
+}function selectRank(rank,button){
+document.querySelectorAll('.rank-btn').forEach(b=>b.classList.remove('active'));
+button.classList.add('active');
 
+const cats=document.getElementById('rankCategories');
+cats.classList.add('active');
+
+document.getElementById('rankInfo').classList.remove('active');
+document.getElementById('rankInfoTitle').textContent='';
+document.getElementById('rankInfoContent').innerHTML='';
+
+cats.dataset.rank=rank;
 }
 
+function showRankInfo(category){
+const rank=document.getElementById('rankCategories').dataset.rank;
+const info=document.getElementById('rankInfo');
+const title=document.getElementById('rankInfoTitle');
+const content=document.getElementById('rankInfoContent');
 
-/* RANGOS */
-
-const rangos={
-
+const data={
 alistado:{
-nombre:"Alistado",
-misiones:[
-"Alistado [BMT]"
-],
-requisitos:[
-"Cuenta mínimo 2 meses de antigüedad",
-"Nivel 10 o superior",
-"Mínimo 4,000 puntos de logros"
-],
-paga:"7 créditos"
+misiones:'Misión: Alistado [BMT]',
+requisitos:'Cuenta mínimo 2 meses de antigüedad.<br>Nivel 10 o superior.<br>Mínimo 4,000 puntos de logros.',
+paga:'7 créditos'
 },
-
 recluta:{
-nombre:"Recluta",
-misiones:[
-"Misiones de Recluta / Grumete"
-],
-requisitos:[
-"1 h 24 min",
-"Con reducción de horas: 42 min"
-],
-paga:"25 créditos + 1 dígito"
+misiones:'Información de misiones de Recluta.',
+requisitos:'Tiempo requerido: 1 h 24 min.<br>Con reducción del 50%: 42 min.',
+paga:'25 créditos + 1 dígito'
 },
-
 especialista:{
-nombre:"Especialista",
-misiones:[
-"Misiones de Especialista"
-],
-requisitos:[
-"1 h 40 min",
-"Con reducción de horas: 50 min"
-],
-paga:"35 créditos + 1 dígito"
+misiones:'Información de misiones de Especialista.',
+requisitos:'Tiempo requerido: 1 h 40 min.<br>Con reducción del 50%: 50 min.',
+paga:'35 créditos + 1 dígito'
 },
-
 suboficial:{
-nombre:"Suboficial",
-misiones:[
-"Misiones de Suboficial"
-],
-requisitos:[
-"2 h",
-"Con reducción de horas: 1 h"
-],
-paga:"50 créditos + 1 dígito"
+misiones:'Información de misiones de Suboficial.',
+requisitos:'Tiempo requerido: 2 h.<br>Con reducción: 1 h.',
+paga:'50 créditos + 1 dígito'
 },
-
 oficial:{
-nombre:"Oficial",
-misiones:[
-"Misiones de Oficial"
-],
-requisitos:[
-"2 h 24 min",
-"Con reducción de horas: 1 h 12 min"
-],
-paga:"65 créditos + 1 dígito"
+misiones:'Información de misiones de Oficial.',
+requisitos:'Tiempo requerido: 2 h 24 min.<br>Con reducción: 1 h 12 min.',
+paga:'65 créditos + 1 dígito'
 },
-
-"oficial-superior":{
-nombre:"Oficial Superior",
-misiones:[
-"Misiones de Oficial Superior"
-],
-requisitos:[
-"3 h",
-"Con reducción de horas: 1 h 30 min"
-],
-paga:"85 créditos + 1 dígito"
+superior:{
+misiones:'Información de misiones de Oficial Superior.',
+requisitos:'Tiempo requerido: 3 h.<br>Con reducción: 1 h 30 min.',
+paga:'85 créditos + 1 dígito'
 },
-
 general:{
-nombre:"General",
-misiones:[
-"Misiones de General"
-],
-requisitos:[
-"3 h 24 min",
-"Con reducción de horas: 1 h 42 min"
-],
-paga:"95 créditos + 1 dígito"
+misiones:'Información de misiones de General.',
+requisitos:'Tiempo requerido: 3 h 24 min.<br>Con reducción: 1 h 42 min.',
+paga:'95 créditos + 1 dígito'
 },
-
 presidencia:{
-nombre:"Presidencia",
-misiones:[],
-requisitos:[
-"Por asignación"
-],
-paga:"—"
+misiones:'Por asignación.',
+requisitos:'Por asignación.',
+paga:'Según corresponda.'
 },
-
-"estado-mayor":{
-nombre:"Estado Mayor",
-misiones:[],
-requisitos:[
-"Por asignación"
-],
-paga:"—"
+estadoMayor:{
+misiones:'Por asignación.',
+requisitos:'Por asignación.',
+paga:'Según corresponda.'
 },
-
 lideres:{
-nombre:"Líderes",
-misiones:[],
-requisitos:[
-"Por asignación"
-],
-paga:"—"
+misiones:'Por asignación.',
+requisitos:'Por asignación.',
+paga:'Según corresponda.'
 }
-
 };
 
+const selected=data[rank]||data.alistado;
+const text=selected[category]||'Información no disponible.';
+title.textContent=category.charAt(0).toUpperCase()+category.slice(1);
+content.innerHTML='<p style="color:var(--muted);line-height:1.7">'+text+'</p>';
+info.classList.add('active');
+}
 
-let rangoAbierto=null;
+function calculateRank(){
+const minutes=Number(document.getElementById('calcTime').value||0);
+const digits=Number(document.getElementById('calcDigits').value||0);
+let rank='Alistado';
 
+if(minutes>=204&&digits>=1)rank='General';
+else if(minutes>=180&&digits>=1)rank='Oficial Superior';
+else if(minutes>=144&&digits>=1)rank='Oficial';
+else if(minutes>=120&&digits>=1)rank='Suboficial';
+else if(minutes>=100&&digits>=1)rank='Especialista';
+else if(minutes>=84&&digits>=1)rank='Recluta';
 
-function abrirRango(id,boton){
+document.getElementById('calcResult').textContent='Rango calculado: '+rank;
+}
 
-const contenedor=
-document.getElementById(
-"detalleRango"
-);
+function saveAscenso(){
+const recipient=document.getElementById('ascRecipient').value.trim();
+const awarder=document.getElementById('ascAwarder').value.trim();
+const reason=document.getElementById('ascReason').value.trim();
+const date=document.getElementById('ascDate').value;
+const result=document.getElementById('ascResult');
 
-
-document
-.querySelectorAll(".rangos-lista button")
-.forEach(
-b=>b.classList.remove("activo")
-);
-
-
-if(rangoAbierto===id){
-
-contenedor.innerHTML=
-'<p class="texto-vacio">Selecciona un rango.</p>';
-
-rangoAbierto=null;
-
+if(!recipient||!awarder||!reason||!date){
+result.textContent='Completa todos los campos.';
 return;
-
 }
 
-
-const rango=rangos[id];
-
-if(!rango)return;
-
-rangoAbierto=id;
-
-boton.classList.add("activo");
-
-
-contenedor.innerHTML=`
-
-<div class="rango-detalle">
-
-<h3>${rango.nombre}</h3>
-
-<div class="rango-categorias">
-
-<div class="rango-categoria">
-
-<h4>Misiones</h4>
-
-${
-rango.misiones.length
-?
-rango.misiones
-.map(m=>`<p>${m}</p>`)
-.join("")
-:
-"<p>—</p>"
+const records=JSON.parse(localStorage.getItem('bmt-ascensos')||'[]');
+records.push({recipient,awarder,reason,date});
+localStorage.setItem('bmt-ascensos',JSON.stringify(records));
+result.textContent='Ascenso registrado correctamente.';
 }
 
-</div>
-
-<div class="rango-categoria">
-
-<h4>Requisitos</h4>
-
-${
-rango.requisitos
-.map(r=>`<p>${r}</p>`)
-.join("")
+function showCalendar(){
+document.getElementById('calendarArea').classList.remove('hidden');
 }
 
-</div>
+function showMonth(month){
+const results=document.getElementById('monthResults');
+const birthdays=JSON.parse(localStorage.getItem('bmt-birthdays')||'{}');
+const list=birthdays[month]||[];
 
-<div class="rango-categoria">
-
-<h4>Paga</h4>
-
-<p>${rango.paga}</p>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* CALCULAR RANGO */
-
-function calcularRango(){
-
-const rango=
-document.getElementById(
-"rangoActual"
-).value;
-
-const digitos=
-Number(
-document.getElementById(
-"digitosActuales"
-).value
-);
-
-document.getElementById(
-"resultadoRango"
-).innerHTML=`
-
-<strong>Rango actual:</strong> ${rango}<br>
-<strong>Dígitos actuales:</strong> ${digitos}
-
-`;
-
-}
-
-
-/* CUMPLEAÑOS */
-
-const meses=[
-"Enero",
-"Febrero",
-"Marzo",
-"Abril",
-"Mayo",
-"Junio",
-"Julio",
-"Agosto",
-"Septiembre",
-"Octubre",
-"Noviembre",
-"Diciembre"
-];
-
-
-function abrirCalendario(){
-
-const calendario=
-document.getElementById(
-"calendario"
-);
-
-if(
-calendario.style.display==="none"
-){
-
-calendario.style.display="block";
-
-mostrarMeses();
-
-}else{
-
-calendario.style.display="none";
-
-}
-
-}
-
-
-function mostrarMeses(){
-
-const contenedor=
-document.getElementById(
-"listaMeses"
-);
-
-contenedor.innerHTML="";
-
-meses.forEach(
-(mes,index)=>{
-
-const boton=
-document.createElement("button");
-
-boton.textContent=mes;
-
-boton.onclick=()=>{
-mostrarCumpleanosMes(index);
-};
-
-contenedor.appendChild(boton);
-
-}
-);
-
-}
-
-
-function mostrarCumpleanosMes(mes){
-
-const lista=
-document.getElementById(
-"cumpleanerosLista"
-);
-
-const datos=
-JSON.parse(
-localStorage.getItem(
-"bmt-cumpleanos"
-)||"[]"
-);
-
-const delMes=
-datos.filter(
-p=>Number(p.mes)===mes
-);
-
-if(!delMes.length){
-
-lista.innerHTML=`
-
-<div class="cumple-persona">
-
-<div class="cumple-info">
-
-<h3 style="color:var(--gold2)">
-Cumpleaños de ${meses[mes]}
-</h3>
-
-<p>
-No hay integrantes registrados para este mes.
-</p>
-
-</div>
-
-<div class="cake">
-🎂🎈
-</div>
-
-</div>
-
-`;
-
+if(!list.length){
+results.innerHTML='<div class="result">No hay cumpleaños registrados para '+month+'.</div>';
 return;
-
 }
 
-lista.innerHTML="";
-
-delMes.forEach(
-(persona)=>{
-
-const tarjeta=
-document.createElement("div");
-
-tarjeta.className="cumple-persona";
-
-tarjeta.onclick=()=>{
-tarjeta.classList.toggle("activo");
-};
-
-tarjeta.innerHTML=`
-
-<div class="cumple-info">
-
-<p style="color:var(--gold2)">
-${persona.dia} de ${meses[mes]}
-</p>
-
-<div class="cumple-nombre">
-${persona.nombre}
-</div>
-
-<button
-class="felicitar-btn"
-onclick="event.stopPropagation();abrirFelicitacion('${persona.nombre}')">
-🎉 Felicitar
-</button>
-
-</div>
-
-<div class="cake">
-🎂🎈
-</div>
-
-`;
-
-lista.appendChild(tarjeta);
-
-}
-);
-
+results.innerHTML=list.map(person=>`
+<div class="birthday-person">
+<div class="api-head"></div>
+<div><strong>${person.name}</strong><br><span style="color:var(--muted)">Día ${person.day}</span></div>
+</div>`).join('');
 }
 
-
-/* FELICITACIONES */
-
-let felicitandoA="";
-
-
-function abrirFelicitacion(nombre){
-
-felicitandoA=nombre;
-
-document.getElementById(
-"mensajeFelicitacion"
-).value="";
-
-document.getElementById(
-"modalFelicitacion"
-).classList.add("visible");
-
+function openBirthday(){
+const modal=document.getElementById('birthdayModal');
+modal.classList.add('active');
 }
 
-
-function cerrarFelicitacion(){
-
-document.getElementById(
-"modalFelicitacion"
-).classList.remove("visible");
-
-felicitandoA="";
-
+function closeBirthdayModal(){
+document.getElementById('birthdayModal').classList.remove('active');
 }
 
+function sendBirthdayMessage(){
+const message=document.getElementById('birthdayMessage').value.trim();
 
-function enviarFelicitacion(){
-
-const mensaje=
-document.getElementById(
-"mensajeFelicitacion"
-).value.trim();
-
-if(!mensaje){
-
-alert(
-"Escribe una felicitación antes de enviarla."
-);
-
+if(!message){
+alert('Escribe una felicitación.');
 return;
-
 }
 
-alert(
-"Felicitación enviada a "+felicitandoA+"."
-);
-
-cerrarFelicitacion();
-
+alert('Felicitación enviada.');
+document.getElementById('birthdayMessage').value='';
+closeBirthdayModal();
 }
 
+function searchPreRegistration(){
+const search=document.getElementById('searchPre').value.trim();
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
+const result=document.getElementById('preResult');
 
-/* HORARIO DE PAGA */
+if(!search){
+result.textContent='Escribe el nombre exacto de Habbo.';
+return;
+}
+
+const user=users[search];
+
+if(!user){
+result.textContent='No se encontró un pre-registro con ese nombre exacto. Indica a la persona que vuelva a registrarse usando su nombre exacto de Habbo.';
+return;
+}
+
+if(user.role!=='pending'){
+result.textContent='Esta cuenta ya fue aprobada.';
+return;
+}
+
+result.innerHTML='<strong>'+search+'</strong><br>Pre-registro encontrado.<br><button class="button" onclick="approveUser(\''+search.replace(/'/g,"\\\\'")+'\')">Aprobar registro</button>';
+}
+
+function approveUser(habbo){
+const users=JSON.parse(localStorage.getItem('bmt-users')||'{}');
+
+if(!users[habbo])return;
+
+users[habbo].role='member';
+users[habbo].status='Registrado';
+users[habbo].mission='Alistado [BMT]';
+
+localStorage.setItem('bmt-users',JSON.stringify(users));
+document.getElementById('preResult').innerHTML='Registro de <strong>'+habbo+'</strong> aprobado correctamente.';
+}
 
 function nextSaturday(){
-
 const now=new Date();
 const d=new Date(now);
-
-let days=
-(6-now.getDay()+7)%7;
+let days=(6-now.getDay()+7)%7;
 
 if(days===0){
-
-const madridHour=
-Number(
-new Intl.DateTimeFormat(
-"en-US",
-{
-timeZone:"Europe/Madrid",
-hour:"numeric",
+const madridHour=Number(new Intl.DateTimeFormat('en-US',{
+timeZone:'Europe/Madrid',
+hour:'numeric',
 hour12:false
-}
-).format(now)
-);
+}).format(now));
 
-if(madridHour>=19){
-days=7;
+if(madridHour>=19)days=7;
 }
 
-}
-
-d.setDate(
-d.getDate()+days
-);
-
+d.setDate(d.getDate()+days);
 return d;
-
 }
-
 
 function madridInstant(date){
-
-let u=
-new Date(
-Date.UTC(
+let u=new Date(Date.UTC(
 date.getFullYear(),
 date.getMonth(),
 date.getDate(),
 19
-)
-);
+));
 
 for(let i=0;i<3;i++){
+const parts=new Intl.DateTimeFormat('en-US',{
+timeZone:'Europe/Madrid',
+timeZoneName:'longOffset'
+}).formatToParts(u);
 
-const parts=
-new Intl.DateTimeFormat(
-"en-US",
-{
-timeZone:"Europe/Madrid",
-timeZoneName:"longOffset"
-}
-).formatToParts(u);
+const z=parts.find(x=>x.type==='timeZoneName')?.value||'GMT';
+const m=z.match(/GMT([+-])(\d{2}):(\d{2})/);
+const off=m?((m[1]==='+'?1:-1)*(+m[2]*60+(+m[3]))):0;
 
-const z=
-parts.find(
-x=>x.type==="timeZoneName"
-)?.value||"GMT";
-
-const m=
-z.match(
-/GMT([+-])(\d{2}):(\d{2})/
-);
-
-const off=
-m
-?
-(
-(m[1]==="+"?1:-1)
-*
-(
-Number(m[2])*60+
-Number(m[3])
-)
-)
-:
-0;
-
-u=
-new Date(
-Date.UTC(
+u=new Date(Date.UTC(
 date.getFullYear(),
 date.getMonth(),
 date.getDate(),
 19
-)-off*60000
-);
-
+)-off*60000);
 }
 
 return u;
-
 }
 
+const d=nextSaturday();
+const pay=madridInstant(d);
 
-const fechaPaga=nextSaturday();
-const pago=madridInstant(fechaPaga);
-
-
-document
-.querySelectorAll("[data-zone]")
-.forEach(
-elemento=>{
-
-elemento.textContent=
-new Intl.DateTimeFormat(
-"es-ES",
-{
-timeZone:elemento.dataset.zone,
-hour:"numeric",
-minute:"2-digit",
+document.querySelectorAll('[data-zone]').forEach(e=>{
+e.textContent=new Intl.DateTimeFormat('es-ES',{
+timeZone:e.dataset.zone,
+hour:'numeric',
+minute:'2-digit',
 hour12:true
-}
-).format(pago);
+}).format(pay);
+});
 
-}
-);
+const f=new Intl.DateTimeFormat('es-ES',{
+timeZone:'Europe/Madrid',
+weekday:'long',
+day:'numeric',
+month:'long'
+}).format(pay);
 
+document.getElementById('proximaPaga').textContent=
+'Próxima paga: '+f.charAt(0).toUpperCase()+f.slice(1)+'.';
 
-const fechaTexto=
-new Intl.DateTimeFormat(
-"es-ES",
-{
-timeZone:"Europe/Madrid",
-weekday:"long",
-day:"numeric",
-month:"long"
-}
-).format(pago);
+document.getElementById('proximaPaga2').textContent=
+'Próxima paga: '+f.charAt(0).toUpperCase()+f.slice(1)+'.';
 
+const savedStatus=localStorage.getItem('bmt-status');
 
-document.getElementById(
-"proximaPaga"
-).textContent=
-"Próxima paga: "+
-fechaTexto.charAt(0).toUpperCase()+
-fechaTexto.slice(1)+".";
-
-
-/* CERRAR MODAL CON FONDO */
-
-document.getElementById(
-"modalFelicitacion"
-).addEventListener(
-"click",
-function(e){
-
-if(e.target===this){
-cerrarFelicitacion();
+if(savedStatus){
+document.getElementById('statusScroll').textContent=savedStatus;
 }
 
+const current=localStorage.getItem('bmt-current');
+
+if(current){
+setLoggedState();
 }
-);
+
+const theme=localStorage.getItem('bmt-tema');
+
+if(theme){
+document.getElementById('themeSelect').value=theme==='claro'?'claro':'oscuro';
+}
+
+const showStates=localStorage.getItem('bmt-show-states');
+
+if(showStates){
+document.getElementById('showStates').value=showStates;
+  }function loadBirthdayData(){
+const list=document.getElementById('birthdayList');
+const birthdays=JSON.parse(localStorage.getItem('bmt-birthdays')||'{}');
+let all=[];
+
+Object.keys(birthdays).forEach(month=>{
+birthdays[month].forEach(person=>{
+all.push({...person,month});
+});
+});
+
+if(!all.length){
+list.innerHTML='<div class="info-card"><h3>Próximamente</h3><p>Aquí aparecerán los cumpleañeros de BMT.</p></div>';
+return;
+}
+
+list.innerHTML=all.map(person=>`
+<div class="info-card">
+<h3>🎂 ${person.name}</h3>
+<p>${person.day} de ${person.month}</p>
+</div>`).join('');
+}
+
+loadBirthdayData();
+
+function prepareTodayBirthday(){
+const today=new Date();
+const day=today.getDate();
+const monthIndex=today.getMonth();
+
+const months=[
+'Enero','Febrero','Marzo','Abril','Mayo','Junio',
+'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
+];
+
+const month=months[monthIndex];
+const birthdays=JSON.parse(localStorage.getItem('bmt-birthdays')||'{}');
+const list=birthdays[month]||[];
+
+const person=list.find(p=>Number(p.day)===day);
+
+if(person){
+document.getElementById('todayBirthdayName').textContent=person.name;
+}else{
+document.getElementById('todayBirthday').style.display='none';
+}
+}
+
+prepareTodayBirthday();
+
+window.addEventListener('beforeunload',()=>{
+});
 
 </script>
-
 </body>
-  </html>
+</html>
