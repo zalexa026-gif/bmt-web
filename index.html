@@ -6,89 +6,828 @@
 <title>EJÉRCITO BMT</title>
 <style>
 :root{--bg:#050505;--surface:#0d0d0d;--surface2:#151515;--text:#fff;--muted:#aaa;--gold:#f0c94a;--border:rgba(240,201,74,.4)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.25s}body.light{--bg:#f0c94a;--surface:#050505;--surface2:#101010;--text:#fff;--muted:#ddd;--gold:#050505;--border:rgba(0,0,0,.45)}
-header{padding:24px 20px;text-align:center;border-bottom:1px solid var(--border)}header h1,.hero h2,.seccion>h2,.discord h2{color:var(--gold);font-family:"Trebuchet MS",Arial,sans-serif}header h1{font-size:30px;letter-spacing:1px}header p{color:var(--muted);font-size:14px;margin-top:7px}
-.menu-btn{position:fixed;top:16px;left:16px;z-index:1100;width:48px;height:48px;border:1px solid var(--border);border-radius:10px;background:#090909;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}.menu-btn span{width:22px;height:2px;background:var(--gold);border-radius:2px}
-.overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:.2s}.side-menu{position:fixed;top:0;left:0;z-index:1050;width:min(360px,88vw);height:100vh;overflow:auto;background:#080808;border-right:1px solid var(--border);transform:translateX(-105%);transition:.25s;padding:82px 18px 28px}body.open .side-menu{transform:translateX(0)}body.open .overlay{opacity:1;pointer-events:auto}
-.login-box{border:1px solid var(--gold);border-radius:12px;padding:18px;margin-bottom:22px;background:#0e0e0e}.login-box h2{color:var(--gold);font-size:19px;margin-bottom:8px}.login-box p{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:14px}.menu-section{margin-top:18px}.menu-section h3{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:0 0 9px 3px}.menu-link{display:block;width:100%;text-align:left;color:#fff;background:transparent;border:1px solid #292929;padding:12px 13px;border-radius:9px;margin-bottom:8px;font-size:14px;text-decoration:none;cursor:pointer}.menu-link:hover{border-color:var(--gold);color:var(--gold)}.locked{opacity:.4;cursor:not-allowed}
-.hero{text-align:center;padding:68px 20px 55px}.hero h2{font-size:clamp(28px,5vw,42px);margin-bottom:15px}.hero p{max-width:680px;margin:auto;line-height:1.7;color:var(--muted)}.button{display:inline-block;margin-top:24px;background:var(--gold);color:#050505;text-decoration:none;padding:13px 23px;border-radius:8px;font-weight:bold;border:1px solid var(--gold)}
-.seccion{max-width:1100px;margin:42px auto;padding:0 20px}.seccion>h2{text-align:center;margin-bottom:24px;font-size:25px}.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.tarjeta{background:var(--surface);padding:22px;border:1px solid #292929;border-radius:12px;text-align:center}.tarjeta h3{margin-bottom:10px;color:var(--gold)}.tarjeta p{color:var(--muted);line-height:1.5;font-size:14px}
-.discord{background:var(--surface);text-align:center;padding:40px 20px;margin-top:35px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.discord p{color:var(--muted);margin-top:8px}.discord a{display:inline-block;margin-top:18px;background:var(--gold);color:#050505;text-decoration:none;padding:12px 22px;border-radius:7px;font-weight:bold}
-.horario-intro{text-align:center;color:var(--muted);max-width:700px;margin:-8px auto 22px;line-height:1.6;font-size:14px}.horario{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.pais{background:var(--surface);border:1px solid #292929;border-radius:11px;padding:16px;display:flex;align-items:center;gap:12px}.flag{font-size:27px}.pais strong{display:block;margin-bottom:4px}.hora{color:var(--gold);font-weight:bold;font-size:17px}.nota{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
-footer{background:#030303;color:#aaa;text-align:center;padding:22px;font-size:13px;margin-top:40px}
-@media(max-width:600px){header{padding-top:78px}.hero{padding-top:45px}.tarjetas{grid-template-columns:1fr}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.25s}
+body.light{--bg:#f0c94a;--surface:#050505;--surface2:#101010;--text:#fff;--muted:#ddd;--gold:#050505;--border:rgba(0,0,0,.45)}
 
-/* Perfiles y jerarquía BMT */
-.perfil-duena{max-width:900px;margin:42px auto;padding:0 20px}.perfil-card{background:var(--surface);border:1px solid var(--gold);border-radius:16px;padding:24px;display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center;box-shadow:0 0 24px rgba(240,201,74,.08)}.avatar-wrap{width:130px;height:150px;display:flex;align-items:center;justify-content:center;background:#080808;border:1px solid #292929;border-radius:12px;overflow:hidden}.avatar-wrap img{max-width:120px;max-height:145px;image-rendering:auto}.perfil-card h2{color:var(--gold);margin-bottom:5px}.perfil-card .duena{display:inline-block;border:1px solid var(--gold);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:bold;color:var(--gold);margin-bottom:12px}.perfil-dato{margin:5px 0;color:var(--muted)}.perfil-dato strong{color:#fff}.permisos{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px}.permiso{font-size:12px;padding:6px 9px;border:1px solid #292929;border-radius:7px;color:#fff;background:#101010}.api-card{display:flex;align-items:center;gap:14px;text-align:left}.api-avatar{width:70px;height:82px;display:flex;align-items:center;justify-content:center;background:#080808;border-radius:9px;border:1px solid #292929;overflow:hidden;flex:none}.api-avatar img{max-width:68px;max-height:80px}.api-card h3{margin:0 0 5px;color:var(--gold)}.api-card p{margin:2px 0}.api-status{font-size:11px;color:#777}.owner-menu .menu-link{opacity:1;cursor:pointer}.owner-menu .menu-link:hover{border-color:var(--gold);color:var(--gold)}.owner-badge{font-size:11px;color:var(--gold);margin-left:5px}.modal{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{width:min(760px,95vw);max-height:90vh;overflow:auto;background:#090909;border:1px solid var(--gold);border-radius:16px;padding:24px;position:relative}.close-modal{position:absolute;right:14px;top:10px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modal-box h2{color:var(--gold);margin-bottom:16px}.permission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}.permission-grid div{border:1px solid #292929;border-radius:8px;padding:10px;color:#ddd;font-size:13px}.permission-grid div::before{content:'✓ ';color:var(--gold);font-weight:bold}@media(max-width:600px){.perfil-card{grid-template-columns:1fr;text-align:center}.avatar-wrap{margin:auto}.permisos{justify-content:center}.api-card{text-align:left}}
+header{padding:24px 20px;text-align:center;border-bottom:1px solid var(--border)}
+header h1,.hero h2,.seccion>h2,.discord h2,.modal h2{color:var(--gold);font-family:"Trebuchet MS",Arial,sans-serif}
+header h1{font-size:30px;letter-spacing:1px}
+header p{color:var(--muted);font-size:14px;margin-top:7px}
+
+.menu-btn{position:fixed;top:16px;left:16px;z-index:1100;width:48px;height:48px;border:1px solid var(--border);border-radius:10px;background:#090909;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
+.menu-btn span{width:22px;height:2px;background:var(--gold);border-radius:2px}
+
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:.2s}
+.side-menu{position:fixed;top:0;left:0;z-index:1050;width:min(360px,88vw);height:100vh;overflow:auto;background:#080808;border-right:1px solid var(--border);transform:translateX(-105%);transition:.25s;padding:82px 18px 28px}
+body.open .side-menu{transform:translateX(0)}
+body.open .overlay{opacity:1;pointer-events:auto}
+
+.login-box{border:1px solid var(--gold);border-radius:12px;padding:18px;margin-bottom:22px;background:#0e0e0e}
+.login-box h2{color:var(--gold);font-size:19px;margin-bottom:8px}
+.login-box p{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:14px}
+
+.menu-section{margin-top:18px}
+.menu-section h3{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:0 0 9px 3px}
+.menu-link{display:block;width:100%;text-align:left;color:#fff;background:transparent;border:1px solid #292929;padding:12px 13px;border-radius:9px;margin-bottom:8px;font-size:14px;text-decoration:none;cursor:pointer}
+.menu-link:hover{border-color:var(--gold);color:var(--gold)}
+
+.category-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.category-head::after{content:"＋";color:var(--gold);font-size:18px}
+.menu-section.expanded .category-head::after{content:"−"}
+
+.submenu{display:none;padding:2px 0 5px 12px}
+.menu-section.expanded .submenu{display:block}
+.submenu .menu-link{font-size:13px}
+
+.private-menu{display:none}
+.logged .private-menu{display:block}
+
+.hero{text-align:center;padding:68px 20px 55px}
+.hero h2{font-size:clamp(28px,5vw,42px);margin-bottom:15px}
+.hero p{max-width:680px;margin:auto;line-height:1.7;color:var(--muted)}
+.button{display:inline-block;margin-top:24px;background:var(--gold);color:#050505;text-decoration:none;padding:13px 23px;border-radius:8px;font-weight:bold;border:1px solid var(--gold)}
+
+.seccion{max-width:1100px;margin:42px auto;padding:0 20px}
+.seccion>h2{text-align:center;margin-bottom:24px;font-size:25px}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.tarjeta{background:var(--surface);padding:22px;border:1px solid #292929;border-radius:12px;text-align:center}
+.tarjeta h3{margin-bottom:10px;color:var(--gold)}
+.tarjeta p{color:var(--muted);line-height:1.5;font-size:14px}
+
+.discord{background:var(--surface);text-align:center;padding:40px 20px;margin-top:35px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.discord p{color:var(--muted);margin-top:8px}
+.discord a{display:inline-block;margin-top:18px;background:var(--gold);color:#050505;text-decoration:none;padding:12px 22px;border-radius:7px;font-weight:bold}.horario-intro{text-align:center;color:var(--muted);max-width:700px;margin:-8px auto 22px;line-height:1.6;font-size:14px}
+.horario{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pais{background:var(--surface);border:1px solid #292929;border-radius:11px;padding:16px;display:flex;align-items:center;gap:12px}
+.flag{font-size:27px}
+.pais strong{display:block;margin-bottom:4px}
+.hora{color:var(--gold);font-weight:bold;font-size:17px}
+.nota{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
+
+.modal-wrap{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-wrap.show{display:flex}
+.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:#0d0d0d;border:1px solid var(--gold);border-radius:14px;padding:24px;position:relative}
+.close{position:absolute;right:15px;top:12px;background:transparent;border:0;color:#fff;font-size:25px;cursor:pointer}
+.modal h2{margin-bottom:18px}
+
+.field{margin-bottom:14px}
+.field label{display:block;color:#ccc;font-size:13px;margin-bottom:6px}
+.field input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#050505;color:#fff}
+.error{color:#ff7777;font-size:13px;margin-top:8px;display:none}
+
+.profile{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.avatar{width:150px;height:180px;object-fit:contain;background:#080808;border:1px solid #292929;border-radius:12px}
+.profile p{color:#ccc;margin:7px 0}
+.profile strong{color:var(--gold)}
+
+footer{background:#030303;color:#aaa;text-align:center;padding:22px;font-size:13px;margin-top:40px}
+
+@media(max-width:600px){
+header{padding-top:78px}
+.hero{padding-top:45px}
+.tarjetas{grid-template-columns:1fr}
+.profile{grid-template-columns:1fr;text-align:center}
+.avatar{margin:auto}
+}
 </style>
 </head>
-<body>
-<button class="menu-btn" id="menuBtn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-<div class="overlay" id="overlay"></div>
-<aside class="side-menu">
-  <div class="login-box"><h2>🔐 Iniciar sesión</h2><p>Inicia sesión para acceder a tu perfil y a las funciones privadas del portal de EJÉRCITO BMT.</p><a class="menu-link" href="#" onclick="login();return false">➜ Iniciar sesión</a></div>
-  <div class="menu-section owner-menu"><h3>👤 Mi cuenta <span class="owner-badge">DUEÑA</span></h3><button class="menu-link" onclick="openModal('perfilModal')">👤 Perfil</button><button class="menu-link" onclick="openModal('estadoModal')">💭 Estado</button><button class="menu-link" onclick="openModal('cumpleModal')">🎂 Cumpleaños / Calendario</button><button class="menu-link" onclick="openModal('configModal')">⚙️ Configuración</button><button class="menu-link" onclick="openModal('seguridadModal')">🔒 Seguridad</button></div>
-  <div class="menu-section owner-menu"><h3>💼 Trabajo</h3><button class="menu-link" onclick="openModal('ascensoModal')">Ascenso</button><button class="menu-link" onclick="openModal('entrenamientoModal')">Entrenamiento</button><button class="menu-link" onclick="openModal('departamentosModal')">Departamentos</button></div>
-  <div class="menu-section owner-menu"><h3>ℹ️ Información</h3><button class="menu-link" onclick="openModal('rangosModal')">Rangos</button><button class="menu-link" onclick="openModal('calcularModal')">Calcular rangos</button><button class="menu-link" onclick="openModal('pagosModal')">Pagos</button><button class="menu-link" onclick="openModal('activosModal')">Activos</button><button class="menu-link" onclick="document.getElementById('paga').scrollIntoView({behavior:'smooth'});body.classList.remove('open')">Horario de paga</button></div>
-</aside>
-<header><h1>⚔️ EJÉRCITO BMT</h1><p>Plataforma oficial del Ejército BMT</p></header>
-<main>
-<section class="hero"><h2>Bienvenido a EJÉRCITO BMT</h2><p>Plataforma oficial para los miembros del Ejército BMT. Aquí podrás consultar información, rangos, departamentos, reglamentos, pagos, guías y mucho más.</p><a class="button" href="#" onclick="openModal('perfilModal');return false">Ver mi perfil</a></section>
 
-<section class="perfil-duena">
-  <h2 style="text-align:center;color:var(--gold);margin-bottom:24px">👑 Perfil de Dueña</h2>
-  <div class="perfil-card">
-    <div class="avatar-wrap"><img id="ownerAvatar" alt="Avatar de Alexa026" src="" data-habbo-name="Alexa026"></div>
-    <div>
-      <span class="duena">DUEÑA • ACCESO TOTAL</span>
-      <h2>Alexa026</h2>
-      <p class="perfil-dato"><strong>Rango:</strong> Estado Mayor</p>
-      <p class="perfil-dato"><strong>Misión:</strong> Directora de Inteligencia</p>
-      <p class="perfil-dato"><strong>Permisos:</strong> Todos</p>
-      <div class="permisos"><span class="permiso">Usuarios</span><span class="permiso">Rangos</span><span class="permiso">Misiones</span><span class="permiso">Departamentos</span><span class="permiso">Pagos</span><span class="permiso">Actividad</span><span class="permiso">Sanciones</span><span class="permiso">Configuración</span><span class="permiso">Seguridad</span><span class="permiso">Contenido</span></div>
-    </div>
-  </div>
+<body>
+
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+<span></span><span></span><span></span>
+</button>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="side-menu">
+
+<div class="login-box" id="loginBox">
+<h2>🔐 Iniciar sesión</h2>
+<p>Inicia sesión para acceder a tu perfil y a las funciones privadas del portal de EJÉRCITO BMT.</p>
+<a class="menu-link" href="#" onclick="openLogin();return false">➜ Iniciar sesión</a>
+</div>
+
+<div class="private-menu" id="privateMenu">
+
+<div class="menu-section">
+<h3 class="category-head" onclick="toggleCategory(this)">👤 Mi cuenta</h3>
+<div class="submenu">
+
+<button class="menu-link" onclick="openProfile()">👤 Perfil</button>
+
+<button class="menu-link" onclick="showInfo('Estado','Estado actual de la cuenta BMT.')">
+💭 Estado
+</button>
+
+<button class="menu-link" onclick="showInfo('Cumpleaños / Calendario','Calendario y fechas importantes de BMT.')">
+🎂 Cumpleaños
+</button>
+
+<button class="menu-link" onclick="showInfo('Configuración','Configuración de la cuenta.')">
+⚙️ Configuración
+</button>
+
+<button class="menu-link" onclick="showInfo('Seguridad','Opciones de seguridad de la cuenta.')">
+🔒 Seguridad
+</button>
+
+</div>
+</div>
+
+<div class="menu-section">
+<h3 class="category-head" onclick="toggleCategory(this)">💼 Trabajo</h3>
+<div class="submenu">
+
+<button class="menu-link" onclick="showInfo('Ascenso','Consulta y seguimiento de ascensos.')">
+Ascenso
+</button>
+
+<button class="menu-link" onclick="showInfo('Entrenamiento','Guías y capacitaciones de BMT.')">
+Entrenamiento
+</button>
+
+<button class="menu-link" onclick="showDepartments()">
+Departamentos
+</button>
+
+</div>
+</div>
+
+<div class="menu-section">
+<h3 class="category-head" onclick="toggleCategory(this)">ℹ️ Información</h3>
+<div class="submenu">
+
+<button class="menu-link" onclick="showInfo('Rangos','Información de los rangos de BMT.')">
+Rangos
+</button>
+
+<button class="menu-link" onclick="showInfo('Calcular rangos','Herramienta para consultar progresión de rangos.')">
+Calcular rangos
+</button>
+
+<button class="menu-link" onclick="showInfo('Pagos','Información de pagos y actividad.')">
+Pagos
+</button>
+
+  <button class="menu-link" onclick="showInfo('Horario de paga','Horario oficial de paga.')">
+Horario de paga
+  </button>
+
+<button class="menu-link" onclick="showInfo('Activos','Consulta de miembros activos.')">
+Activos
+</button>
+
+</div>
+</div>
+
+<button class="menu-link" onclick="logout()">↩️ Cerrar sesión</button>
+
+</div>
+</aside><header>
+<h1>⚔️ EJÉRCITO BMT</h1>
+<p>Plataforma oficial del Ejército BMT</p>
+</header>
+
+<main>
+
+<section class="hero">
+<h2>Bienvenido a EJÉRCITO BMT</h2>
+<p>
+Plataforma oficial para los miembros del Ejército BMT.
+Aquí podrás consultar información, rangos, departamentos,
+reglamentos, pagos, guías y mucho más.
+</p>
+
+<a class="button" href="#" onclick="openLogin();return false">
+Iniciar sesión
+</a>
 </section>
-<section class="discord"><h2>💬 Discord oficial</h2><p>Únete al servidor oficial de Discord de EJÉRCITO BMT.</p><a href="#">Entrar a Discord</a></section>
-<section class="seccion"><h2>🏛️ Jerarquía de BMT</h2><div class="tarjetas">
-<div class="tarjeta"><h3>Líderes</h3><div id="lideresApi"></div></div>
-<div class="tarjeta"><h3>Estado Mayor</h3><div id="estadoApi" class="api-card"><div class="api-avatar"><span>⌛</span></div><div><p>Cargando API de Habbo...</p></div></div></div>
-<div class="tarjeta"><h3>Presidencia</h3><p>Próximamente</p></div>
-</div></section>
-<section class="seccion"><h2>🏢 Departamentos</h2><div class="tarjetas"><div class="tarjeta"><h3>Recursos Humanos</h3><p>Líder: Próximamente</p><p>Co-líder: Próximamente</p></div><div class="tarjeta"><h3>Ataque</h3><p>Líder: Próximamente</p><p>Co-líder: Próximamente</p></div><div class="tarjeta"><h3>Marchas</h3><p>Líder: Próximamente</p><p>Co-líder: Próximamente</p></div><div class="tarjeta"><h3>Juego</h3><p>Líder: Próximamente</p><p>Co-líder: Próximamente</p></div><div class="tarjeta"><h3>Capacitación</h3><p>Líder: Próximamente</p><p>Co-líder: Próximamente</p></div><div class="tarjeta"><h3>Marketing</h3><p>Departamento próximamente disponible.</p></div></div></section><section class="seccion"><h2>🏆 Top Donadores</h2><div class="tarjetas"><div class="tarjeta"><h3>🥇 Próximamente</h3><p>El ranking de donaciones aparecerá aquí.</p></div><div class="tarjeta"><h3>🥈 Próximamente</h3><p>El ranking de donaciones aparecerá aquí.</p></div><div class="tarjeta"><h3>🥉 Próximamente</h3><p>El ranking de donaciones aparecerá aquí.</p></div></div></section>
-<section class="seccion" id="paga"><h2>💰 Horario de paga</h2><p class="horario-intro">La paga se realiza cada sábado a las <strong>7:00 PM, hora de España</strong>. Las horas de los demás países se calculan automáticamente según la fecha.</p><div class="horario"><div class="pais"><span class="flag">🇪🇸</span><div><strong>España</strong><span class="hora" data-zone="Europe/Madrid">Calculando...</span></div></div><div class="pais"><span class="flag">🇻🇪</span><div><strong>Venezuela</strong><span class="hora" data-zone="America/Caracas">Calculando...</span></div></div><div class="pais"><span class="flag">🇩🇴</span><div><strong>Rep. Dominicana</strong><span class="hora" data-zone="America/Santo_Domingo">Calculando...</span></div></div><div class="pais"><span class="flag">🇨🇴</span><div><strong>Colombia</strong><span class="hora" data-zone="America/Bogota">Calculando...</span></div></div><div class="pais"><span class="flag">🇨🇱</span><div><strong>Chile</strong><span class="hora" data-zone="America/Santiago">Calculando...</span></div></div><div class="pais"><span class="flag">🇲🇽</span><div><strong>México</strong><span class="hora" data-zone="America/Mexico_City">Calculando...</span></div></div></div><p class="nota" id="proximaPaga">Calculando próxima paga...</p></section>
+
+<section class="discord">
+<h2>💬 Discord oficial</h2>
+<p>Únete al servidor oficial de Discord de EJÉRCITO BMT.</p>
+<a href="#">Entrar a Discord</a>
+</section>
+
+<section class="seccion">
+<h2>🏛️ Jerarquía de BMT</h2>
+
+<div class="tarjetas">
+
+<div class="tarjeta">
+<h3>Líderes</h3>
+<div id="leaders"></div>
+</div>
+
+<div class="tarjeta">
+<h3>Estado Mayor</h3>
+<div id="staff"></div>
+</div>
+
+<div class="tarjeta">
+<h3>Presidencia</h3>
+<p>Próximamente</p>
+</div>
+
+</div>
+</section>
+
+<section class="seccion">
+<h2>🏆 Top Donadores</h2>
+
+<div class="tarjetas">
+
+<div class="tarjeta">
+<h3>🥇 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+<div class="tarjeta">
+<h3>🥈 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+<div class="tarjeta">
+<h3>🥉 Próximamente</h3>
+<p>El ranking de donaciones aparecerá aquí.</p>
+</div>
+
+</div>
+</section>
+
+<section class="seccion">
+<h2>💰 Horario de paga</h2>
+
+<p class="horario-intro">
+La paga se realiza cada sábado a las
+<strong>7:00 PM, hora de España</strong>.
+Las horas de los demás países se calculan automáticamente según la fecha.
+</p>
+
+<div class="horario">
+
+<div class="pais">
+<span class="flag">🇪🇸</span>
+<div>
+<strong>España</strong>
+<span class="hora" data-zone="Europe/Madrid">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇻🇪</span>
+<div>
+<strong>Venezuela</strong>
+<span class="hora" data-zone="America/Caracas">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇩🇴</span>
+<div>
+<strong>Rep. Dominicana</strong>
+<span class="hora" data-zone="America/Santo_Domingo">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇨🇴</span>
+<div>
+<strong>Colombia</strong>
+<span class="hora" data-zone="America/Bogota">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇨🇱</span>
+<div>
+<strong>Chile</strong>
+<span class="hora" data-zone="America/Santiago">Calculando...</span>
+</div>
+</div>
+
+<div class="pais">
+<span class="flag">🇲🇽</span>
+<div>
+<strong>México</strong>
+<span class="hora" data-zone="America/Mexico_City">Calculando...</span>
+</div>
+</div>
+
+</div>
+
+<p class="nota" id="proximaPaga">Calculando próxima paga...</p>
+</section>
+
 </main>
 
-<div class="modal" id="perfilModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>👑 Perfil de Dueña</h2><div class="perfil-card"><div class="avatar-wrap"><img id="modalOwnerAvatar" alt="Alexa026" src="" data-habbo-name="Alexa026"></div><div><span class="duena">DUEÑA • ACCESO TOTAL</span><h2>Alexa026</h2><p class="perfil-dato"><strong>Rango BMT:</strong> Estado Mayor</p><p class="perfil-dato"><strong>Misión:</strong> Directora de Inteligencia</p><p class="perfil-dato"><strong>Permisos:</strong> Todos</p></div></div></div></div>
-<div class="modal" id="estadoModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>💭 Estado</h2><p>Estado de cuenta: <strong>Activa</strong></p><p style="color:var(--muted);margin-top:8px">Nivel de acceso: Dueña / Total.</p></div></div>
-<div class="modal" id="cumpleModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>🎂 Cumpleaños / Calendario</h2><p>Gestión disponible para la cuenta de Dueña.</p></div></div>
-<div class="modal" id="configModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>⚙️ Configuración</h2><div class="permission-grid"><div>Administrar usuarios</div><div>Editar perfiles</div><div>Gestionar rangos</div><div>Gestionar misiones</div><div>Gestionar departamentos</div><div>Gestionar pagos</div><div>Gestionar actividad</div><div>Gestionar sanciones</div><div>Editar contenido</div><div>Configuración general</div></div></div></div>
-<div class="modal" id="seguridadModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>🔒 Seguridad</h2><p>La cuenta <strong>Alexa026</strong> tiene nivel de acceso de Dueña.</p><p style="color:var(--muted);margin-top:8px">Las funciones sensibles deberán conectarse a autenticación real antes de publicar la web.</p></div></div>
-<div class="modal" id="ascensoModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Ascenso</h2><p>Acceso total de administración de ascensos.</p></div></div>
-<div class="modal" id="entrenamientoModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Entrenamiento</h2><p>Acceso total a capacitación y registros de entrenamiento.</p></div></div>
-<div class="modal" id="departamentosModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Departamentos</h2><p>Acceso total a la administración de departamentos.</p></div></div>
-<div class="modal" id="rangosModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Rangos</h2><p>Acceso total a rangos y jerarquía.</p></div></div>
-<div class="modal" id="calcularModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Calcular rangos</h2><p>Acceso total al cálculo y gestión de rangos.</p></div></div>
-<div class="modal" id="pagosModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Pagos</h2><p>Acceso total a la administración de pagos.</p></div></div>
-<div class="modal" id="activosModal"><div class="modal-box"><button class="close-modal" onclick="closeModals()">×</button><h2>Activos</h2><p>Acceso total a la gestión de miembros activos.</p></div></div>
-<footer>© EJÉRCITO BMT — Todos los derechos reservados.</footer>
-<script>
-const body=document.body,btn=document.getElementById('menuBtn'),overlay=document.getElementById('overlay');
-btn.onclick=()=>body.classList.toggle('open');overlay.onclick=()=>body.classList.remove('open');
-function login(){openModal('perfilModal');}
-function openModal(id){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'));const el=document.getElementById(id);if(el)el.classList.add('show');body.classList.remove('open');}
-function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'));}
-document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModals();}));
+<footer>
+© EJÉRCITO BMT — Todos los derechos reservados.
+</footer><div class="modal-wrap" id="loginModal">
 
-const BMT_API_HOTEL='com';
-function habboUserUrl(name){return `https://www.habbo.${BMT_API_HOTEL}/api/public/users?name=${encodeURIComponent(name)}`;}
-function habboAvatarUrl(figure){return `https://www.habbo.${BMT_API_HOTEL}/habbo-imaging/avatarimage?figure=${encodeURIComponent(figure)}&size=l&direction=3&head_direction=3&gesture=sml`;}
-async function cargarHabbo(name,targetId,rol){const target=document.getElementById(targetId);try{const r=await fetch(habboUserUrl(name));const data=await r.json();if(!data || data.error || !data.figureString)throw new Error('No encontrado');target.innerHTML=`<div class="api-avatar"><img src="${habboAvatarUrl(data.figureString)}" alt="${data.name||name}"></div><div><h3>${data.name||name}</h3><p>${rol}</p><p class="api-status">API pública de Habbo</p></div>`;document.querySelectorAll('[data-habbo-name=\"'+name+'\"]').forEach(img=>img.src=habboAvatarUrl(data.figureString));}catch(e){target.innerHTML=`<div class="api-avatar"><span>?</span></div><div><h3>${name}</h3><p>${rol}</p><p class="api-status">API no disponible en este momento</p></div>`;}}
-['Migue-lito13','Ashleeeeyy','QIR'].forEach((name,i)=>{const d=document.createElement('div');d.className='api-card';d.id='liderApi'+i;d.style.marginBottom='12px';document.getElementById('lideresApi').appendChild(d);cargarHabbo(name,d.id,'Líder BMT');});
-cargarHabbo('Alexa026','estadoApi','Estado Mayor • Directora de Inteligencia');
-if(localStorage.getItem('bmt-tema')==='claro')body.classList.add('light');
-function nextSaturday(){const now=new Date(),d=new Date(now);let days=(6-now.getDay()+7)%7; if(days===0){const madridHour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',hour:'numeric',hour12:false}).format(now));if(madridHour>=19)days=7;}d.setDate(d.getDate()+days);return d;}
-function madridInstant(date){let u=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),19));for(let i=0;i<3;i++){const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',timeZoneName:'longOffset'}).formatToParts(u);const z=parts.find(x=>x.type==='timeZoneName')?.value||'GMT';const m=z.match(/GMT([+-])(\d{2}):(\d{2})/);const off=m?((m[1]==='+'?1:-1)*(+m[2]*60+(+m[3]))):0;u=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),19)-off*60000);}return u;}const d=nextSaturday(),pay=madridInstant(d);document.querySelectorAll('[data-zone]').forEach(e=>e.textContent=new Intl.DateTimeFormat('es-ES',{timeZone:e.dataset.zone,hour:'numeric',minute:'2-digit',hour12:true}).format(pay));
-const f=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',weekday:'long',day:'numeric',month:'long'}).format(pay);document.getElementById('proximaPaga').textContent='Próxima paga: '+f.charAt(0).toUpperCase()+f.slice(1)+'.';
+<div class="modal">
+
+<button class="close" onclick="closeModal('loginModal')">×</button>
+
+<h2>🔐 Iniciar sesión</h2>
+
+<div class="field">
+<label>Usuario</label>
+<input id="userInput" autocomplete="username">
+</div>
+
+<div class="field">
+<label>Contraseña</label>
+<input id="passInput" type="password" autocomplete="current-password">
+</div>
+
+<p class="error" id="loginError">
+Usuario o contraseña incorrectos.
+</p>
+
+<a class="button" href="#" onclick="doLogin();return false">
+Entrar
+</a>
+
+</div>
+</div>
+
+
+<div class="modal-wrap" id="profileModal">
+
+<div class="modal">
+
+<button class="close" onclick="closeModal('profileModal')">×</button>
+
+<h2>👤 Mi perfil</h2>
+
+<div class="profile">
+
+<img
+class="avatar"
+id="ownerAvatar"
+alt="Avatar de Alexa026"
+>
+
+<div>
+
+<p>
+<strong>Cuenta:</strong> Alexa026
+</p>
+
+<p>
+<strong>Permiso:</strong> Dueña
+</p>
+
+<p>
+<strong>Rango BMT:</strong> Estado Mayor
+</p>
+
+<p>
+<strong>Misión:</strong> Directora de Inteligencia
+</p>
+
+<p>
+<strong>Permisos:</strong> Todos
+</p>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<div class="modal-wrap" id="infoModal">
+
+<div class="modal">
+
+<button class="close" onclick="closeModal('infoModal')">×</button>
+
+<h2 id="infoTitle"></h2>
+
+<p
+id="infoText"
+style="color:#ccc;line-height:1.6">
+</p>
+
+</div>
+</div>
+
+
+<div class="modal-wrap" id="departmentModal">
+
+<div class="modal">
+
+<button class="close" onclick="closeModal('departmentModal')">×</button>
+
+<h2>🏢 Departamentos</h2>
+
+<div class="tarjetas">
+
+<div class="tarjeta">
+<h3>Recursos Humanos</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Ataque</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Marchas</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Juego</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Capacitación</h3>
+<p>Líder: Próximamente</p>
+<p>Co-líder: Próximamente</p>
+</div>
+
+<div class="tarjeta">
+<h3>Marketing</h3>
+<p>Departamento próximamente disponible.</p>
+</div>
+
+</div>
+</div>
+</div><script>
+
+const body=document.body,
+btn=document.getElementById('menuBtn'),
+overlay=document.getElementById('overlay');
+
+btn.onclick=()=>body.classList.toggle('open');
+
+overlay.onclick=()=>body.classList.remove('open');
+
+
+function openLogin(){
+
+document.getElementById('loginModal').classList.add('show');
+
+document.getElementById('loginError').style.display='none';
+
+document.getElementById('userInput').focus();
+
+}
+
+
+function closeModal(id){
+
+document.getElementById(id).classList.remove('show');
+
+}
+
+
+function doLogin(){
+
+const u=document
+.getElementById('userInput')
+.value
+.trim()
+.toLowerCase();
+
+const p=document
+.getElementById('passInput')
+.value;
+
+if(u==='alexa096' && p==='Alexa1320'){
+
+localStorage.setItem('bmt-session','owner');
+
+document.body.classList.add('logged');
+
+closeModal('loginModal');
+
+body.classList.add('open');
+
+document.getElementById('loginBox').style.display='none';
+
+loadOwnerAvatar();
+
+}else{
+
+document.getElementById('loginError').style.display='block';
+
+}
+
+}
+
+
+function logout(){
+
+localStorage.removeItem('bmt-session');
+
+location.reload();
+
+}
+
+
+function toggleCategory(el){
+
+el.parentElement.classList.toggle('expanded');
+
+}
+
+
+function openProfile(){
+
+loadOwnerAvatar();
+
+document
+.getElementById('profileModal')
+.classList
+.add('show');
+
+}
+
+
+function showInfo(title,text){
+
+document.getElementById('infoTitle').textContent=title;
+
+document.getElementById('infoText').textContent=text;
+
+document
+.getElementById('infoModal')
+.classList
+.add('show');
+
+}
+
+
+function showDepartments(){
+
+document
+.getElementById('departmentModal')
+.classList
+.add('show');
+
+}
+
+
+function avatarUrl(figure){
+
+return 'https://www.habbo.es/habbo-imaging/avatarimage?figure='
++encodeURIComponent(figure)
++'&size=l&direction=3&head_direction=3&gesture=sml';
+
+}
+
+
+async function getHabbo(name){
+
+const r=await fetch(
+'https://www.habbo.es/api/public/users?name='
++encodeURIComponent(name)
+);
+
+if(!r.ok)throw new Error('API');
+
+return r.json();
+
+}
+
+
+async function loadAvatar(name,target){
+
+try{
+
+const data=await getHabbo(name);
+
+if(data.figureString){
+
+target.src=avatarUrl(data.figureString);
+
+}
+
+}catch(e){}
+
+}
+
+
+function loadOwnerAvatar(){
+
+loadAvatar(
+'Alexa026',
+document.getElementById('ownerAvatar')
+);
+
+}
+
+
+async function loadLeaders(){
+
+const names=[
+'Migue-lito13',
+'Ashleeeeyy',
+'QIR'
+];
+
+const box=document.getElementById('leaders');
+
+for(const name of names){
+
+const row=document.createElement('div');
+
+row.style.margin='10px 0';
+
+row.innerHTML=
+'<p style="color:#ccc;font-size:13px">'
++'<strong>'+name+'</strong><br>Líder'
++'</p>'
++'<img style="height:90px;object-fit:contain" alt="'
++name+'">';
+
+box.appendChild(row);
+
+loadAvatar(
+name,
+row.querySelector('img')
+);
+
+}
+
+const staff=document.getElementById('staff');
+
+const row=document.createElement('div');
+
+row.innerHTML=
+'<p style="color:#ccc;font-size:13px">'
++'<strong>Alexa026</strong><br>Estado Mayor'
++'</p>'
++'<img style="height:90px;object-fit:contain" alt="Alexa026">';
+
+staff.appendChild(row);
+
+loadAvatar(
+'Alexa026',
+row.querySelector('img')
+);
+
+}if(localStorage.getItem('bmt-session')==='owner'){
+
+document.body.classList.add('logged');
+
+document.getElementById('loginBox').style.display='none';
+
+loadOwnerAvatar();
+
+}
+
+
+if(localStorage.getItem('bmt-tema')==='claro'){
+
+body.classList.add('light');
+
+}
+
+
+loadLeaders();
+
+
+function nextSaturday(){
+
+const now=new Date(),
+d=new Date(now);
+
+let days=(6-now.getDay()+7)%7;
+
+if(days===0){
+
+const madridHour=Number(
+new Intl.DateTimeFormat(
+'en-US',
+{
+timeZone:'Europe/Madrid',
+hour:'numeric',
+hour12:false
+}
+).format(now)
+);
+
+if(madridHour>=19)days=7;
+
+}
+
+d.setDate(d.getDate()+days);
+
+return d;
+
+}
+
+
+function madridInstant(date){
+
+let u=new Date(
+Date.UTC(
+date.getFullYear(),
+date.getMonth(),
+date.getDate(),
+19
+)
+);
+
+for(let i=0;i<3;i++){
+
+const parts=new Intl.DateTimeFormat(
+'en-US',
+{
+timeZone:'Europe/Madrid',
+timeZoneName:'longOffset'
+}
+).formatToParts(u);
+
+const z=
+parts.find(
+x=>x.type==='timeZoneName'
+)?.value||'GMT';
+
+const m=
+z.match(
+/GMT([+-])(\d{2}):(\d{2})/
+);
+
+const off=m?
+(
+(m[1]==='+'?1:-1)
+*
+(+m[2]*60+(+m[3]))
+):0;
+
+u=new Date(
+Date.UTC(
+date.getFullYear(),
+date.getMonth(),
+date.getDate(),
+19
+)-off*60000
+);
+
+}
+
+return u;
+
+}
+
+
+const d=nextSaturday(),
+pay=madridInstant(d);
+
+document
+.querySelectorAll('[data-zone]')
+.forEach(e=>{
+
+e.textContent=
+new Intl.DateTimeFormat(
+'es-ES',
+{
+timeZone:e.dataset.zone,
+hour:'numeric',
+minute:'2-digit',
+hour12:true
+}
+).format(pay);
+
+});
+
+
+const f=
+new Intl.DateTimeFormat(
+'es-ES',
+{
+timeZone:'Europe/Madrid',
+weekday:'long',
+day:'numeric',
+month:'long'
+}
+).format(pay);
+
+document
+.getElementById('proximaPaga')
+.textContent=
+'Próxima paga: '
++f.charAt(0).toUpperCase()
++f.slice(1)
++'.';
+
+
 </script>
-</body></html>
+
+</body>
+</html>
